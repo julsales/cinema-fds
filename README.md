@@ -19,8 +19,10 @@ Grupo formado por
 
 [Screencast](https://www.youtube.com/watch?v=KBGdFhLl5QU) (abrir com o email institucional)
 
+Backlog
 ![Backlog](Imagens/Backlog.jpg)
 
+Quadro
 ![Quadro](Imagens/Quadro.jpeg)
 
              
