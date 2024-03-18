@@ -19,5 +19,8 @@ Grupo formado por
 
 [Screencast](https://www.youtube.com/watch?v=KBGdFhLl5QU) (abrir com o email institucional)
 
-![](blob:https://web.whatsapp.com/274ca4c2-7beb-4349-8b1c-72b59e668641)
+![Backlog](Imagens/Backlog.jpg)
+
+![Quadro](Imagens/Quadro.jpeg)
+
              
