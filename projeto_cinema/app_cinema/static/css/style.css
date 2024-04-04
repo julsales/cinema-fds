@@ -1,0 +1,250 @@
+* {
+    border: 0px;
+    margin: 0px;
+    font-family: lato, sans-serif;
+}
+
+main {
+    background-color:#000000;
+    color: #dd7b05;
+}
+
+/*            ----------   HEADER   ----------          */
+header {
+    position: fixed;
+    background-color: #3b0100;
+    color: #dd7b05;
+    width: 100vw;
+    height: 80px;
+}
+
+#header {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 15px;
+}
+
+#titulo {
+    color:#d7c599;
+    font-family: 'Noto Serif', serif;
+    font-weight: 700;
+}
+
+nav {
+    width: 390px;
+}
+
+#navega {
+    display: flex;
+    text-decoration: none;
+    list-style: none;
+    justify-content: space-evenly;
+    padding-left: 0;
+    padding-top: 10px;
+}
+
+header nav ul {
+    display: flex;
+    box-sizing: border-box;
+}
+
+header nav ul li a {
+    text-decoration: none;
+    color: #d7c599;
+}
+
+
+
+#img-topo {
+    height: 250px;
+    width: 100%;
+    background-image: url(../images/pexels-horizon-content-3826016\ 1.png);
+}
+
+/*            ----------   SEÇÕES   ----------          */
+section {
+    height: 590px;
+    padding-top: 90px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.titulo-secao {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+    font-size: 2rem;
+}
+
+/*           ----------   CARDAPIO   ----------         */
+#sec-cardapio {
+    height: fit-content;
+}
+
+#cardapio{
+    display:flex;
+    justify-content: space-between;
+}
+
+#pizza {
+    width: 35%;
+}
+
+#bebida {
+    width: 35%;
+}
+
+img {
+    height: 120px;
+}
+
+.titulo-subsecao {
+    display: flex;
+    justify-content: center;
+    font-size: 1.5rem;
+}
+
+.item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 15px;
+    margin-bottom: 10px;
+}
+
+.nome-item {
+    color:#d7c599;
+    font-size: 1.2rem;
+}
+
+.preco {
+    color: #d7c599;
+}
+
+/*          ----------   QUEM SOMOS   ----------        */
+#nos {
+    display: flex;
+    color: #d7c599;
+    justify-content: space-around;
+    font-size: 1.3rem;
+    padding-top: 15px;
+}
+
+#somos-texto {
+    width: 45%;
+    padding-top: 50px;
+}
+
+#somos-img {
+    width: 70%;
+}
+
+#pizzaiolo {
+    height: 300px;
+}
+
+
+/*           ----------   CONTATO   ----------          */
+#geral-contato {
+    display: flex;
+    justify-content: space-around;
+    padding-top: 200px;
+    color: #d7c599;
+    font-size: 1.2rem;
+}
+
+.contato-redes {
+    display: flex;
+    align-items: center;
+}
+
+.contato-logo {
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+}
+
+#img-contato {
+    height: 200px;
+    width: 100%;
+    background-image: url(../images/pexels-nataliya-vaitkevich-5792329\ 1.png);
+}
+
+/*            ----------   PEDIDO   ----------          */
+#geral-pedido {
+    display: flex;
+    justify-content: space-between;
+    padding-top: 50px;
+    color: #d7c599;
+    font-size: 1.2rem;
+}
+
+#fazer-pedido {
+    width: 45%;
+    padding-left: 20px;
+}
+
+#acomp-pedido {
+    width: 45%;
+}
+
+.titulo-subsecao-pedido {
+    font-size: 1.5rem;
+    color: #dd7b05;
+    margin-bottom: 30px;
+}
+
+#fazer-pedido > p {
+    margin-bottom: 10px;
+    margin-top: 30px;
+}
+
+select {
+    cursor: pointer;
+}
+
+#acomp-pedido > p {
+    margin-bottom: 15px;
+}
+
+.btn-secundario {
+    border-radius: 3px;
+    background-color: #dd7b05;
+    color: #0e0200;
+    cursor: pointer;
+}
+
+.btn-secundario:hover {
+    background-color: #d7c599;
+}
+
+#btn-pedido {
+    border-radius: 5px;
+    background-color: #dd7b05;
+    color: #0e0200;
+    margin-top: 20px;
+    width: 120px;
+    height: 30px;
+    cursor: pointer;
+}
+
+#btn-pedido:hover {
+    background-color: #d7c599;
+}
+
+#img-mapa {
+    width: 350px;
+    height: 300px;
+}
+
+/*            ----------   FOOTER   ----------          */
+footer {
+    background-color: #3b0100;
+    color: #dd7b05;
+}
+#rodape {
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 30px 0px 30px 0px;
+}
