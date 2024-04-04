@@ -2,195 +2,32 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ChrisTemPizza</title>
-    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Noto+Serif:wght@400;700&display=swap" rel="stylesheet">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="{% static 'css/style.css' %}" rel="stylesheet"type="text/css">
     <title>Cinema FDS</title>
 </head>
 
 <body>
-  <header>
-      <div id="header">
-          <h1><span id="titulo"><em>CINE</em></span>Priwe</h1>
-          <nav>
-              <ul id="navega">
-                  <li><a href="#sec-cardapio">Cardápio</a></li>
-                  <li><a href="#contato">Contato</a></li>
-                  <li><a href="#pedido">Pedido</a></li>
-              </ul>
-          </nav>
-      </div>
-  </header>
-  <div id="../img-topo">
-  </div>
-  <main>
-      <section id="sec-cardapio">
-          <h2 class="titulo-secao">Cardápio</h2>
-          <div id="cardapio">
-              <div id="pizza">
-                  <h3 class="titulo-subsecao">Pizzas</h3>
-                  <div class="item">
-                      <div>
-                          <p class="nome-item">Calabresa</p>
-                          <p>Molho, Mussarela, Calabresa, Cebola, Azeitona e Orégano</p>
-                          <p class="preco">R$ 49.00</p>
-                      </div>
-                      <div>
-                          <img src="" alt="">
-                      </div>
-                  </div>
-                  <div class="item">
-                      <div>
-                          <p class="nome-item">Quatro queijos</p>
-                          <p>Molho, Mussarela, Provolone, Parmesão, Gorgonzola, Tomate, Azeitona e Orégano</p>
-                          <p class="preco">R$ 52.00</p>
-                      </div>
-                      <div>
-                          <img src="" alt="">
-                      </div>
-                  </div>
-                  <div class="item">
-                      <div>
-                          <p class="nome-item">Italiana</p>
-                          <p>Molho, Mussarela, Catupiry, Salaminho, Azeitona e Orégano</p>
-                          <p class="preco">R$ 59.99</p>
-                      </div>
-                      <div>
-                          <img src="" alt="">
-                      </div>
-                  </div>
-                  <div class="item">
-                      <div>
-                          <p class="nome-item">Presunto</p>
-                          <p>Molho, Mussarela, Prersunto, Tomate, Azeitona e Orégano</p>
-                          <p class="preco">R$ 51.00</p>
-                      </div>
-                      <div>
-                          <img src="" alt="">
-                      </div>
-                  </div>
-              </div>
-              <div id="bebida">
-                  <h3 class="titulo-subsecao">Bebidas</h3>
-                  <div class="item">
-                      <div>
-                          <p class="nome-item">Coca-Cola 1.5L</p>
-                          <p class="preco">R$ 7.00</p>
-                      </div>
-                      <div><img src="" alt=""></div>
-                  </div>
-                  <div class="item">
-                      <div>
-                          <p class="nome-item">Coca-Cola 2L</p>
-                          <p class="preco">R$ 10.00</p>
-                      </div>
-                      <div><img src="" alt=""></div>
-                  </div>
-                  <div class="item">
-                      <div>
-                          <p class="nome-item">Coca-Cola Lata</p>
-                          <p class="preco">R$ 4.00</p>
-                      </div>
-                      <div><img src="" alt=""></div>
-                  </div>
-                  <div class="item">
-                      <div>
-                          <p class="nome-item">Fanta laranja 2L</p>
-                          <p class="preco">R$ 7.00</p>
-                      </div>
-                      <div><img src="" alt=""></div>
-                  </div>
-                  <div class="item">
-                      <div>
-                          <p class="nome-item">Guaraná Antarctica 2L</p>
-                          <p class="preco">R$ 10.00</p>
-                      </div>
-                      <div><img src="" alt=""></div>
-                  </div>
-                  <div class="item">
-                      <div>
-                          <p class="nome-item">Sprite 2L</p>
-                          <p class="preco">R$ 7.00</p>
-                      </div>
-                      <div><img src="" alt=""></div>
-                  </div>
-              </div>
-          </div>
-      </section>
-       </div>
-       <section id="somos">
-          <h2 class="titulo-secao">Quem Somos</h2>
-          <div id="nos">
-              <div id="somos-texto">
-                  <p>A SUS pizza é uma pizzaria exclusiva para aqueles que querem experimentar sabores SUSpeitos,
-                      e que todos do mundo Geak tenham uma experiência extraórdinaria com nossos sabores, criamos assim
-                      a pizzaria SUS coom os grandes cozinheiros e Nerds da geração.</p>
-              </div>
-            
-          </div>
-      </section>
-      <section id="contato">
-          <h2 class="titulo-secao">Contato</h2>
-          <div id="geral-contato">
-              <div class="contato-redes">
-                  <img src="" alt="" class="">
-                  <p>(81) 99999-9999</p>
-              </div>
-              <div class="contato-redes">
-                  <img src="" alt="" class="">
-                  <p>@SUSpizza</p>
-              </div>
-          </div>
+    <!-- barra de navegação -->
+    <nav style="background-color: rgb(49, 152, 225) !important;" class="navbar navbar-light bg-light">
+        <div class="container-fluid">            
+          <button type="button" class="btn btn-dark">Menu</button>
+          <span class="navbar-brand mb-0 h1"></span>
+        </div>
+      </nav>
+    <div id="container">
+      <br>
+      <nav cust style="background-color: rgb(53, 51, 51) !important;" class="navbar">
+        <img src="https://www.kinoplex.com.br/filmes/images/cartaz/262x388/bob-marley-one-love.jpg?" alt="">
+        <img src="https://www.kinoplex.com.br/filmes/images/cartaz/262x388/brinquedo-diabolico-imaginario.jpg?" alt="">
+        <img src="https://www.kinoplex.com.br/filmes/images/cartaz/262x388/duna-parte-2.jpg?" alt="">
+        <img src="https://www.kinoplex.com.br/filmes/images/cartaz/262x388/godzilla-e-kong-o-novo-imperio.jpg?" alt="">
+      </nav>
+    </div>
 
-      </section>
-      <div id=""></div>
-      <section id="pedido">
-          <h2 class="titulo-secao">Faça já o seu pedido</h2>
-          <div id="geral-pedido">
-              <div id="fazer-pedido">
-                  <h3 class="titulo-subsecao-pedido">Seu pedido</h3>
-                  <p>Sabor da pizza:</p>
-                  <form>
-                      <select name="pizza">
-                          <option value=""></option>
-                          <option value="calabresa">Calabresa</option>
-                          <option value="queijo">Quatro queijos</option>
-                          <option value="italiana">Italiana</option>
-                          <option value="presunto">Presunto</option>
-                      </select>
-                      <input type="button" value="Selecionar" class="btn-secundario"/>
-                  </form>
-                  <p>Bebida:</p>
-                  <form>
-                      <select name="bebida">
-                          <option value=""></option>
-                          <option value="coca15l">Coca-Cola 1.5L</option>
-                          <option value="coca2l">Coca-Cola 2L</option>
-                          <option value="coca-lata">Coca lata</option>
-                          <option value="fanta">Fanta laranja 2L</option>
-                          <option value="guarana">Guaraná Antarctica 2L</option>
-                          <option value="sprite">Sprite 2L</option>
-                      </select>
-                      <input type="button" value="Selecionar" class="btn-secundario"/>
-                  </form>
-                  <input type="button" value="Finalizar pedido" id="btn-pedido">
-              </div>
-              <div id="acomp-pedido">
-                  <h3 class="titulo-subsecao-pedido">Acompanhe seu pedido</h3>
-                  <img src="" alt="mapa" id="">
-              </div>
-          </div>
-      </section>
-  </main>
-  <footer>
-      <div id="rodape">
-          <h4>&copy; Pizzaria  SUSPizza</h4>
-      </div>
-  </footer>
 
-</body>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    
+  </body>
 </html>
