@@ -8,7 +8,7 @@ if defined _OLD_CODEPAGE (
     "%SystemRoot%\System32\chcp.com" 65001 > nul
 )
 
-set VIRTUAL_ENV=C:\Users\chris\OneDrive\Documentos\GitHub\cinema-fds\projeto_cinema\venv
+set VIRTUAL_ENV=C:\Users\julia\Documents\GitHub\cinema-fds\projeto_cinema\venv
 
 if not defined PROMPT set PROMPT=$P$G
 
