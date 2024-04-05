@@ -5,14 +5,14 @@
 }
 
 main {
-    background-color:#a07a7a;
+    background-color:#353232;
     color: #dd7b05;
 }
 
 /*            ----------   HEADER   ----------          */
 header {
     position: fixed;
-    background-color: #3b0100;
+    background-color: #350707;
     color: #dd7b05;
     width: 100vw;
     height: 80px;
