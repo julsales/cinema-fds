@@ -5,7 +5,7 @@
 }
 
 main {
-    background-color:#000000;
+    background-color:#a07a7a;
     color: #dd7b05;
 }
 
@@ -210,7 +210,7 @@ select {
 .btn-secundario {
     border-radius: 3px;
     background-color: #dd7b05;
-    color: #0e0200;
+    color: #745a55;
     cursor: pointer;
 }
 
