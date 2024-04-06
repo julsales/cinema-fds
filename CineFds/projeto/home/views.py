@@ -15,7 +15,7 @@ def login_page(request):
             user_obj = User.objects.filter(username=username)
              
             if not user_obj.exists():
-                messages.error(request, "Username not found")
+                messages.error(request, "Usuário não encontrado")
                 return redirect('/login/')
              
             user_obj = authenticate(username=username, password=password)
@@ -24,11 +24,11 @@ def login_page(request):
                 login(request, user_obj)
                 return redirect('/')
              
-            messages.error(request, "Wrong Password")
+            messages.error(request, "Senha errada")
             return redirect('/login/')
          
         except Exception as e:
-            messages.error(request, "Something went wrong")
+            messages.error(request, "Algo deu errado.....")
             return redirect('/register/')
      
     return render(request, "login.html")
@@ -40,18 +40,18 @@ def register_page(request):
             user_obj = User.objects.filter(username=username)
              
             if user_obj.exists():
-                messages.error(request, "Username is taken")
+                messages.error(request, "Nome de usuário já utilizado")
                 return redirect('/register/')
              
             user_obj = User.objects.create(username=username)
             user_obj.set_password(password)
             user_obj.save()
              
-            messages.success(request, "Account created")
+            messages.success(request, "Conta criada com sucesso")
             return redirect('/login/')
          
         except Exception as e:
-            messages.error(request, "Something went wrong")
+            messages.error(request, "Algo deu errado....")
             return redirect('/register/')
      
     return render(request, "register.html")
