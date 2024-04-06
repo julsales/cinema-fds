@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+ 
+{% load static %}
+ 
+{% block start %}
+ 
+<style>
+    .bold{
+        margin-left: 57px;
+    }
+    .middle{
+        margin-left: 26%;
+    }
+</style>
+<div class="container mt-5 pt-3">
+    <div class="row">
+    {% for movie in movies %}
+    <div class="col-md-3 pt-3">
+        <div class="card shadow-lg" style="width: 18rem;">
+            <img src="{{movie.images}}" style="height: 210px; border-radius: 30px;" alt="Veg Pizza Image">
+            <div class="card-body">
+                <h5 class="card-title text-center text-uppercase">  <strong style="font-size: 28px; color:red">{{movie.movie_name}}</strong></h5>
+                <p class="bold"> <b>Ticket Price -</b> ₹ {{movie.price}} <br> <strong>Session</strong> - {{movie.category.category_name}}</p>
+                 <a href="{%  url 'add-cart' movie.uid %}" class="btn btn-warning middle">Book </a>
+                   </div>
+        </div>
+        <br>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+</div>
+{% endblock %}

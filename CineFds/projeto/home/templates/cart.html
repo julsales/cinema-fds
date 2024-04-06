@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+ 
+{% load static %}
+ 
+{% block start %}
+ 
+<style>
+ 
+</style>
+<div class="container card shadow-lg mt-5 ">
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">S.No.</th>
+ 
+                <th scope="col"></th>
+ 
+                <th scope="col">Comprar</th>
+                <th scope="col">Nome do Filme</th>
+                <th scope="col">Assistir</th>
+ 
+            </tr>
+        </thead>
+        <tbody>
+            {% for cartItems in carts.cart_items.all %}
+            <tr>
+                <th scope="row">{{forloop.counter}}</th>
+                <td><a href="{% url 'remove_cart' cartItems.uid %}" class="btn btn-danger">Cancelar</a>
+                </td>
+                <td><img src="https://i.ibb.co/Dkz0p6G/gfg-movei-3.jpg" style="height: 100px; width:100px;"></td>
+                <td>
+                    <h5>{{cartItems.movie.movie_name}}</h5>
+                </td>
+                <td><a href="https://www.geeksforgeeks.org/" class="btn btn-warning">Finalizar a compra</a>
+
+            </tr>
+            {% endfor %}
+            <tr>
+ 
+                <th scope="col"></th>
+                <td></td>
+                <td></td>
+                <td></td>
+ 
+            </tr>
+ 
+        </tbody>
+    </table>
+</div>
+{% endblock %}
