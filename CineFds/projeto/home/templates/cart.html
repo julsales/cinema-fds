@@ -7,10 +7,10 @@
 <style>
  
 </style>
-<div class="container card shadow-lg mt-5">
+<div class="container card shadow-lg mt-5" style="background-color: rgb(33 38 45);">
     <table class="table">
         <thead>
-            <tr>
+            <tr style="color: aliceblue;">
                 <th scope="col">S.No.</th>
  
                 <th scope="col"></th>
@@ -26,23 +26,16 @@
             <tr>
                 <th scope="row">{{forloop.counter}}</th>
                 <td><a href="{% url 'remove_cart' cartItems.uid %}" class="btn btn-danger">Cancelar</a>
-                </td>
-                <td><img src="https://i.ibb.co/Dkz0p6G/gfg-movei-3.jpg" style="height: 100px; width:100px;"></td>
+            
+                <td style="color: aliceblue;">R$31,00 </td>
                 <td>
-                    <h5>{{cartItems.movie.movie_name}}</h5>
+                    <h5 style="color: aliceblue;">{{cartItems.movie.movie_name}}</h5>
                 </td>
                 <td><a href="" class="btn btn-warning">Finalizar a compra</a>
 
             </tr>
             {% endfor %}
-            <tr>
- 
-                <th scope="col"></th>
-                <td></td>
-                <td></td>
-                <td></td>
- 
-            </tr>
+
  
         </tbody>
     </table>
