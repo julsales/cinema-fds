@@ -66,6 +66,7 @@ def add_cart(request, movie_uid):
     return redirect('/')
 @login_required(login_url='/login/')
 def cart(request):
+    print(request.user)
     cart = Cart.objects.get(is_paid=False, user=request.user)
     context = {'carts': cart}
     return render(request, "cart.html", context)

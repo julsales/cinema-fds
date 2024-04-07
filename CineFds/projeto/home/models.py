@@ -20,7 +20,7 @@ class Movie(BaseModel):
     images = models.CharField(max_length=500)
      
 class Cart(BaseModel):
-    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="carts")
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="cart")
     is_paid = models.BooleanField(default=False)
      
 class CartItems(BaseModel):
