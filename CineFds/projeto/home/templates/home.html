@@ -7,16 +7,22 @@
 <style>
     .bold{
         margin-left: 57px;
+        
     }
     .middle{
         margin-left: 26%;
+        
     }
+
 </style>
-<div class="container mt-5 pt-3">
-    <div class="row">
+    
+<div class="container mt-5 pt-3" >
+
+    <div class="row" >
     {% for movie in movies %}
-    <div class="col-md-3 pt-3">
-        <div class="card shadow-lg" style="width: 18rem;">
+    <div class="col-md-3 pt-3" >
+        <!-- COR DAS CAIXAS DE FILME-->
+        <div class="card shadow-lg" style="width: 18rem; background-color:  rgb(7, 7, 7); border-radius: 32px;" >
             <img src="{{movie.images}}" style="height: 210px; border-radius: 30px;" alt="Filme">
             <div class="card-body">
                 <h5 class="card-title text-center text-uppercase">  <strong style="font-size: 28px; color:red">{{movie.movie_name}}</strong></h5>
