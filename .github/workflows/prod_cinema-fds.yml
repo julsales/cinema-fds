@@ -32,7 +32,7 @@ jobs:
 
       - name: Cleaning testing files
         run: |
-          rm db.sqlite3
+          rm CineFds/projeto/db.sqlite3
           rm .env
           
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
