@@ -15,7 +15,7 @@
  
                 <th scope="col"></th>
  
-                <th scope="col">Comprar</th>
+                <th scope="col">Valor</th>
                 <th scope="col">Nome do Filme</th>
                 <th scope="col">Assistir</th>
  
@@ -25,7 +25,7 @@
             {% for cartItems in carts.cart_items.all %}
             <tr>
                 <th scope="row">{{forloop.counter}}</th>
-                <td><a href="{% url 'remove_cart' cartItems.uid %}" class="btn btn-danger">Cancelar</a>
+                <td><a href="{% url 'remove_cart' cartItems.uid %}" class="btn btn-danger">Remover</a>
             
                 <td style="color: aliceblue;">R$31,00 </td>
                 <td>
