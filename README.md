@@ -11,7 +11,8 @@ Grupo formado por
 
 ## Entregas
 
-### Entrega 1
+### PRIMEIRA ENTREGA
+
 [Página no Jira](https://juliasales.atlassian.net/jira/software/projects/PCF/boards/2)
 
 [Protótipo Lo-Fi](https://www.figma.com/file/Ms5aUXSnImGqW7S97h7m92/Wireframe-Template-(Community)?type=design&node-id=0%3A1&mode=design&t=v2NZ8sR463NZwdIk-1)
@@ -24,4 +25,12 @@ Backlog
 Quadro
 ![Quadro](Imagens/Quadro.jpeg)
 
+### SEGUNDA ENTREGA
+
+Azure
+[Azure](https://cinema-fds.azurewebsites.net/)
+
+Diagrama de atividade do sistema
+[Diagrama](https://lucid.app/lucidchart/bb251b89-9408-4094-92cf-37d2f4fcab6e/edit?viewport_loc=-10415%2C-6050%2C12296%2C4880%2C0_0&invitationId=inv_963f026a-c0bd-4bdf-bbd2-693fe5ce399d)
              
+#! Programação em par não foi utilizado nessa entrega pois houve muito conflito de horario entre os estudantes.
