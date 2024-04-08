@@ -41,12 +41,13 @@ jobs:
         run: zip release.zip ./* -r
 
       - name: Upload artifact for deployment jobs
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: python-app
           path: |
-            release.zip
+            .
             !venv/
+            
 
   deploy:
     runs-on: ubuntu-latest
