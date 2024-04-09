@@ -34,7 +34,7 @@ Quadro
 
 [Deployment na Azure](https://cinema-fds.azurewebsites.net)
 
-## Instruções de uso:
+#### Instruções de uso:
 - Bara usar o código é necessário adicionar todos os arquivos do requirements.txt na sua maquina
 - Depois disso, é preciso rodar o comando -python manage.py runserver-
 - Para alterações de admin, é necessário colocar /admin/ após o endereço do site
