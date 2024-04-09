@@ -10,8 +10,6 @@ Grupo formado por
 - Matheus Cazé
 
 # Entregas
-<br>
-<br>
 
 ### PRIMEIRA ENTREGA
 
