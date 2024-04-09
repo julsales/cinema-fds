@@ -32,6 +32,12 @@ Quadro
 
 [Deployment na Azure](https://cinema-fds.azurewebsites.net)
 
+# Instruções de uso:
+- Bara usar o código é necessário adicionar todos os arquivos do requirements.txt na sua maquina
+- Depois disso, é preciso rodar o comando -python manage.py runserver-
+- Para alterações de admin, é necessário colocar /admin/ após o endereço do site
+- Depois é necessária a criação de um superuser e logar na página de admin, possibilitando assim alterações dos filmes disponíveis e de suas respectivas categorias
+
 [Diagrama atividades do sistema](https://lucid.app/lucidchart/bb251b89-9408-4094-92cf-37d2f4fcab6e/edit?viewport_loc=-10415%2C-6050%2C12296%2C4880%2C0_0&invitationId=inv_963f026a-c0bd-4bdf-bbd2-693fe5ce399d)
 
 ![ImagemDiagrama](Imagens/Diagrama.jpg)
