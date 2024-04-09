@@ -10,7 +10,8 @@ Grupo formado por
 - Matheus Cazé
 
 ## Entregas
-
+<br>
+<br>
 ### PRIMEIRA ENTREGA
 
 [Página no Jira](https://juliasales.atlassian.net/jira/software/projects/PCF/boards/2)
@@ -26,7 +27,8 @@ Quadro
 ![Quadro](Imagens/Quadro.jpeg)
 
 ### SEGUNDA ENTREGA
-
+<br>
+<br>
 
 [Deployment na Azure](https://cinema-fds.azurewebsites.net/)
 
@@ -43,4 +45,4 @@ Sprint e histórias implementadas
 [Screencast segunda entrega]() 
 
 
-- Programação em par não foi utilizado nessa entrega pois houve conflitos de horario entre os estudantes,além de um certo desconhecimento de como usar as ferramentas requeridas. -
+- Programação em par não foi utilizado nessa entrega pois houve conflitos de horario entre os estudantes,além de um certo desconhecimento de como usar as ferramentas requeridas. 
