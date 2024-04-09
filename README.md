@@ -4,7 +4,7 @@ Página no github dedicada a o projeto de Fundamentos de Desenvolvimento de Soft
 
 Grupo formado por 
 - Júlia Sales
-- Luis Claudio
+- Luiz Claudio
 - Adriano Bernard
 - Christian Bernard
 - Matheus Cazé
