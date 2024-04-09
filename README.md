@@ -14,6 +14,7 @@ Grupo formado por
 ### PRIMEIRA ENTREGA
 
 <br>
+
 [Página no Jira](https://juliasales.atlassian.net/jira/software/projects/PCF/boards/2)
 
 [Protótipo Lo-Fi](https://www.figma.com/file/Ms5aUXSnImGqW7S97h7m92/Wireframe-Template-(Community)?type=design&node-id=0%3A1&mode=design&t=v2NZ8sR463NZwdIk-1)
