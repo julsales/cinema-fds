@@ -49,7 +49,7 @@ Bug Tracker
 Sprint e histórias implementadas
 ![Sprint2](Imagens/Backlog2.jpg)
 
-[Screencast segunda entrega]() 
+[Screencast segunda entrega](https://youtu.be/Rphdc2gDhM0) 
 
 
 - Programação em par não foi utilizado nessa entrega pois houve conflitos de horario entre os estudantes,além de um certo desconhecimento de como usar as ferramentas requeridas. 
