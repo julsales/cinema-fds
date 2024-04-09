@@ -32,7 +32,7 @@ Quadro
 ### SEGUNDA ENTREGA
 <br>
 
-[####Deployment na Azure](cinemafds.azurewebsites.net)
+[#### Deployment na Azure](cinemafds.azurewebsites.net)
 
 #### Instruções de uso:
 - Bara usar o código é necessário adicionar todos os arquivos do requirements.txt na sua maquina
