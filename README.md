@@ -32,13 +32,13 @@ Quadro
 
 [Diagrama atividades do sistema](https://lucid.app/lucidchart/bb251b89-9408-4094-92cf-37d2f4fcab6e/edit?viewport_loc=-10415%2C-6050%2C12296%2C4880%2C0_0&invitationId=inv_963f026a-c0bd-4bdf-bbd2-693fe5ce399d)
 
-![ImagemDiagrama](Imagens/diagrama de atividades.jpg)
+![ImagemDiagrama](Imagens/Diagrama.jpg)
 
 Bug Tracker
-![Bugtracker](Imagens/bug tracker.jpg)
+![Bugtracker](Imagens/BugTracker.jpg)
 
 Sprint e histórias implementadas
-![Sprint2](Imagens/sprint 2.jpg)
+![Sprint2](Imagens/Backlog2.jpg)
 
 [Screencast segunda entrega]() 
 
