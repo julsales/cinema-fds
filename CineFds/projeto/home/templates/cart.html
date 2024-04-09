@@ -11,7 +11,7 @@
     <table class="table">
         <thead>
             <tr style="color: aliceblue;">
-                <th scope="col">S.No.</th>
+                <th scope="col"></th>
  
                 <th scope="col"></th>
  
@@ -27,7 +27,7 @@
                 <th scope="row">{{forloop.counter}}</th>
                 <td><a href="{% url 'remove_cart' cartItems.uid %}" class="btn btn-danger">Remover</a>
             
-                <td style="color: aliceblue;">R$31,00 </td>
+                <td style="color: aliceblue;"><p> R$ {{cartItems.movie.price}} </p> </td>
                 <td>
                     <h5 style="color: aliceblue;">{{cartItems.movie.movie_name}}</h5>
                 </td>
