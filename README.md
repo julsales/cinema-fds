@@ -25,7 +25,8 @@ Backlog
 
 Quadro
 ![Quadro](Imagens/Quadro.jpeg)
-
+<br>
+<br>
 ### SEGUNDA ENTREGA
 <br>
 <br>
