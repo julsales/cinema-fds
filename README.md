@@ -27,10 +27,20 @@ Quadro
 
 ### SEGUNDA ENTREGA
 
-Azure
-[Azure](https://cinema-fds.azurewebsites.net/)
 
-Diagrama de atividade do sistema
-[Diagrama](https://lucid.app/lucidchart/bb251b89-9408-4094-92cf-37d2f4fcab6e/edit?viewport_loc=-10415%2C-6050%2C12296%2C4880%2C0_0&invitationId=inv_963f026a-c0bd-4bdf-bbd2-693fe5ce399d)
-             
-#! Programação em par não foi utilizado nessa entrega pois houve muito conflito de horario entre os estudantes.
+[Deployment na Azure](https://cinema-fds.azurewebsites.net/)
+
+[Diagrama atividades do sistema](https://lucid.app/lucidchart/bb251b89-9408-4094-92cf-37d2f4fcab6e/edit?viewport_loc=-10415%2C-6050%2C12296%2C4880%2C0_0&invitationId=inv_963f026a-c0bd-4bdf-bbd2-693fe5ce399d)
+
+![ImagemDiagrama](Imagens/diagrama_de_atividades.jpg)
+
+Bug Tracker
+![Bugtracker](Imagens/bug_tracker.jpg)
+
+Sprint e histórias implementadas
+![Sprint2](Imagens/sprint_2.jpg)
+
+[Screencast segunda entrega]() 
+
+
+- Programação em par não foi utilizado nessa entrega pois houve conflitos de horario entre os estudantes,além de um certo desconhecimento de como usar as ferramentas requeridas. -
