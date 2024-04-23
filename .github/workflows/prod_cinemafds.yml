@@ -2,7 +2,7 @@
 # More GitHub Actions for Azure: https://github.com/Azure/actions
 # More info on Python, GitHub Actions, and Azure App Service: https://aka.ms/python-webapps-actions
 
-name: Build and deploy Python app to Azure Web App - CinemaFds
+name: Build and deploy Python app to Azure Web App - cinemafds
 
 on:
   push:
@@ -29,12 +29,12 @@ jobs:
       
       - name: Install dependencies
         run: pip install -r requirements.txt
-      
+
       - name: Cleaning testing files
         run: |
           rm db.sqlite3
           rm .env
-        
+
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
@@ -70,14 +70,14 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_0685DCE7E7154D1EBB9BF1678DA9CD58 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_05A89917CDF4453DA581A9F0404E54FB }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_0176FEBD2DCD4EB4B7F478B4593BA03D }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_A811D03360DB40848955B42827BF0B2C }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_15607F6730EE4E41B85CB6B325168973 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_A67B0693C5434EF29D091B629B9048F1 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'CinemaFds'
+          app-name: 'cinemafds'
           slot-name: 'Production'
           
