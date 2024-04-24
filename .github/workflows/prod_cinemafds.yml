@@ -36,8 +36,9 @@ jobs:
       - name: Cleaning testing files
         run: |
           cd CineFds
-          rm db.sqlite3
           rm .env
+          cd projeto
+          rm db.sqlite3
 
       # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
