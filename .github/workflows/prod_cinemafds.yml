@@ -28,7 +28,10 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r requirements.txt
+        run: |
+          python -m pip install --upgrade pip
+          cd projeto
+          pip install -r requirements.txt
 
       - name: Cleaning testing files
         run: |
