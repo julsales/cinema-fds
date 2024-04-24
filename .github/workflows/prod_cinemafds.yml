@@ -36,7 +36,6 @@ jobs:
         run: |
           cd CineFds/
           rm .env
-          cd projeto
           rm db.sqlite3
           cd ..
 
