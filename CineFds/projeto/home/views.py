@@ -91,3 +91,4 @@ def search_movies(request):
     else:
         movies = Movie.objects.all()
     return render(request, 'search_results.html', {'movies': movies, 'query': query})
+

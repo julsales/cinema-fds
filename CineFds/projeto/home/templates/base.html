@@ -27,8 +27,12 @@
   
   <nav class="navbar navbar-dark background-color:rgb(5, 101, 255) shadow-lg"> 
     <!--BARRA DE CIMA-->
+    
     <div class="container-fluid" style="background-color:rgb(5, 101, 255)" > 
-      <a href="{% url 'home' %}" class="navbar-brand"> <strong style="font-size: 30px; color: rgb(255, 255, 255); "> CineFDS </strong></a>
+      <a href="{% url 'home' %}" class="navbar-brand"> <strong style="font-size: 30px; color: rgb(255, 255, 255);"> CineFDS </strong></a>
+      <!--Colocar aqui o url "filregister"-->
+      <button href="{% url 'home' %}" class="navbar-brand" style="background-color: #dc3546fc; border-radius: 12px; color: aliceblue; ">ADM</button>
+
       <form action="{% url 'search_movies' %}" method="GET">
         <input type="text" name="q" placeholder="Buscar filmes" style="background-color: rgb(63, 62, 62); color: rgb(215, 225, 214); border-radius: 14px; " >
         <button type="submit" style="background-color: #dc3546fc; border-radius: 12px; color: aliceblue;">Pesquisar</button>
