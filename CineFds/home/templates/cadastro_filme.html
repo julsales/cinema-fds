@@ -1,33 +1,42 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Filme</title>
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
-
 <body style="background-color: rgb(4, 10, 29);">
-    <nav class="navbar navbar-dark" style="background-color:rgb(5, 101, 255); margin-top: 0;">
+
+  <nav class="navbar navbar-dark" style="background-color:rgb(5, 101, 255); margin-top: 0; width: 100%;">
     <div class="container-fluid">
       <a href="{% url 'home' %}" class="navbar-brand">
         <strong style="font-size: 30px; color: rgb(255, 255, 255);"> CineFDS </strong>
       </a>
-
     </div>
-    <h1 style="color: aliceblue;">Cadastro de Filme</h1>
-    <form method="post">
-        {% csrf_token %}
-        <label for="titulo">Título:</label><br>
-        <input type="text" id="titulo" name="titulo"><br>
-        <label for="diretor">Diretor:</label><br>
-        <input type="text" id="diretor" name="diretor"><br>
-        <label for="ano">Ano:</label><br>
-        <input type="number" id="ano" name="ano"><br>
-        <label for="genero">Gênero:</label><br>
-        <input type="text" id="genero" name="genero"><br><br>
-        <input type="submit" value="Cadastrar">
-    </form>
+  </nav>
+  
+  <div class="container-fluid mt-4 d-flex justify-content-center">
+    <div class="col-md-6">
+      <h1 style="color: aliceblue; text-align: center;">Cadastro de Filme</h1>
+      <form method="post">
+          {% csrf_token %}
+          
+          <label for="titulo" style="color: antiquewhite;">Título:</label><br>
+          <input type="text" id="titulo" name="titulo" style="color: antiquewhite;" class="form-control"><br>
+          <label for="diretor" style="color: antiquewhite;">Diretor:</label><br>
+          <input type="text" id="diretor" name="diretor" style="color: antiquewhite;" class="form-control"><br>
+          <label for="ano" style="color: antiquewhite;">Ano:</label><br>
+          <input type="number" id="ano" name="ano" style="color: antiquewhite;" class="form-control"><br>
+          <label for="genero" style="color: antiquewhite;">Gênero:</label><br>
+          <input type="text" id="genero" name="genero" style="color: antiquewhite;" class="form-control"><br><br>
+          <input type="submit" value="Cadastrar" class="btn btn-primary">
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk+5KVc4+G5h & rGz4DAe/IARiqKtpV / Fi1f" crossorigin="anonymous"></script>
 </body>
 </html>
