@@ -12,12 +12,16 @@ class BaseModel(models.Model):
          
 class MovieCategory(BaseModel):
     category_name = models.CharField(max_length=100)
+    def __str__(self):
+        return self.category_name
      
 class Movie(BaseModel):
-    category = models.ForeignKey(MovieCategory, on_delete=models.CASCADE, related_name="pizzas")
+    category = models.ForeignKey(MovieCategory, on_delete=models.CASCADE, related_name="movies")
     movie_name = models.CharField(max_length=100)
     price = models.IntegerField(default=100)
     images = models.CharField(max_length=500)
+    
+    
      
 class Cart(BaseModel):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="cart")

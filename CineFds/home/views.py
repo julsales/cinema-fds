@@ -4,15 +4,13 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
-
+from .models import Movie
+from .forms import MovieForm
 
 def home(request):
     movies = Movie.objects.all()
     context = {'movies': movies}
     return render(request, "home.html", context)
-
-def cadastro_filme(request):
-    return render(request, 'cadastro_filme.html')
 
 class HomePageView(TemplateView):
     template_name = 'home.html'
@@ -107,3 +105,12 @@ def search_movies(request):
         movies = Movie.objects.all()
     return render(request, 'search_results.html', {'movies': movies, 'query': query})
 
+def add_movie(request):
+    if request.method == 'POST':
+        form = MovieForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
+    else:
+        form = MovieForm()
+    return render(request, 'cadastro_filme.html', {'form': form})

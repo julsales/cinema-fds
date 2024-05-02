@@ -16,7 +16,7 @@ urlpatterns = [
     path("login/",views.login_page,name="login"),
     path('register/', views.register_page, name="register"),
     path("admin/", admin.site.urls),
-    path('cadastro-filme/', views.cadastro_filme, name='cadastro_filme'),
+    path('cadastro-filme/', views.add_movie, name='cadastro_filme'),
     path('', HomePageView.as_view(), name='home'),
     path('logout/', views.logout_view, name='logout'),
 

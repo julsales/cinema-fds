@@ -1,9 +1,44 @@
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro de Filme</title>
+    <style>
+      body {
+          background-color: #333; 
+          color: #fff; 
+          font-family: Arial, sans-serif; 
+      }
+      form {
+          max-width: 400px; 
+          margin: 0 auto; 
+          color: #fff
+      }
+      input[type="text"], input[type="number"] {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #fff; 
+          background-color: #fff; 
+          color: #000; 
+          border-radius: 10px; 
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+      }
+      button[type="submit"] {
+          padding: 10px 20px;
+          background-color: #007bff; 
+          color: #fff; 
+          border: none;
+          cursor: pointer;
+          border-radius: 10px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+      button[type="submit"]:hover {
+          background-color: #0056b3; 
+      }
+  </style>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 <body style="background-color: rgb(4, 10, 29);">
@@ -19,16 +54,8 @@
       <h1 style="color: aliceblue; text-align: center;">Cadastro de Filme</h1>
       <form method="post">
           {% csrf_token %}
-          
-          <label for="titulo" style="color: antiquewhite;">Título:</label><br>
-          <input type="text" id="titulo" name="titulo" style="color: antiquewhite;" class="form-control"><br>
-          <label for="diretor" style="color: antiquewhite;">Diretor:</label><br>
-          <input type="text" id="diretor" name="diretor" style="color: antiquewhite;" class="form-control"><br>
-          <label for="ano" style="color: antiquewhite;">Ano:</label><br>
-          <input type="number" id="ano" name="ano" style="color: antiquewhite;" class="form-control"><br>
-          <label for="genero" style="color: antiquewhite;">Gênero:</label><br>
-          <input type="text" id="genero" name="genero" style="color: antiquewhite;" class="form-control"><br><br>
-          <input type="submit" value="Cadastrar" class="btn btn-primary">
+          {{ form.as_p }}
+        <button type="submit">Salvar</button>
       </form>
     </div>
   </div>
