@@ -3,6 +3,7 @@ from .models import *
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
+from django.views.generic import TemplateView
 
 def home(request):
     movies = Movie.objects.all()
@@ -11,6 +12,16 @@ def home(request):
 
 def cadastro_filme(request):
     return render(request, 'cadastro_filme.html')
+
+class HomePageView(TemplateView):
+    template_name = 'home.html'
+
+from django.contrib.auth import logout
+from django.shortcuts import redirect
+
+def logout_view(request):
+    logout(request)
+    return redirect('home') 
 
 def login_page(request):
     if request.method == "POST":
