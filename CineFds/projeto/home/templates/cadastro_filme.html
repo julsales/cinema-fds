@@ -1,0 +1,33 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Filme</title>
+
+</head>
+
+<body style="background-color: rgb(4, 10, 29);">
+    <nav class="navbar navbar-dark" style="background-color:rgb(5, 101, 255); margin-top: 0;">
+    <div class="container-fluid">
+      <a href="{% url 'home' %}" class="navbar-brand">
+        <strong style="font-size: 30px; color: rgb(255, 255, 255);"> CineFDS </strong>
+      </a>
+
+    </div>
+    <h1 style="color: aliceblue;">Cadastro de Filme</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="titulo">Título:</label><br>
+        <input type="text" id="titulo" name="titulo"><br>
+        <label for="diretor">Diretor:</label><br>
+        <input type="text" id="diretor" name="diretor"><br>
+        <label for="ano">Ano:</label><br>
+        <input type="number" id="ano" name="ano"><br>
+        <label for="genero">Gênero:</label><br>
+        <input type="text" id="genero" name="genero"><br><br>
+        <input type="submit" value="Cadastrar">
+    </form>
+</body>
+</html>

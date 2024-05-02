@@ -9,6 +9,9 @@ def home(request):
     context = {'movies': movies}
     return render(request, "home.html", context)
 
+def cadastro_filme(request):
+    return render(request, 'cadastro_filme.html')
+
 def login_page(request):
     if request.method == "POST":
         try:

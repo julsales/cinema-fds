@@ -15,6 +15,8 @@ urlpatterns = [
     path("login",views.login_page,name="login"),
     path('register/', views.register_page, name="register"),
     path("admin/", admin.site.urls),
+    path('cadastro-filme/', views.cadastro_filme, name='cadastro_filme'),
+
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
