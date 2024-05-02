@@ -5,6 +5,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 
+
 def home(request):
     movies = Movie.objects.all()
     context = {'movies': movies}
