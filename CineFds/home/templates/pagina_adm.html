@@ -42,12 +42,15 @@
 </head>
 <body style="background-color: rgb(4, 10, 29); margin: 0;">
 
-  <nav class="navbar navbar-dark justify-content-start" style="background-color:rgb(5, 101, 255); padding: 0;">
-    <a href="{% url 'home' %}" class="navbar-brand" style="padding-left: 15px;">
-      <strong style="font-size: 30px; color: rgb(255, 255, 255);"> CineFDS </strong>
-    </a>
+  <nav class="navbar navbar-dark" style="background-color:rgb(5, 101, 255); margin-top: 0; height: 55px;">
+    <div class="container-fluid d-flex justify-content-center align-items-center">
+      <a href="{% url 'home' %}" class="navbar-brand">
+        <strong style="font-size: 30px; color: rgb(255, 255, 255); line-height: 55px;"> CineFDS </strong>
+      </a>
+    </div>
   </nav>
-  
+</body>
+
   <div class="container-fluid mt-4 d-flex justify-content-center">
     <div class="col-md-6">
       <h1 style="color: aliceblue; text-align: center;">Cadastro de Filme</h1>
