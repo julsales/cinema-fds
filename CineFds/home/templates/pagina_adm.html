@@ -1,0 +1,74 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Filme</title>
+    <style>
+      body {
+          background-color: #333; 
+          color: #fff; 
+          font-family: Arial, sans-serif; 
+      }
+      button {
+          padding: 10px 20px;
+          background-color: #007bff; 
+          color: #fff; 
+          border: none;
+          cursor: pointer;
+          border-radius: 10px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+          margin: 10px;
+      }
+      button:hover {
+          background-color: #0056b3; 
+      }
+      .navbar {
+          width: 100%;
+          padding: 0;
+          border-bottom: none; 
+      }
+      .navbar-brand {
+          padding: 0;
+          margin: 0;
+          text-decoration: none; 
+      }
+      .navbar-brand strong {
+          font-size: 30px;
+          color: rgb(255, 255, 255);
+      }
+  </style>
+</head>
+<body style="background-color: rgb(4, 10, 29); margin: 0;">
+
+  <nav class="navbar navbar-dark justify-content-start" style="background-color:rgb(5, 101, 255); padding: 0;">
+    <a href="{% url 'home' %}" class="navbar-brand" style="padding-left: 15px;">
+      <strong style="font-size: 30px; color: rgb(255, 255, 255);"> CineFDS </strong>
+    </a>
+  </nav>
+  
+  <div class="container-fluid mt-4 d-flex justify-content-center">
+    <div class="col-md-6">
+      <h1 style="color: aliceblue; text-align: center;">Cadastro de Filme</h1>
+      <div style="text-align: center;">
+        <a href="{% url 'cadastro_filme' %}">
+          <button>Adicionar Filme</button>
+        </a>
+        <a href="{% url 'adicionar_genero' %}">
+          <button>Adicionar Gênero</button>
+        </a>
+        <a href="{% url 'remover_genero' %}">
+          <button>Remover Gênero</button>
+        </a>
+        <a href="{% url 'remover_filme' %}">
+          <button>Remover  Filme</button>
+        </a>
+        <a href="{% url 'home' %}">
+          <button>Voltar</button>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</body>

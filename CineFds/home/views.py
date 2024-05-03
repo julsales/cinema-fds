@@ -114,3 +114,23 @@ def add_movie(request):
     else:
         form = MovieForm()
     return render(request, 'cadastro_filme.html', {'form': form})
+def index(request):
+    return render(request, 'index.html')
+
+
+def pagina_adm(request):
+    return render(request, 'pagina_adm.html')
+
+def adicionar_filme(request):
+    return render(request, 'adicionar_filme.html')
+
+def adicionar_genero(request):
+    return render(request, 'adicionar_genero.html')
+
+def remover_genero(request):
+    return render(request, 'remover_genero.html')
+
+from django.shortcuts import render
+
+def remover_filme(request):
+    return render(request, 'remover_filme.html')

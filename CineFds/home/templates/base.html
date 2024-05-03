@@ -61,14 +61,14 @@
         } else {
             searchInput.style.color = "rgb(215, 225, 214)";
         }
-        setTimeout(flashTextColor, 200); // Chama a função novamente após 200ms para continuar piscando
+        setTimeout(flashTextColor, 200); 
     }
     </script>
     
     <div class="d-flex">
       {% if request.user.is_authenticated %}
         {% if request.user.is_staff %}
-          <a href="{% url 'cadastro_filme' %}" class="navbar-brand" style="background-color: #dc3546fc; border-radius: 12px; display: inline-block; padding: 10px;">
+          <a href="{% url 'pagina_adm' %}" class="navbar-brand" style="background-color: #dc3546fc; border-radius: 12px; display: inline-block; padding: 10px;">
             <button type="button" style="background-color: transparent; border: none; color: aliceblue; cursor: pointer;">ADM</button>
           </a>
         {% endif %}
