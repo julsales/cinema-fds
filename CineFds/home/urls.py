@@ -19,7 +19,6 @@ urlpatterns = [
     path('cadastro-filme/', views.add_movie, name='cadastro_filme'),
     path('', HomePageView.as_view(), name='home'),
     path('logout/', views.logout_view, name='logout'),
-    path('adicionar-filme/', views.adicionar_filme, name='adicionar_filme'),
     path('adicionar-genero/', views.adicionar_genero, name='adicionar_genero'),
     path('remover-genero/', views.remover_genero, name='remover_genero'),
     path('pagina_adm/', views.pagina_adm, name='pagina_adm'),

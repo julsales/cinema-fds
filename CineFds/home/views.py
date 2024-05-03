@@ -5,7 +5,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from .models import Movie
-from .forms import MovieForm
+from .forms import MovieForm,CategoryForm
 
 def home(request):
     movies = Movie.objects.all()
@@ -114,18 +114,20 @@ def add_movie(request):
     else:
         form = MovieForm()
     return render(request, 'cadastro_filme.html', {'form': form})
-def index(request):
-    return render(request, 'index.html')
-
 
 def pagina_adm(request):
     return render(request, 'pagina_adm.html')
 
-def adicionar_filme(request):
-    return render(request, 'adicionar_filme.html')
 
 def adicionar_genero(request):
-    return render(request, 'adicionar_genero.html')
+    if request.method == 'POST':
+        form2 = CategoryForm(request.POST)
+        if form2.is_valid():
+            form2.save()
+            return redirect('home')
+    else:
+        form2 = CategoryForm()
+    return render(request, 'adicionar_genero.html', {'form2': form2})
 
 def remover_genero(request):
     return render(request, 'remover_genero.html')
