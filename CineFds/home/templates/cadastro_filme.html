@@ -1,0 +1,67 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Filme</title>
+    <style>
+      body {
+          background-color: #333; 
+          color: #fff; 
+          font-family: Arial, sans-serif; 
+      }
+      form {
+          max-width: 400px; 
+          margin: 0 auto; 
+          color: #fff
+      }
+      input[type="text"], input[type="number"] {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #fff; 
+          background-color: #fff; 
+          color: #000; 
+          border-radius: 10px; 
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+      }
+      button[type="submit"] {
+          padding: 10px 20px;
+          background-color: #007bff; 
+          color: #fff; 
+          border: none;
+          cursor: pointer;
+          border-radius: 10px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+      button[type="submit"]:hover {
+          background-color: #0056b3; 
+      }
+  </style>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+</head>
+<body style="background-color: rgb(4, 10, 29);">
+
+  <nav class="navbar navbar-dark justify-content-start" style="background-color:rgb(5, 101, 255); margin-top: 0;">
+    <a href="{% url 'home' %}" class="navbar-brand">
+      <strong style="font-size: 30px; color: rgb(255, 255, 255);"> CineFDS </strong>
+    </a>
+  </nav>
+  
+  <div class="container-fluid mt-4 d-flex justify-content-center">
+    <div class="col-md-6">
+      <h1 style="color: aliceblue; text-align: center;">Cadastro de Filme</h1>
+      <form method="post">
+          {% csrf_token %}
+          {{ form.as_p }}
+        <button type="submit">Salvar</button>
+      </form>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shCk+5KVc4+G5h & rGz4DAe/IARiqKtpV / Fi1f" crossorigin="anonymous"></script>
+</body>
+</html>
