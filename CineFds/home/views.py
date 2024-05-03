@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render,  get_object_or_404, redirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
@@ -132,5 +132,9 @@ def remover_genero(request):
 
 from django.shortcuts import render
 
-def remover_filme(request):
-    return render(request, 'remover_filme.html')
+def remover_filme(request,movie_id):
+    movie = get_object_or_404(Movie, uid=movie_id)
+    if request.method == 'POST':
+        movie.delete()
+        return redirect('movie')
+    return render(request, 'remover_filme.html', {'movie': movie})
