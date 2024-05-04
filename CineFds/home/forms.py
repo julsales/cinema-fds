@@ -10,3 +10,8 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = MovieCategory
         fields = ['category_name'] 
+
+class MovieRemovalForm(forms.ModelForm):
+    class Meta:
+        model = Movie
+        fields = []
