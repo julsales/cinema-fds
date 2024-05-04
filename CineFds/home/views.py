@@ -140,3 +140,18 @@ def remover_filme(request,movie_id):
         movie.delete()
         return redirect('movie')
     return render(request, 'remover_filme.html', {'movie': movie})
+
+#Pagamento
+def payment(request):
+    if request.method == 'POST':
+        payment_method = request.POST.get('payment_method')
+        nome = request.POST.get('nome')
+        cpf = request.POST.get('cpf')
+        numero_cartao = request.POST.get('numero_cartao')
+        endereco = request.POST.get('endereco')
+        return render(request, 'payment_success.html')  
+
+    return render(request, 'payment.html')
+
+def payment_success(request):
+    return render(request, 'payment_success.html')

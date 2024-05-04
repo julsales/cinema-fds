@@ -23,6 +23,8 @@ urlpatterns = [
     path('remover-genero/', views.remover_genero, name='remover_genero'),
     path('pagina_adm/', views.pagina_adm, name='pagina_adm'),
     path('remover-filme/', views.remover_filme, name='remover_filme'),
+    path('pagamento/', views.payment, name='payment'),
+    path('pagamento/sucesso/', views.payment_success, name='payment_success'),
     
 
 ]
