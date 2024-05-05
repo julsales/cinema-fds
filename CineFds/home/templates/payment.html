@@ -1,0 +1,150 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagamento</title>
+    <style>
+        body {
+            background-color: rgb(4, 10, 29);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding-top: 55px;
+        }
+
+        button {
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin: 10px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .container-fluid {
+            margin-top: 4rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        .col-md-6 {
+            width: 50%;
+        }
+
+        h1 {
+            color: aliceblue;
+            text-align: center;
+        }
+
+        select,
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            border: none;
+            border-radius: 5px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        label {
+            color: #fff;
+        }
+
+        .navbar {
+            position: fixed;
+            width: 100%;
+            padding: 0;
+            top: 0;
+            background-color:rgb(5, 101, 255);
+            height: 55px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            border-bottom: none; 
+        }
+
+        .navbar-brand {
+            margin-left: 15px;
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .navbar-brand strong {
+            font-size: 30px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="navbar-brand">
+            <strong>CineFDS</strong>
+        </a>
+    </nav>
+
+    <div class="container-fluid mt-4">
+        <div class="col-md-6">
+            <h1>Forma de Pagamento</h1>
+            <form id="payment_form" action="/processar_pagamento/" method="post">
+                {% csrf_token %}
+                <label for="payment_method">Selecione a forma de pagamento:</label>
+                <select name="payment_method" id="payment_method">
+                    <option value="boleto">Boleto</option>
+                    <option value="cartao">Cartão</option>
+                    <option value="pix">Pix</option>
+                </select>
+                <br>
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome">
+                <br>
+                <div id="cpf_input" style="display: none;">
+                    <label for="cpf">CPF:</label>
+                    <input type="text" id="cpf" name="cpf">
+                </div>
+                <div id="numero_cartao_input" style="display: none;">
+                    <label for="numero_cartao">Número do Cartão:</label>
+                    <input type="text" id="numero_cartao" name="numero_cartao">
+                    <br>
+                </div>
+                <div id="endereco_input" style="display: none;">
+                    <label for="endereco">Endereço:</label>
+                    <input type="text" id="endereco" name="endereco">
+                </div>
+                <br>
+                <button type="submit">Pagar</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('payment_method').addEventListener('change', function() {
+            var selected_option = this.value;
+            var cpf_input = document.getElementById('cpf_input');
+            var numero_cartao_input = document.getElementById('numero_cartao_input');
+            var endereco_input = document.getElementById('endereco_input');
+
+            if (selected_option === 'boleto') {
+                cpf_input.style.display = 'block';
+                numero_cartao_input.style.display = 'none';
+                endereco_input.style.display = 'none';
+            } else if (selected_option === 'cartao') {
+                cpf_input.style.display = 'block';
+                numero_cartao_input.style.display = 'block';
+                endereco_input.style.display = 'block';
+            } else if (selected_option === 'pix') {
+                cpf_input.style.display = 'none';
+                numero_cartao_input.style.display = 'none';
+                endereco_input.style.display = 'block';
+            }
+        });
+    </script>
+</body>
+</html>

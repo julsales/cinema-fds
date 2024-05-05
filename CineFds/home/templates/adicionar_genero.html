@@ -14,7 +14,7 @@
 
 
 {% block start %}
-    <title>Cadastro de Filme</title>
+    <title>Adicionar Gênero</title>
     <style>
       body {
           background-color: #333; 
@@ -52,11 +52,11 @@
   <div class="container-fluid mt-4 d-flex justify-content-center">
     <div class="col-md-6">
       <br>
-      <h1 style="color: aliceblue; text-align: center;">Cadastro de Filme</h1>
+      <h1 style="color: aliceblue; text-align: center;">Adicionar Gênero</h1>
       <br>
       <form method="post">
           {% csrf_token %}
-          {{ form.as_p }}
+          {{ form2.as_p }}
         <button type="submit">Salvar</button>
       </form>
     </div>

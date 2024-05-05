@@ -19,6 +19,13 @@ urlpatterns = [
     path('cadastro-filme/', views.add_movie, name='cadastro_filme'),
     path('', HomePageView.as_view(), name='home'),
     path('logout/', views.logout_view, name='logout'),
+    path('adicionar-genero/', views.adicionar_genero, name='adicionar_genero'),
+    path('remover-genero/', views.remover_genero, name='remover_genero'),
+    path('pagina_adm/', views.pagina_adm, name='pagina_adm'),
+    path('remover-filme/', views.remover_filme, name='remover_filme'),
+    path('pagamento/', views.payment, name='payment'),
+    path('pagamento/sucesso/', views.payment_success, name='payment_success'),
+    
 
 ]
 if settings.DEBUG:

@@ -1,11 +1,11 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render,  get_object_or_404, redirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from .models import Movie
-from .forms import MovieForm
+from .forms import MovieForm,CategoryForm, MovieRemovalForm
 
 def home(request):
     movies = Movie.objects.all()
@@ -73,6 +73,40 @@ def register_page(request):
     return render(request, "register.html")
 @login_required(login_url="/login/")
 
+def add_movie(request):
+    if request.method == 'POST':
+        form = MovieForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('home') 
+    else:
+        form = MovieForm()
+    return render(request, 'cadastro_filme.html', {'form': form})
+
+from django.core.exceptions import ObjectDoesNotExist
+
+def remover_filme(request):
+    if request.method == 'POST':
+        from django.core.exceptions import ObjectDoesNotExist
+
+def remover_filme(request):
+    if request.method == 'POST':
+        movie_id_str = request.POST.get('movie_id')
+        if movie_id_str:
+            try:
+                movie_id = int(movie_id_str)
+                movie = Movie.objects.get(pk=movie_id)
+                movie.delete()
+                return redirect('pagina_adm')
+            except (ValueError, ObjectDoesNotExist):
+                pass
+    
+    filmes = Movie.objects.all() 
+    return render(request, 'remover_filme.html', {'filmes': filmes})
+
+
+
+
 def add_cart(request, movie_uid):
     user = request.user
     movie_obj = Movie.objects.get(uid=movie_uid)
@@ -105,12 +139,35 @@ def search_movies(request):
         movies = Movie.objects.all()
     return render(request, 'search_results.html', {'movies': movies, 'query': query})
 
-def add_movie(request):
+
+def pagina_adm(request):
+    return render(request, 'pagina_adm.html')
+
+
+def adicionar_genero(request):
     if request.method == 'POST':
-        form = MovieForm(request.POST)
-        if form.is_valid():
-            form.save()
+        form2 = CategoryForm(request.POST)
+        if form2.is_valid():
+            form2.save()
             return redirect('home')
     else:
-        form = MovieForm()
-    return render(request, 'cadastro_filme.html', {'form': form})
+        form2 = CategoryForm()
+    return render(request, 'adicionar_genero.html', {'form2': form2})
+
+def remover_genero(request):
+    return render(request, 'remover_genero.html')
+
+
+def payment(request):
+    if request.method == 'POST':
+        payment_method = request.POST.get('payment_method')
+        nome = request.POST.get('nome')
+        cpf = request.POST.get('cpf')
+        numero_cartao = request.POST.get('numero_cartao')
+        endereco = request.POST.get('endereco')
+        return render(request, 'payment_success.html')  
+
+    return render(request, 'payment.html')
+
+def payment_success(request):
+    return render(request, 'payment_success.html')
