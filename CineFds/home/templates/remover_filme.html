@@ -58,18 +58,17 @@
 <div class="container-fluid mt-4 d-flex justify-content-center">
     <div class="col-md-6">
         <div> 
-            <form action="" method="post">
+            <form action="{% if selected_movie %}{% url 'delete_movie' movie_id=selected_movie.id %}{% endif %}" method="post">
                 {% csrf_token %}
                 <h1>Remover Filme</h1>
                 <label for="movie_id">Selecione o Filme:</label><br>
-                <select id="movie_id" name="movie_id"> 
-                    {% for filme in filmes %}
-                        <option value="{{ filme.id }}">{{ filme.movie_name }}</option>
+                <select id="movie_id" name="movie_id">
+                    {% for movie in movies %}
+                    <option value="{{ movie.id }}">{{ movie.movie_name }}</option>
                     {% endfor %}
                 </select><br><br>
                 <input type="submit" value="Remover Filme">
             </form>
-            
         </div>
     </div>
 </div>

@@ -1,4 +1,5 @@
 from django.shortcuts import render,  get_object_or_404, redirect
+from django.http import HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
@@ -83,24 +84,32 @@ def add_movie(request):
         form = MovieForm()
     return render(request, 'cadastro_filme.html', {'form': form})
 
-from django.core.exceptions import ObjectDoesNotExist
-
-
 def remover_filme(request):
-    if request.method == 'POST':
-        movie_id_str = request.POST.get('movie_id')
-        if movie_id_str:
-            try:
-                movie_id = int(movie_id_str)
-                movie = Movie.objects.get(pk=movie_id)
-                movie.delete()
-                return redirect('pagina_adm')
-            except (ValueError, ObjectDoesNotExist):
-                pass
-    
-    filmes = Movie.objects.all() 
-    return render(request, 'remover_filme.html', {'filmes': filmes})
+    movies = Movie.objects.all()
+    selected_movie = None
 
+    if request.method == 'POST':
+        movie_id = request.POST.get('movie_id')
+        if movie_id:
+            try:
+                selected_movie = Movie.objects.get(id=movie_id)
+                selected_movie.delete()  
+                return redirect('pagina_adm') 
+            except Movie.DoesNotExist:
+                pass
+
+    return render(request, 'remover_filme.html', {'movies': movies, 'selected_movie': selected_movie})
+
+def delete_movie(request, movie_uid):
+    filme = get_object_or_404(Movie, uid=movie_uid)
+
+    if request.method == 'POST':
+        filme.delete()
+        return redirect('pagina_adm')
+
+    filmes = Movie.objects.all()
+    return render(request, 'remover_filme.html', {'filmes': filmes})
+                                                  
 def pag_fim(request):
     return render(request, 'pag_fim.html')
 
@@ -111,14 +120,13 @@ def add_cart(request, movie_uid):
     cart, _ = Cart.objects.get_or_create(user=user, is_paid=False)
     cart_items = CartItems.objects.create(cart=cart, movie=movie_obj)
      
-    return render(request, 'escolha_acento.html')
+    return redirect('/')
 @login_required(login_url='/login/')
 
 def cart(request):
     print(request.user)
     cart = Cart.objects.get(is_paid=False, user=request.user)
-    context = {'carts': cart}
-    return render(request, "cart.html", context)
+    return render(request, "cart.html", {'carts': cart})
 @login_required(login_url='/login/')
 
 def remove_cart_item(request, cart_item_uid):
