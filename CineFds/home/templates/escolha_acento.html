@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escolha de Assentos</title>
+    <style>
+        /* Estilos para os assentos */
+        .seats-container {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr); /* 12 colunas */
+            gap: 5px; /* Espaçamento entre as colunas de assentos */
+            background-color: rgb(9, 27, 87); /* Fundo branco */
+            padding: 20px; /* Espaçamento interno */
+            border-radius: 10px; /* Borda arredondada */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+        }
+
+        .seat {
+            width: 50px; /* largura do assento */
+            height: 50px; /* altura do assento */
+            background-image: url('https://cdn-icons-png.flaticon.com/512/708/708905.png'); /* imagem inicial do assento */
+            background-size: cover; /* ajustar o tamanho da imagem */
+            cursor: pointer; /* cursor de mouse ao passar por cima do assento */
+        }
+
+        /* Estilos para o assento selecionado */
+        .seat.selected {
+            background-image: url('https://cdn-icons-png.flaticon.com/512/24/24627.png');
+        }
+
+        /* Centralizar o título e o botão */
+        .container {
+            text-align: center;
+            margin-top: 50px; /* Espaço superior */
+        }
+
+        .payment-button {
+            margin-top: 20px; /* Espaço entre o título e o botão */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Escolha de Assentos</h1>
+        <!-- Box branca para os assentos -->
+        <div class="seats-container">
+            <!-- Gerar 6x12 assentos -->
+            <script>
+                // Gerar os assentos
+                for (let i = 1; i <= 6; i++) {
+                    for (let j = 1; j <= 12; j++) {
+                        let seat = document.createElement('div');
+                        seat.classList.add('seat');
+                        seat.dataset.seatId = `${i}-${j}`; // Usando o formato "linha-coluna" como ID do assento
+                        seat.addEventListener('click', function() {
+                            this.classList.toggle('selected');
+                        });
+                        document.querySelector('.seats-container').appendChild(seat);
+                    }
+                }
+            </script>
+        </div>
+        <a href="{% url 'payment' %}" class="btn btn-warning payment-button">Pagar</a>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Contar o número de itens na tabela da página anterior
+            const maxSeats = document.querySelectorAll('.table tbody tr').length;
+            let selectedSeats = 0; // Contador de assentos selecionados
+
+            // Função para verificar se o limite máximo de assentos foi atingido
+            function checkMaxSeats() {
+                if (selectedSeats >= maxSeats) {
+                    // Desativar a seleção de mais assentos
+                    document.querySelectorAll('.seat').forEach(seat => {
+                        if (!seat.classList.contains('selected')) {
+                            seat.classList.add('disabled');
+                        }
+                    });
+                } else {
+                    // Ativar a seleção de assentos
+                    document.querySelectorAll('.seat').forEach(seat => {
+                        seat.classList.remove('disabled');
+                    });
+                }
+            }
+
+            // Event listener para cada assento
+            document.querySelectorAll('.seat').forEach(seat => {
+                seat.addEventListener('click', function() {
+                    if (!this.classList.contains('selected') && !this.classList.contains('disabled')) {
+                        this.classList.toggle('selected');
+                        selectedSeats += this.classList.contains('selected') ? 1 : -1;
+                        checkMaxSeats();
+                    }
+                });
+            });
+
+            // Verificar o limite máximo de assentos ao carregar a página
+            checkMaxSeats();
+        });
+    </script>
+</body>
+</html>
+{% endblock %}

@@ -85,9 +85,6 @@ def add_movie(request):
 
 from django.core.exceptions import ObjectDoesNotExist
 
-def remover_filme(request):
-    if request.method == 'POST':
-        from django.core.exceptions import ObjectDoesNotExist
 
 def remover_filme(request):
     if request.method == 'POST':
@@ -104,17 +101,17 @@ def remover_filme(request):
     filmes = Movie.objects.all() 
     return render(request, 'remover_filme.html', {'filmes': filmes})
 
-
-
+def pag_fim(request):
+    return render(request, 'pag_fim.html')
 
 def add_cart(request, movie_uid):
     user = request.user
     movie_obj = Movie.objects.get(uid=movie_uid)
-     
+    max_seats = request.GET.get('max_seats')
     cart, _ = Cart.objects.get_or_create(user=user, is_paid=False)
     cart_items = CartItems.objects.create(cart=cart, movie=movie_obj)
      
-    return redirect('/')
+    return render(request, 'escolha_acento.html')
 @login_required(login_url='/login/')
 
 def cart(request):
@@ -171,3 +168,6 @@ def payment(request):
 
 def payment_success(request):
     return render(request, 'payment_success.html')
+
+def escolha_acento(request):
+    return render(request, 'escolha_acento.html')

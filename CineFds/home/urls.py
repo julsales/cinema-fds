@@ -25,6 +25,10 @@ urlpatterns = [
     path('remover-filme/', views.remover_filme, name='remover_filme'),
     path('pagamento/', views.payment, name='payment'),
     path('pagamento/sucesso/', views.payment_success, name='payment_success'),
+    path('escolha_acento/', views.escolha_acento, name='escolha_acento'),
+    path('pag_fim/', views.pag_fim, name='pag_fim'),
+
+
     
 
 ]
