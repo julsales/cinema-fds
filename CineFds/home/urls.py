@@ -23,11 +23,12 @@ urlpatterns = [
     path('remover-genero/', views.remover_genero, name='remover_genero'),
     path('pagina_adm/', views.pagina_adm, name='pagina_adm'),
     path('remover_filme/', views.remover_filme, name='remover_filme'),
-    path('delete_movie/<int:movie_uid>/',views.delete_movie, name='delete_movie'),
     path('pagamento/', views.payment, name='payment'),
     path('pagamento/sucesso/', views.payment_success, name='payment_success'),
     path('escolha_acento/', views.escolha_acento, name='escolha_acento'),
     path('pag_fim/', views.pag_fim, name='pag_fim'),
+    path('delete_movie_by_name/', views.delete_movie_by_name, name='delete_movie_by_name'),
+
 
 
     

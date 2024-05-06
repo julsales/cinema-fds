@@ -100,16 +100,25 @@ def remover_filme(request):
 
     return render(request, 'remover_filme.html', {'movies': movies, 'selected_movie': selected_movie})
 
-def delete_movie(request, movie_uid):
-    filme = get_object_or_404(Movie, uid=movie_uid)
+from django.contrib import messages
 
+
+def delete_movie_by_name(request):
     if request.method == 'POST':
-        filme.delete()
-        return redirect('pagina_adm')
+        movie_name = request.POST.get('movie_name')
+        try:
+            movie = Movie.objects.get(movie_name=movie_name)
+            movie.delete()
+            messages.success(request, "Filme removido com sucesso!")
+        except Movie.DoesNotExist:
+            messages.error(request, "Filme não encontrado.")
+        return redirect('remover_filme')
 
-    filmes = Movie.objects.all()
-    return render(request, 'remover_filme.html', {'filmes': filmes})
-                                                  
+    movies = Movie.objects.all()
+    return render(request, 'remover_filme.html', {'movies': movies})
+
+
+
 def pag_fim(request):
     return render(request, 'pag_fim.html')
 
