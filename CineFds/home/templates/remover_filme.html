@@ -1,32 +1,31 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Remover Filme</title>
     <style>
         body {
+            margin: 0; 
             background-color: rgb(4, 10, 29); 
             color: #fff; 
             font-family: Arial, sans-serif; 
-            margin: 0;
+        }
+        .container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start; 
+            min-height: 100vh;
+            padding-top: 20px;
         }
         form {
             max-width: 400px; 
-            margin: 0 auto; 
+            margin-bottom: 20px; 
             color: #fff;
             text-align: center;
-            margin-top: 50px;
-        }
-        select {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #fff; 
-            background-color: #fff; 
-            color: #000; 
-            border-radius: 10px; 
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
         }
         input[type="submit"] {
             padding: 10px 20px;
@@ -40,40 +39,49 @@
         input[type="submit"]:hover {
             background-color: #0056b3; 
         }
+        .filme-list-container {
+            background-color: rgb(4, 14, 46);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+        }
     </style>
 </head>
+
 <body>
-
-<nav class="navbar navbar-dark justify-content-start" style="background-color:rgb(5, 101, 255); padding: 0;">
-    <div class="nav-content" style="padding-left: 10px; display: flex; align-items: center;">
-        <a href="{% url 'pagina_adm' %}" class="navbar-brand" style="text-decoration: none; display: flex; align-items: center; background-color: rgb(0, 48, 126); border-radius: 5px; padding: 5px; width: 140px; height: 45px;" >
-            <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
-                <path fill-rule="evenodd" d="M10.354 11.354a.5.5 0 0 0 0-.708L7.707 8l2.647-2.646a.5.5 0 0 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
-            </svg>
-            <span style="font-size: 24px; color: white; margin-left: 5px;">Voltar</span>
-        </a>
-    </div>
-</nav>
-
-<div class="container-fluid mt-4 d-flex justify-content-center">
-    <div class="col-md-6">
-        <div> 
-            <form action="" method="post">
-                {% csrf_token %}
-                <h1>Remover Filme</h1>
-                <label for="movie_id">Selecione o Filme:</label><br>
-                <select id="movie_id" name="movie_id"> 
-                    {% for filme in filmes %}
-                        <option value="{{ filme.id }}">{{ filme.movie_name }}</option>
-                    {% endfor %}
-                </select><br><br>
-                <input type="submit" value="Remover Filme">
-            </form>
-            
+    <nav class="navbar navbar-dark justify-content-start" style="background-color:rgb(5, 101, 255); padding: 0;">
+        <div class="nav-content" style="padding-left: 10px; display: flex; align-items: center;">
+            <a href="{% url 'pagina_adm' %}" class="navbar-brand" style="text-decoration: none; display: flex; align-items: center; background-color: rgb(0, 48, 126); border-radius: 5px; padding: 5px; width: 140px; height: 45px;" >
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10.354 11.354a.5.5 0 0 0 0-.708L7.707 8l2.647-2.646a.5.5 0 0 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+                </svg>
+                <span style="font-size: 24px; color: white; margin-left: 5px;">Voltar</span>
+            </a>
         </div>
+    </nav>
+    <div class="container">
+        <form action="{% url 'delete_movie_by_name' %}" method="post">
+            {% csrf_token %}
+            <h1>Remover Filme</h1>
+            <label for="movie_name">Nome do Filme:</label><br>
+            <input type="text" id="movie_name" name="movie_name"><br><br>
+            <input type="submit" value="Remover Filme">
+        </form>
+        
+        {% if movies %}
+            <div class="filme-list-container">
+                <h2>Lista de Filmes:</h2>
+                <ul>
+                    {% for movie in movies %}
+                        <li>{{ movie.movie_name }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% else %}
+            <p>Não há filmes disponíveis.</p>
+        {% endif %}
     </div>
-</div>
-
-
 </body>
+
 </html>

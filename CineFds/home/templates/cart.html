@@ -3,42 +3,93 @@
 {% load static %}
  
 {% block start %}
- 
 <style>
- 
+/* Estilos personalizados */
+.quantity-container {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-container .input-group {
+    width: 90px; 
+}
+
+.quantity-container .btn {
+    font-size: 1.3rem; 
+    padding: 0.2rem 0.4rem;
+}
 </style>
 <div class="container card shadow-lg mt-5" style="background-color: rgb(33 38 45);">
     <table class="table">
         <thead>
             <tr style="color: aliceblue;">
                 <th scope="col"></th>
- 
                 <th scope="col"></th>
- 
+                <th scope="col">Quantidade</th>
                 <th scope="col">Valor</th>
                 <th scope="col">Nome do Filme</th>
                 <th scope="col">Assistir</th>
- 
             </tr>
         </thead>
         <tbody>
-            {% for cartItems in carts.cart_items.all %}
+            {% for cartItem in carts.cart_items.all %}
             <tr>
-                <th scope="row">{{forloop.counter}}</th>
-                <td><a href="{% url 'remove_cart' cartItems.uid %}" class="btn btn-danger">Remover</a>
-            
-                <td style="color: aliceblue;"><p> R$ {{cartItems.movie.price}} </p> </td>
-                <td>
-                    <h5 style="color: aliceblue;">{{cartItems.movie.movie_name}}</h5>
+                <th scope="row">{{ forloop.counter }}</th>
+                <td><a href="{% url 'remove_cart' cartItem.uid %}" class="btn btn-danger">Remover</a></td>
+                <td class="quantity-container">
+                    <div class="input-group">
+                        <button class="btn btn-outline-secondary decrease" type="button">-</button>
+                        <input type="text" class="form-control quantity" value="1" readonly maxlength="2">
+                        <button class="btn btn-outline-secondary increase" type="button">+</button>
+                    </div>
                 </td>
-                <td><a href="{% url 'payment' %}" class="btn btn-warning">Finalizar a compra</a>
-
+                <td style="color: aliceblue;"><p class="price">R$ {{ cartItem.movie.price }}</p></td>
+                <td>
+                    <h5 style="color: aliceblue;">{{ cartItem.movie.movie_name }}</h5>
+                </td>
+                <td><a href="{% url 'escolha_acento' %}" class="btn btn-warning">Finalizar a compra</a></td>
             </tr>
             {% endfor %}
-
- 
         </tbody>
     </table>
-    
 </div>
+
+<script>
+    function calculateTotalPrice(quantity, unitPrice) {
+        return (quantity * unitPrice).toFixed(2);
+    }
+
+    document.addEventListener('DOMContentLoaded', function () {
+        const decreaseButtons = document.querySelectorAll('.decrease');
+        const increaseButtons = document.querySelectorAll('.increase');
+        const quantityInputs = document.querySelectorAll('.quantity');
+        const priceElements = document.querySelectorAll('.price');
+
+        decreaseButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                let quantityInput = this.parentElement.querySelector('.quantity');
+                let currentValue = parseInt(quantityInput.value);
+                if (currentValue > 1) {
+                    quantityInput.value = currentValue - 1;
+                    let unitPrice = parseFloat(this.parentElement.nextElementSibling.querySelector('.price').textContent.replace('R$', '').trim());
+                    let totalPrice = calculateTotalPrice(currentValue - 1, unitPrice);
+                    this.parentElement.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
+                }
+            });
+        });
+
+        increaseButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                let quantityInput = this.parentElement.querySelector('.quantity');
+                let currentValue = parseInt(quantityInput.value);
+                if (currentValue < 9) {
+                    quantityInput.value = currentValue + 1;
+                    let unitPrice = parseFloat(this.parentElement.nextElementSibling.querySelector('.price').textContent.replace('R$', '').trim());
+                    let totalPrice = calculateTotalPrice(currentValue + 1, unitPrice);
+                    this.parentElement.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
+                }
+            });
+        });
+    });
+</script>
 {% endblock %}

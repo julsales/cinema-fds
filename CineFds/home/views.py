@@ -1,4 +1,5 @@
 from django.shortcuts import render,  get_object_or_404, redirect
+from django.http import HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
@@ -83,34 +84,48 @@ def add_movie(request):
         form = MovieForm()
     return render(request, 'cadastro_filme.html', {'form': form})
 
-from django.core.exceptions import ObjectDoesNotExist
-
 def remover_filme(request):
-    if request.method == 'POST':
-        from django.core.exceptions import ObjectDoesNotExist
+    movies = Movie.objects.all()
+    selected_movie = None
 
-def remover_filme(request):
     if request.method == 'POST':
-        movie_id_str = request.POST.get('movie_id')
-        if movie_id_str:
+        movie_id = request.POST.get('movie_id')
+        if movie_id:
             try:
-                movie_id = int(movie_id_str)
-                movie = Movie.objects.get(pk=movie_id)
-                movie.delete()
-                return redirect('pagina_adm')
-            except (ValueError, ObjectDoesNotExist):
+                selected_movie = Movie.objects.get(id=movie_id)
+                selected_movie.delete()  
+                return redirect('pagina_adm') 
+            except Movie.DoesNotExist:
                 pass
-    
-    filmes = Movie.objects.all() 
-    return render(request, 'remover_filme.html', {'filmes': filmes})
+
+    return render(request, 'remover_filme.html', {'movies': movies, 'selected_movie': selected_movie})
+
+from django.contrib import messages
+
+
+def delete_movie_by_name(request):
+    if request.method == 'POST':
+        movie_name = request.POST.get('movie_name')
+        try:
+            movie = Movie.objects.get(movie_name=movie_name)
+            movie.delete()
+            messages.success(request, "Filme removido com sucesso!")
+        except Movie.DoesNotExist:
+            messages.error(request, "Filme não encontrado.")
+        return redirect('remover_filme')
+
+    movies = Movie.objects.all()
+    return render(request, 'remover_filme.html', {'movies': movies})
 
 
 
+def pag_fim(request):
+    return render(request, 'pag_fim.html')
 
 def add_cart(request, movie_uid):
     user = request.user
     movie_obj = Movie.objects.get(uid=movie_uid)
-     
+    max_seats = request.GET.get('max_seats')
     cart, _ = Cart.objects.get_or_create(user=user, is_paid=False)
     cart_items = CartItems.objects.create(cart=cart, movie=movie_obj)
      
@@ -120,8 +135,7 @@ def add_cart(request, movie_uid):
 def cart(request):
     print(request.user)
     cart = Cart.objects.get(is_paid=False, user=request.user)
-    context = {'carts': cart}
-    return render(request, "cart.html", context)
+    return render(request, "cart.html", {'carts': cart})
 @login_required(login_url='/login/')
 
 def remove_cart_item(request, cart_item_uid):
@@ -171,3 +185,6 @@ def payment(request):
 
 def payment_success(request):
     return render(request, 'payment_success.html')
+
+def escolha_acento(request):
+    return render(request, 'escolha_acento.html')
