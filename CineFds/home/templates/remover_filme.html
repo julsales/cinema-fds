@@ -68,7 +68,13 @@
             <input type="text" id="movie_name" name="movie_name"><br><br>
             <input type="submit" value="Remover Filme">
         </form>
-        
+        {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+            <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+        {% endfor %}
+    </ul>
+        {% endif %}
         {% if movies %}
             <div class="filme-list-container">
                 <h2>Lista de Filmes:</h2>
