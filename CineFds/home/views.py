@@ -84,6 +84,8 @@ def add_movie(request):
         form = MovieForm()
     return render(request, 'cadastro_filme.html', {'form': form})
 
+
+
 def remover_filme(request):
     movies = Movie.objects.all()
     selected_movie = None
@@ -100,14 +102,15 @@ def remover_filme(request):
 
     return render(request, 'remover_filme.html', {'movies': movies, 'selected_movie': selected_movie})
 
-from django.contrib import messages
-
+def normalize_text(text):
+    return text.lower()
 
 def delete_movie_by_name(request):
     if request.method == 'POST':
         movie_name = request.POST.get('movie_name')
+        normalized_name = normalize_text(movie_name)
         try:
-            movie = Movie.objects.get(movie_name=movie_name)
+            movie = Movie.objects.get(movie_name__iexact=normalized_name)
             movie.delete()
             messages.success(request, "Filme removido com sucesso!")
         except Movie.DoesNotExist:
@@ -116,6 +119,7 @@ def delete_movie_by_name(request):
 
     movies = Movie.objects.all()
     return render(request, 'remover_filme.html', {'movies': movies})
+
 
 
 
