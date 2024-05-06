@@ -1,0 +1,82 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Filme</title>
+    <style>
+      body {
+          background-color: #333; 
+          color: #fff; 
+          font-family: Arial, sans-serif; 
+      }
+      form {
+          max-width: 400px; 
+          margin: 0 auto; 
+          color: #fff;
+      }
+      input[type="text"], input[type="number"] {
+          width: 100%;
+          padding: 10px;
+          margin-bottom: 10px;
+          border: 1px solid #fff; 
+          background-color: #fff; 
+          color: #000; 
+          border-radius: 10px; 
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+      }
+      button[type="submit"] {
+          padding: 10px 20px;
+          background-color: #007bff; 
+          color: #fff; 
+          border: none;
+          cursor: pointer;
+          border-radius: 10px;
+          box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+      }
+      button[type="submit"]:hover {
+          background-color: #0056b3; 
+      }
+  </style>
+</head>
+<body style="background-color: rgb(4, 10, 29); margin: 0;">
+
+  <nav class="navbar navbar-dark justify-content-start" style="background-color:rgb(5, 101, 255); padding: 0;">
+    <div class="nav-content" style="padding-left: 10px; display: flex; align-items: center;">
+      <a href="{% url 'pagina_adm' %}" class="navbar-brand" style="text-decoration: none; display: flex; align-items: center; background-color: rgb(0, 48, 126); border-radius: 5px; padding: 5px; width: 140px; height: 45px;" >
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M10.354 11.354a.5.5 0 0 0 0-.708L7.707 8l2.647-2.646a.5.5 0 0 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+        </svg>
+        <span style="font-size: 24px; color: white; margin-left: 5px;">Voltar</span>
+      </a>
+    </div>
+  </nav>
+
+  {% block start %}
+  <div class="container-fluid mt-4 d-flex justify-content-center">
+    <div class="col-md-6">
+      <br>
+      <h1 style="color: aliceblue; text-align: center;">Editar Filme</h1>
+      <br>
+      <form method="post">
+          {% csrf_token %}
+          <!-- Adicione um campo de seleção para escolher o filme a ser editado -->
+          <select name="filme" id="filme" required>
+              <option value="" disabled selected>Escolha o Filme</option>
+              {% for movie in movies %}
+                  <option value="{{ movie.id }}">{{ movie.nome }}</option> <!-- Certifique-se de que "nome" corresponde ao atributo correto do seu modelo Filme -->
+              {% endfor %}
+          </select>
+          <!-- Aqui você pode adicionar outros campos para editar -->
+          <input type="text" name="titulo" placeholder="Título" required>
+          <input type="number" name="ano" placeholder="Ano" required>
+          <!-- Adicione mais campos conforme necessário -->
+          <button type="submit">Salvar</button>
+      </form>
+    </div>
+  </div>
+  {% endblock %}
+
+</body>
+</html>
