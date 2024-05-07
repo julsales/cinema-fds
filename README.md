@@ -57,6 +57,21 @@ Sprint e histórias implementadas
 
 ### TERCEIRA ENTREGA
 
+= Segundo Diagrama Atualizado =
+![ImagemDiagrama](Imagens/Diagrama2.jpg)
+
+<br>
+
+= Screencast's =
+
+<br>
+
+[Screencast terceira entrega -> AZURE](https://youtu.be/guMPy21XEss) 
+
+[Screencast terceira entrega -> Testes do Sistema E CI\CD com Build e Deployment automatizado](https://youtu.be/RwNLcXC-mfY) 
+
+<br>
+
 -Programação em par:
 
 
@@ -73,15 +88,4 @@ Nosso maior desafio foi ter foco, principalmente para desenvolver as histórias,
 No final, ao contrário do que nós pensamos anteriormente, o Pair Programming se provou um método eficiente de trabalho, melhorando a qualidade do código e até fortalecendo laços entre as partes envolvidas, se tornando assim uma experiência de aprendizado que vale a pena ser vivida.
 
 <br>
-
-= Segundo Diagrama Atualizado =
-![ImagemDiagrama](Imagens/Diagrama2.jpg)
-
-<br>
-
-= Screencast's =
-
-[Screencast terceira entrega -> AZURE](https://youtu.be/guMPy21XEss) 
-
-[Screencast terceira entrega -> Testes do Sistema]() 
 
