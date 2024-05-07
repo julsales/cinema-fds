@@ -59,6 +59,7 @@ Sprint e histórias implementadas
 
 -Programação em par:
 
+
 Durante o desenvolvimento da aplicação CineFds realizamos o Pair Programming, uma prática ágil onde dois desenvolvedores trabalham em conjunto no mesmo código utilizando do mesmo computador, seja de forma síncrona, ou assíncrona, com o objetivo de melhorar a qualidade do código, acelerar o desenvolvimento e adquirir conhecimento
 
 Na entrega 2 não foi possivel aplicar esse método, porem na entrega 3  quase todo o desenvolvimento de código foi feito desta forma. Assim, seguimos o modelo de "piloto" e "navegador", alternando papéis regularmente para ter a garantia de que ambos estavam aprendendo e participando.
@@ -71,8 +72,16 @@ Nosso maior desafio foi ter foco, principalmente para desenvolver as histórias,
 
 No final, ao contrário do que nós pensamos anteriormente, o Pair Programming se provou um método eficiente de trabalho, melhorando a qualidade do código e até fortalecendo laços entre as partes envolvidas, se tornando assim uma experiência de aprendizado que vale a pena ser vivida.
 
+<br>
 
 = Segundo Diagrama corrigindo o primeiro entregue =
 ![ImagemDiagrama](Imagens/Diagrama2.jpg)
 
+<br>
+
+= Screencast's =
+
 [Screencast terceira entrega AZURE](https://youtu.be/guMPy21XEss) 
+
+[Screencast terceira Testes do sistema]() 
+
