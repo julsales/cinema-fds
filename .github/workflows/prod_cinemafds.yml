@@ -32,14 +32,26 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r CineFds/requirements.txt
 
+      - name: Run local server
+        run: |
+          cd CineFds/
+          python manage.py migrate
+          python manage.py runserver &
+          sleep 5
+          npx cypress run
+
       - name: Cleaning testing files
         run: |
           cd CineFds/
           rm .env
           rm db.sqlite3
+          rm cypress.config.js
+          rm package-lock.json
+          rm package.json
+          rm -rf cypress
+          rm -rf node_modules
           cd ..
 
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
 
       - name: Zip artifact for deployment
         run: |
