@@ -77,3 +77,7 @@ No final, ao contrário do que nós pensamos anteriormente, o Pair Programming s
 
 = Sprint e histórias implementadas =
 ![image](https://github.com/ZiicoB/cinema-fds/assets/142419446/51bd463d-cfdc-44ec-90bf-f42b347a22a4)
+
+= Bug tracker  =
+![image](https://github.com/ZiicoB/cinema-fds/assets/142419446/f7a2ab06-753a-497f-a9de-0f1a946844b5)
+
