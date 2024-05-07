@@ -29,11 +29,7 @@ urlpatterns = [
     path('escolha_acento/', views.escolha_acento, name='escolha_acento'),
     path('pag_fim/', views.pag_fim, name='pag_fim'),
     path('delete_movie_by_name/', views.delete_movie_by_name, name='delete_movie_by_name'),
-
-
-
-    
-
+    path('editar_filme/', editar_filme, name='editar_filme'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)

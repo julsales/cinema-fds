@@ -103,13 +103,28 @@ def remover_filme(request):
 
     return render(request, 'remover_filme.html', {'movies': movies, 'selected_movie': selected_movie})
 
-def normalize_text(text):
-    return text.lower()
+
+from django.contrib import messages
+
+def editar_filme(request):
+    filmes = Movie.objects.all()  
+    selected_movie = None
+
+    if request.method == 'POST':
+        movie_id = request.POST.get('filme')
+        if movie_id:
+            try:
+                selected_movie = Movie.objects.get(id=movie_id)
+                return redirect('pagina_adm')  
+            except Movie.DoesNotExist:
+                pass
+
+    return render(request, 'editar_filme.html', {'filmes': filmes, 'selected_movie': selected_movie})
+
 
 def delete_movie_by_name(request):
     if request.method == 'POST':
         movie_name = request.POST.get('movie_name')
-        normalized_name = normalize_text(movie_name)
         try:
             movie = Movie.objects.filter(movie_name__iexact=normalized_name)
             movie.delete()
@@ -120,7 +135,6 @@ def delete_movie_by_name(request):
 
     movies = Movie.objects.all()
     return render(request, 'remover_filme.html', {'movies': movies})
-
 
 
 

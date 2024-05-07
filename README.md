@@ -70,3 +70,7 @@ Na entrega 3, a colaboração conjunta doi crucial para o desenvolvimento das hi
 Nosso maior desafio foi ter foco, principalmente para desenvolver as histórias, pois a vezes é fácil se perder com os diversos requisitos que o projeto exige, mas no final foi possivel obter um bom andamento
 
 No final, ao contrário do que nós pensamos anteriormente, o Pair Programming se provou um método eficiente de trabalho, melhorando a qualidade do código e até fortalecendo laços entre as partes envolvidas, se tornando assim uma experiência de aprendizado que vale a pena ser vivida.
+
+
+= Segundo Diagrama corrigindo o primeiro entregue =
+![ImagemDiagrama](Imagens/Diagrama2.jpg)
