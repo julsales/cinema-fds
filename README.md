@@ -74,14 +74,14 @@ No final, ao contrário do que nós pensamos anteriormente, o Pair Programming s
 
 <br>
 
-= Segundo Diagrama corrigindo o primeiro entregue =
+= Segundo Diagrama Atualizado =
 ![ImagemDiagrama](Imagens/Diagrama2.jpg)
 
 <br>
 
 = Screencast's =
 
-[Screencast terceira entrega AZURE](https://youtu.be/guMPy21XEss) 
+[Screencast terceira entrega -> AZURE](https://youtu.be/guMPy21XEss) 
 
-[Screencast terceira Testes do sistema]() 
+[Screencast terceira entrega -> Testes do Sistema]() 
 
