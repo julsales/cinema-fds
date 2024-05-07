@@ -74,3 +74,5 @@ No final, ao contrário do que nós pensamos anteriormente, o Pair Programming s
 
 = Segundo Diagrama corrigindo o primeiro entregue =
 ![ImagemDiagrama](Imagens/Diagrama2.jpg)
+
+[Screencast terceira entrega AZURE](https://youtu.be/guMPy21XEss) 
