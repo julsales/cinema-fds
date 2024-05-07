@@ -74,3 +74,6 @@ No final, ao contrário do que nós pensamos anteriormente, o Pair Programming s
 
 = Segundo Diagrama corrigindo o primeiro entregue =
 ![ImagemDiagrama](Imagens/Diagrama2.jpg)
+
+= Sprint e histórias implementadas =
+![image](https://github.com/ZiicoB/cinema-fds/assets/142419446/51bd463d-cfdc-44ec-90bf-f42b347a22a4)
