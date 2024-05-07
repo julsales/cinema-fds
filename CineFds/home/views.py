@@ -84,6 +84,8 @@ def add_movie(request):
         form = MovieForm()
     return render(request, 'cadastro_filme.html', {'form': form})
 
+def editar_filme(request,movie_id):
+        return render(request, 'editar_filme.html')
 
 def remover_filme(request):
     movies = Movie.objects.all()
@@ -124,7 +126,7 @@ def delete_movie_by_name(request):
     if request.method == 'POST':
         movie_name = request.POST.get('movie_name')
         try:
-            movie = Movie.objects.get(movie_name=movie_name)
+            movie = Movie.objects.filter(movie_name__iexact=normalized_name)
             movie.delete()
             messages.success(request, "Filme removido com sucesso!")
         except Movie.DoesNotExist:

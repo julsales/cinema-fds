@@ -20,6 +20,7 @@ urlpatterns = [
     path('', HomePageView.as_view(), name='home'),
     path('logout/', views.logout_view, name='logout'),
     path('adicionar-genero/', views.adicionar_genero, name='adicionar_genero'),
+    path('editar_filme/', views.editar_filme, name='editar_filme'),
     path('remover-genero/', views.remover_genero, name='remover_genero'),
     path('pagina_adm/', views.pagina_adm, name='pagina_adm'),
     path('remover_filme/', views.remover_filme, name='remover_filme'),
