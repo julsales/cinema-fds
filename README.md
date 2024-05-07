@@ -70,7 +70,9 @@ Sprint e histórias implementadas
 <br> 
 
 = Lo-FI  =
+
 <br>
+
 O Lo-fi já tinhas essas histórias implementadas nele anteriormente, é póssivel encontrar os links aqui:
 
 [Protótipo Lo-Fi](https://www.figma.com/file/Ms5aUXSnImGqW7S97h7m92/Wireframe-Template-(Community)?type=design&node-id=0%3A1&mode=design&t=v2NZ8sR463NZwdIk-1)
