@@ -107,11 +107,11 @@ No final, ao contrário do que nós pensamos anteriormente, o Pair Programming s
 <br>
 
 ===========================================================
+<br>
 [Deployment na Azure](https://cinemafds.azurewebsites.net)
 
 = Para Logar =
-
+<br>
 adm123
 admin123
 ^^ Login/Senha^^ 
-===========================================================
