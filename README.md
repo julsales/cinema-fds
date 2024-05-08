@@ -96,7 +96,7 @@ Durante o desenvolvimento da aplicação CineFds realizamos o Pair Programming, 
 
 Na entrega 2 não foi possivel aplicar esse método, porem na entrega 3  quase todo o desenvolvimento de código foi feito desta forma. Assim, seguimos o modelo de "piloto" e "navegador", alternando papéis regularmente para ter a garantia de que ambos estavam aprendendo e participando.
 
-De começo não entendiamos a necessidade desse método, pois achávamos que tomaria muito do nosso tempo, mas depois de algumas tentativas percebemos que a colaboração direta resultava em um código mais limpo, com menos erros e com ideias mais criativas.
+De começo não entendiamos a necessidade desse d, pois achávamos que tomaria muito do nosso tempo, mas depois de algumas tentativas percebemos que a colaboração direta resultava em um código mais limpo, com menos erros e com ideias mais criativas.
 
 Na entrega 3, a colaboração conjunta doi crucial para o desenvolvimento das historias, principalmente a de "adicionar filmes" pois proporcionou um maior fluxo de soluções possiveis. Além disso, uma das maiores vantagens encontradas foi a redução na quantidade de bugs, pois haviam duas pessoas analisando o código, e por consequência é mais facil encontrar os possíveis erros, ajudando na manutenção do código.
 
@@ -106,3 +106,12 @@ No final, ao contrário do que nós pensamos anteriormente, o Pair Programming s
 
 <br>
 
+===========================================================
+[Deployment na Azure](https://cinemafds.azurewebsites.net)
+
+= Para Logar =
+
+adm123
+admin123
+^^ Login/Senha^^ 
+===========================================================
