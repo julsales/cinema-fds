@@ -67,6 +67,8 @@ Sprint e histórias implementadas
 
 = Bug tracker  =
 ![image](https://github.com/ZiicoB/cinema-fds/assets/142419446/f7a2ab06-753a-497f-a9de-0f1a946844b5)
+![image](https://github.com/ZiicoB/cinema-fds/assets/142419446/78ded062-67c2-4ae5-a6e5-841b89b77002)
+
 <br> 
 
 = Lo-FI  =
