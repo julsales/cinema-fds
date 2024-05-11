@@ -31,9 +31,6 @@ Quadro
 ### SEGUNDA ENTREGA
 <br>
 
-### SITE
-[Deployment na Azure](https://cinemafds.azurewebsites.net)
-
 #### Instruções de uso:
 - Bara usar o código é necessário adicionar todos os arquivos do requirements.txt na sua maquina
 - Depois disso, é preciso rodar o comando -python manage.py runserver-
@@ -109,8 +106,10 @@ No final, ao contrário do que nós pensamos anteriormente, o Pair Programming s
 <br>
 
 ===========================================================
+
+### SITE
 <br>
-[Deployment na Azure](https://cinemafds.azurewebsites.net)
+[Deployment na Azure](https://cinefds.azurewebsites.net)
 
 = Para Logar =
 <br>
