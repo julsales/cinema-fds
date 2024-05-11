@@ -54,6 +54,22 @@ Sprint e histórias implementadas
 
 ### TERCEIRA ENTREGA
 
+===========================================================
+
+### SITE
+<br>
+
+[Deployment na azure](https://cinefds.azurewebsites.net) 
+
+= Para Logar =
+<br>
+adm123<br>
+admin123<br>
+^^ Login/Senha^^
+<br>
+===========================================================
+
+
 = Segundo Diagrama Atualizado =
 ![ImagemDiagrama](Imagens/Diagrama2.jpg)
 
@@ -104,17 +120,3 @@ Nosso maior desafio foi ter foco, principalmente para desenvolver as histórias,
 No final, ao contrário do que nós pensamos anteriormente, o Pair Programming se provou um método eficiente de trabalho, melhorando a qualidade do código e até fortalecendo laços entre as partes envolvidas, se tornando assim uma experiência de aprendizado que vale a pena ser vivida.
 
 <br>
-
-===========================================================
-
-### SITE
-<br>
-[Deployment na Azure](https://cinefds.azurewebsites.net)
-
-= Para Logar =
-<br>
-adm123<br>
-admin123<br>
-^^ Login/Senha^^
-<br>
-===========================================================
