@@ -62,9 +62,10 @@ Sprint e histórias implementadas
 
 = Para Logar =
 <br>
-adm123<br>
-admin123<br>
-^^ Login/Senha^^
+Login: adm123
+<br>
+Senha: admin123
+<br>
 <br>
 ===========================================================
 
@@ -93,7 +94,7 @@ O Lo-fi já tinhas essas histórias implementadas nele anteriormente, é póssiv
 
 <br> 
 
-= Screencast's =
+= Screencasts =
 
 <br>
 
