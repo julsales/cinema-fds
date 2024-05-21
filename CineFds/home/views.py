@@ -84,8 +84,57 @@ def add_movie(request):
         form = MovieForm()
     return render(request, 'cadastro_filme.html', {'form': form})
 
-def editar_filme(request,movie_id):
-        return render(request, 'editar_filme.html')
+from django.contrib import messages
+
+
+from django.shortcuts import redirect, render, get_object_or_404
+from .models import Movie, MovieCategory
+
+def editar_filme(request):
+    movies = Movie.objects.all()
+    categories = MovieCategory.objects.all()  # Query para todas as categorias de filme
+    
+    if request.method == 'POST':
+        movie_id = request.POST.get('movie_id')
+        new_name = request.POST.get('new_name')
+        new_price = request.POST.get('new_price')
+        new_category_id = request.POST.get('new_category')  # Receba o ID da nova categoria
+        
+        # Verificar se o ID do filme foi fornecido
+        if movie_id:
+            # Obter o objeto do filme ou retornar 404 se não encontrado
+            movie = get_object_or_404(Movie, id=movie_id)
+            
+            # Atualizar os campos do filme com os novos valores
+            if new_name:
+                movie.movie_name = new_name
+            if new_price:
+                movie.price = new_price
+            if new_category_id:
+                new_category = get_object_or_404(MovieCategory, id=new_category_id)
+                movie.category = new_category
+            
+            # Salvar as alterações no banco de dados
+            movie.save()
+            
+            # Redirecionar para a página inicial após salvar
+            return redirect('home')
+    
+    return render(request, 'editar_filme.html', {'movies': movies, 'categories': categories})
+
+def adicionar_genero(request):
+    if request.method == 'POST':
+        form2 = CategoryForm(request.POST)
+        if form2.is_valid():
+            form2.save()
+            return redirect('home')
+    else:
+        form2 = CategoryForm()
+    return render(request, 'adicionar_genero.html', {'form2': form2})
+
+def remover_genero(request):
+    return render(request, 'remover_genero.html')
+
 
 def remover_filme(request):
     movies = Movie.objects.all()
@@ -103,28 +152,10 @@ def remover_filme(request):
 
     return render(request, 'remover_filme.html', {'movies': movies, 'selected_movie': selected_movie})
 
-
-from django.contrib import messages
-
-def editar_filme(request):
-    filmes = Movie.objects.all()  
-    selected_movie = None
-
-    if request.method == 'POST':
-        movie_id = request.POST.get('filme')
-        if movie_id:
-            try:
-                selected_movie = Movie.objects.get(id=movie_id)
-                return redirect('pagina_adm')  
-            except Movie.DoesNotExist:
-                pass
-
-    return render(request, 'editar_filme.html', {'filmes': filmes, 'selected_movie': selected_movie})
-
-
 def delete_movie_by_name(request):
     if request.method == 'POST':
         movie_name = request.POST.get('movie_name')
+        normalized_name = normalize_text(movie_name)
         try:
             movie = Movie.objects.filter(movie_name__iexact=normalized_name)
             movie.delete()
@@ -136,7 +167,8 @@ def delete_movie_by_name(request):
     movies = Movie.objects.all()
     return render(request, 'remover_filme.html', {'movies': movies})
 
-
+def normalize_text(text):
+    return text.lower()
 
 def pag_fim(request):
     return render(request, 'pag_fim.html')
@@ -175,20 +207,6 @@ def search_movies(request):
 
 def pagina_adm(request):
     return render(request, 'pagina_adm.html')
-
-
-def adicionar_genero(request):
-    if request.method == 'POST':
-        form2 = CategoryForm(request.POST)
-        if form2.is_valid():
-            form2.save()
-            return redirect('home')
-    else:
-        form2 = CategoryForm()
-    return render(request, 'adicionar_genero.html', {'form2': form2})
-
-def remover_genero(request):
-    return render(request, 'remover_genero.html')
 
 
 def payment(request):

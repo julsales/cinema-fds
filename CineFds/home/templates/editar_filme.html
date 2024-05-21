@@ -52,31 +52,37 @@
       </a>
     </div>
   </nav>
-
-  {% block start %}
-  <div class="container-fluid mt-4 d-flex justify-content-center">
-    <div class="col-md-6">
-      <br>
-      <h1 style="color: aliceblue; text-align: center;">Editar Filme</h1>
-      <br>
-      <form method="post">
-          {% csrf_token %}
-          <!-- Adicione um campo de seleção para escolher o filme a ser editado -->
-          <select name="filme" id="filme" required>
-              <option value="" disabled selected>Escolha o Filme</option>
+<div class="container">
+  <form action="{% url 'editar_filme' %}" method="post">
+      {% csrf_token %}
+      <h1>Editar Filme</h1>
+      <label for="movie_name">Nome do Filme:</label><br>
+      <input type="text" id="movie_name" name="movie_name"><br><br>
+      <label for="new_name">Novo Nome:</label><br>
+      <input type="text" id="new_name" name="new_name"><br><br>
+      <label for="new_price">Novo Preço:</label><br>
+      <input type="number" id="new_price" name="new_price"><br><br>
+      <label for="new_category">Nova Categoria:</label><br>
+      <input type="text" id="new_category" name="new_category"><br><br>
+      <input type="submit" value="Salvar Alterações">
+  </form>
+  {% if messages %}
+      <ul class="messages">
+          {% for message in messages %}
+              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+          {% endfor %}
+      </ul>
+  {% endif %}
+  {% if movies %}
+      <div class="filme-list-container">
+          <h2>Lista de Filmes:</h2>
+          <ul>
               {% for movie in movies %}
-                  <option value="{{ movie.id }}">{{ movie.nome }}</option> <!-- Certifique-se de que "nome" corresponde ao atributo correto do seu modelo Filme -->
+                  <li>{{ movie.movie_name }}</li>
               {% endfor %}
-          </select>
-          <!-- Aqui você pode adicionar outros campos para editar -->
-          <input type="text" name="titulo" placeholder="Título" required>
-          <input type="number" name="ano" placeholder="Ano" required>
-          <!-- Adicione mais campos conforme necessário -->
-          <button type="submit">Salvar</button>
-      </form>
-    </div>
-  </div>
-  {% endblock %}
-
-</body>
-</html>
+          </ul>
+      </div>
+  {% else %}
+      <p>Não há filmes disponíveis.</p>
+  {% endif %}
+</div>
