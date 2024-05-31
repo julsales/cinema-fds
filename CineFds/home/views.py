@@ -6,7 +6,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from .models import Movie
-from .forms import MovieForm,CategoryForm, MovieRemovalForm
+from .forms import MovieForm,CategoryForm
 
 def home(request):
     movies = Movie.objects.all()
@@ -173,28 +173,47 @@ def normalize_text(text):
 def pag_fim(request):
     return render(request, 'pag_fim.html')
 
+@login_required(login_url='/login/')
 def add_cart(request, movie_uid):
-    user = request.user
-    movie_obj = Movie.objects.get(uid=movie_uid)
-    max_seats = request.GET.get('max_seats')
-    cart, _ = Cart.objects.get_or_create(user=user, is_paid=False)
-    cart_items = CartItems.objects.create(cart=cart, movie=movie_obj)
-     
-    return redirect('/')
+    try:
+        user = request.user
+        movie_obj = get_object_or_404(Movie, uid=movie_uid)
+        max_seats = request.GET.get('max_seats')  # Certifique-se de que max_seats está sendo usado conforme necessário
+        cart, created = Cart.objects.get_or_create(user=user, is_paid=False)
+        CartItems.objects.create(cart=cart, movie=movie_obj)
+        messages.success(request, "Filme adicionado ao carrinho com sucesso!")
+        return redirect('/')
+    except Movie.DoesNotExist:
+        messages.error(request, "Filme não encontrado.")
+        return redirect('/')
+    except Exception as e:
+        messages.error(request, "Algo deu errado ao adicionar ao carrinho.")
+        return redirect('/')
 @login_required(login_url='/login/')
 
 def cart(request):
-    print(request.user)
-    cart = Cart.objects.get(is_paid=False, user=request.user)
-    return render(request, "cart.html", {'carts': cart})
+    try:
+        cart = Cart.objects.get(is_paid=False, user=request.user)
+        return render(request, "cart.html", {'carts': cart})
+    except Cart.DoesNotExist:
+        messages.error(request, "Carrinho não encontrado.")
+        return redirect('/')
+    except Exception as e:
+        messages.error(request, "Algo deu errado ao acessar o carrinho.")
+        return redirect('/')
 @login_required(login_url='/login/')
 
 def remove_cart_item(request, cart_item_uid):
     try:
-        CartItems.objects.get(uid=cart_item_uid).delete()
+        cart_item = get_object_or_404(CartItems, uid=cart_item_uid)
+        cart_item.delete()
+        return redirect('/cart/')
+    except CartItems.DoesNotExist:
+        messages.error(request, "Item do carrinho não encontrado.")
         return redirect('/cart/')
     except Exception as e:
-        print(e)
+        messages.error(request, "Algo deu errado ao remover o item do carrinho.")
+        return redirect('/cart/')
         
 def search_movies(request):
     query = request.GET.get('q')
@@ -204,10 +223,8 @@ def search_movies(request):
         movies = Movie.objects.all()
     return render(request, 'search_results.html', {'movies': movies, 'query': query})
 
-
 def pagina_adm(request):
     return render(request, 'pagina_adm.html')
-
 
 def payment(request):
     if request.method == 'POST':
@@ -221,6 +238,7 @@ def payment(request):
     return render(request, 'payment.html')
 
 def payment_success(request):
+    messages.success(request, "Filme pago com sucesso")
     return render(request, 'payment_success.html')
 
 def escolha_acento(request):
