@@ -225,3 +225,10 @@ def payment_success(request):
 
 def escolha_acento(request):
     return render(request, 'escolha_acento.html')
+
+def usuario(request):
+    is_admin = request.user.is_staff
+    context = {
+        'is_admin': is_admin,
+    }
+    return render(request, 'usuario.html', context)

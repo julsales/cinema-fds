@@ -3,94 +3,91 @@
 <html lang="pt-BR">
 
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- 
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
- 
-  <title>Home</title>
-  <style>
-    
-    h1 {
-      color: rgb(255, 255, 255);
-      font-size: 45px;
-    }
-    #log{
-      color:black;
-    }
-  </style>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <title>Home</title>
+    <style>
+        h1 {
+            color: rgb(255, 255, 255);
+            font-size: 45px;
+        }
+        #log {
+            color: black;
+        }
+    </style>
 </head>
- <!--FUNDO-->
 <body style="background-color: rgb(4, 10, 29);">
-    <nav class="navbar navbar-dark" style="background-color:rgb(5, 101, 255); margin-top: 0;">
-    <div class="container-fluid">
-      <a href="{% url 'home' %}" class="navbar-brand">
-        <strong style="font-size: 30px; color: rgb(255, 255, 255);"> CineFDS </strong>
-      </a>
+    <nav class="navbar navbar-dark" style="background-color: rgb(5, 101, 255); margin-top: 0;">
+        <div class="container-fluid">
+            <a href="{% url 'home' %}" class="navbar-brand">
+                <strong style="font-size: 30px; color: rgb(255, 255, 255);">CineFDS</strong>
+            </a>
 
-    
-      <form id="search-form" action="{% url 'search_movies' %}" method="GET" onsubmit="return validateSearch()">
-        <input id="search-input" type="text" name="q" placeholder="Buscar filmes" style="background-color: rgb(63, 62, 62); color: rgb(215, 225, 214); border-radius: 14px; font-weight: bold;" >
-        <button type="submit" style="background-color: #dc3546fc; border-radius: 12px; color: rgb(255, 255, 255); padding: 4px;">Pesquisar</button>
-    </form>
-    
-    <script>
-    function validateSearch() {
-        var searchInput = document.getElementById("search-input").value.trim();
-        if (searchInput === "") {
-            document.getElementById("search-input").style.backgroundColor = "white";
-            document.getElementById("search-input").placeholder = "Digite o filme";
-            document.getElementById("search-input").style.fontWeight = "bold"; 
-            setTimeout(function() {
-                document.getElementById("search-input").style.backgroundColor = "rgb(63, 62, 62)"; 
-                document.getElementById("search-input").placeholder = "Buscar filmes";
-            }, 2000);
-            setTimeout(flashTextColor, 200); 
-            return false; 
-        }
-        return true; 
-    }
-    
-    // Função para piscar a cor do texto
-    function flashTextColor() {
-        var searchInput = document.getElementById("search-input");
-        if (searchInput.style.color === "rgb(215, 225, 214)") {
-            searchInput.style.color = "rgb(240, 240, 240)";
-        } else {
-            searchInput.style.color = "rgb(215, 225, 214)";
-        }
-        setTimeout(flashTextColor, 200); 
-    }
-    </script>
-    
-    <div class="d-flex">
-      {% if request.user.is_authenticated %}
-        {% if request.user.is_staff %}
-          <a href="{% url 'pagina_adm' %}" class="navbar-brand" style="background-color: #dc3546fc; border-radius: 12px; display: inline-block; padding: 10px;">
-            <button type="button" style="background-color: transparent; border: none; color: aliceblue; cursor: pointer;">ADM</button>
-          </a>
-        {% endif %}
-        <a class="navbar-brand" href="{% url 'cart' %}" style="background-color: #dc3546fc; border-radius: 12px; display: inline-block; padding: 10px;">
-          <button type="button" style="background-color: transparent; border: none; color: aliceblue; cursor: pointer;"><i class="fas fa-hourglass-half"></i> Carrinho<strong>{{ request.user.get_cart_count }}</strong></button>
-        </a>
-        <a href="{% url 'logout' %}" class="navbar-brand" style="border: 2px solid white; border-radius: 10px; padding: 5px 10px; background-color: black;">Logout</a>
-      {% else %}
-        <a href="{% url 'login' %}?next={{ request.path }}" class="navbar-brand" style="border: 1px solid white; border-radius: 12px; padding: 5px 10px; margin-right: 10px; background-color: black;">Login</a>
-        <a href="{% url 'register' %}?next={{ request.path }}" class="navbar-brand" style="border: 1px solid white; border-radius: 12px; padding: 5px 10px; background-color: black;">Registrar</a>
-      {% endif %}
-    </div>
-    
-  </nav>
-  <br>
- 
-  {% block start %}
-  {% endblock %}
- 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js "
-    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-    crossorigin="anonymous"></script>
+            <form id="search-form" action="{% url 'search_movies' %}" method="GET" onsubmit="return validateSearch()">
+                <input id="search-input" type="text" name="q" placeholder="Buscar filmes" style="background-color: rgb(63, 62, 62); color: rgb(215, 225, 214); border-radius: 14px; font-weight: bold;">
+                <button type="submit" style="background-color: #dc3546fc; border-radius: 12px; color: rgb(255, 255, 255); padding: 4px;">Pesquisar</button>
+            </form>
+
+            <script>
+                function validateSearch() {
+                    var searchInput = document.getElementById("search-input").value.trim();
+                    if (searchInput === "") {
+                        document.getElementById("search-input").style.backgroundColor = "white";
+                        document.getElementById("search-input").placeholder = "Digite o filme";
+                        document.getElementById("search-input").style.fontWeight = "bold";
+                        setTimeout(function () {
+                            document.getElementById("search-input").style.backgroundColor = "rgb(63, 62, 62)";
+                            document.getElementById("search-input").placeholder = "Buscar filmes";
+                        }, 2000);
+                        setTimeout(flashTextColor, 200);
+                        return false;
+                    }
+                    return true;
+                }
+
+                function flashTextColor() {
+                    var searchInput = document.getElementById("search-input");
+                    if (searchInput.style.color === "rgb(215, 225, 214)") {
+                        searchInput.style.color = "rgb(240, 240, 240)";
+                    } else {
+                        searchInput.style.color = "rgb(215, 225, 214)";
+                    }
+                    setTimeout(flashTextColor, 200);
+                }
+            </script>
+
+            <div class="d-flex">
+                {% if request.user.is_authenticated %}
+                    {% if request.user.is_staff %}
+                        <a href="{% url 'pagina_adm' %}" class="navbar-brand" style="background-color: #dc3546fc; border-radius: 12px; display: inline-block; padding: 10px;">
+                            <button type="button" style="background-color: transparent; border: none; color: aliceblue; cursor: pointer;">ADM</button>
+                        </a>
+                    {% else %}
+                        <div class="user-icon" style="margin-left: auto; padding-right: 10px;">
+                            <a href="{% url 'usuario' %}">
+                                <svg width="50" height="50" viewBox="0 0 24 24" fill="black" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M12 12c2.209 0 4-1.791 4-4s-1.791-4-4-4-4 1.791-4 4 1.791 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" fill="black"/>
+                                </svg>
+                            </a>
+                        </div>
+                    {% endif %}
+                    <a class="navbar-brand" href="{% url 'cart' %}" style="background-color: #dc3546fc; border-radius: 12px; display: inline-block; padding: 10px;">
+                        <button type="button" style="background-color: transparent; border: none; color: aliceblue; cursor: pointer;"><i class="fas fa-hourglass-half"></i> Carrinho<strong>{{ request.user.get_cart_count }}</strong></button>
+                    </a>
+                    <a href="{% url 'logout' %}" class="navbar-brand" style="border: 2px solid white; border-radius: 10px; padding: 5px 10px; background-color: black;">Logout</a>
+                {% else %}
+                    <a href="{% url 'login' %}?next={{ request.path }}" class="navbar-brand" style="border: 1px solid white; border-radius: 12px; padding: 5px 10px; margin-right: 10px; background-color: black;">Login</a>
+                    <a href="{% url 'register' %}?next={{ request.path }}" class="navbar-brand" style="border: 1px solid white; border-radius: 12px; padding: 5px 10px; background-color: black;">Registrar</a>
+                {% endif %}
+            </div>
+        </div>
+    </nav>
+    <br>
+
+    {% block start %}
+    {% endblock %}
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 </body>
- 
 </html>
