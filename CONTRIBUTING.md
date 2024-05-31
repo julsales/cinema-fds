@@ -1,4 +1,4 @@
-# Guia de contribuição para o Projeto CineFds 🤝
+# Guia de contribuição para o Projeto CineFds 🎬
 
 Sejam bem vindos ao projeto CineFds, uma plataforma de gerenciamento de compra de ingressos para cinemas pequenos. Antes de começar, por favor, leia este guia para entender como você pode contribuir de maneira eficaz.
 
@@ -22,14 +22,12 @@ Sejam bem vindos ao projeto CineFds, uma plataforma de gerenciamento de compra d
 6. **Envie um Pull Request:**
    - Abra um pull request explicando as alterações que você fez. 
 
-## Diretrizes de Desenvolvimento 🤔
+## Requisitos Para o Desenvolvimento 🤔
 
-- Siga as boas práticas de codificação em Python, HTML e CSS.
+- Siga as boas práticas de codificação em Python (com o uso de Django) , HTML e CSS.
   - Formatação correta do código.
   - Ordem de imports correta no código.
-  - Testes de unidade passando e cobrindo 90% de classes Rest.
-  - Testes de mutação passando e cobrindo 90% das mutações.
+  - Testes E2E válidos e cobrindo a maioria dos casos de uso das novas funcionalidades
   - Compilação e Empacotamento do código funcionando.
-
 
 Obrigado por contribuir! Se tiver alguma dúvida, não hesite em entrar em contato no email jsn@cesar.school
