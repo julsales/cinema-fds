@@ -62,12 +62,11 @@ Sprint e histórias implementadas
 
 = Para Logar =
 <br>
-Login: adm123
+`Login: adm123`
 <br>
-Senha: admin123
+`Senha: admin123`
 <br>
 <br>
-===========================================================
 
 
 = Segundo Diagrama Atualizado =
@@ -106,17 +105,6 @@ O Lo-fi já tinhas essas histórias implementadas nele anteriormente, é póssiv
 
 -Programação em par:
 
-
-Durante o desenvolvimento da aplicação CineFds realizamos o Pair Programming, uma prática ágil onde dois desenvolvedores trabalham em conjunto no mesmo código utilizando do mesmo computador, seja de forma síncrona, ou assíncrona, com o objetivo de melhorar a qualidade do código, acelerar o desenvolvimento e adquirir conhecimento
-
-Na entrega 2 não foi possivel aplicar esse método, porem na entrega 3 quase todo o desenvolvimento de código foi feito desta forma. Assim, seguimos o modelo de "piloto" e "navegador", alternando papéis regularmente para ter a garantia de que ambos estavam aprendendo e participando.
-
-De começo não entendiamos a necessidade desse método, pois achávamos que tomaria muito do nosso tempo, mas depois de algumas tentativas percebemos que a colaboração direta resultava em um código mais limpo, com menos erros e com ideias mais criativas.
-
-Na entrega 3, a colaboração conjunta foi crucial para o desenvolvimento das historias, principalmente na de "adicionar filmes" pois proporcionou um maior fluxo de soluções possiveis. Além disso, uma das maiores vantagens encontradas foi a redução na quantidade de bugs, pois haviam duas pessoas analisando o código, e por consequência foi mais facil encontrar os possíveis erros, ajudando na manutenção do código.
-
-Nosso maior desafio foi ter foco, principalmente para desenvolver as histórias, pois a vezes é fácil se perder com os diversos requisitos que o projeto exige, mas no final foi possivel obter um bom andamento
-
-No final, ao contrário do que nós pensamos anteriormente, o Pair Programming se provou um método eficiente de trabalho, melhorando a qualidade do código e até fortalecendo laços entre as partes envolvidas, se tornando assim uma experiência de aprendizado que vale a pena ser vivida.
+[Docs do relato](https://docs.google.com/document/d/19zGnUU6alP4K4-cIQ1aMZvmV7GqcnomqHvNyMZZcX0Q/edit?usp=sharing)
 
 <br>
