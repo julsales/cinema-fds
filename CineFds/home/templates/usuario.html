@@ -1,4 +1,3 @@
-{% load static %}
 <!DOCTYPE html>
 <html lang="pt-BR">
 
@@ -121,7 +120,7 @@
             </div>
             <h1>Página do Usuário</h1>
             <br>
-            <form method="post" enctype="multipart/form-data">
+            <form method="post" enctype="multipart/form-data" action="{% url 'usuario' %}">
                 {% csrf_token %}
                 <div class="form-group">
                     <label for="username">Nome de Usuário:</label>
