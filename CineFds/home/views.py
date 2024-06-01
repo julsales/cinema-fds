@@ -253,9 +253,27 @@ def payment_success(request):
 def escolha_acento(request):
     return render(request, 'escolha_acento.html')
 
+
+
+from django.db import IntegrityError
+
 def usuario(request):
-    is_admin = request.user.is_staff
-    context = {
-        'is_admin': is_admin,
-    }
-    return render(request, 'usuario.html', context)
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+
+        if not username or not email:
+            messages.error(request, 'Nome de usuário e e-mail são obrigatórios.')
+            return render(request, 'usuario.html', {'user': request.user})
+
+        user = request.user
+        user.username = username
+        user.email = email
+        if password:
+            user.set_password(password)
+        user.save()
+        messages.success(request, 'Informações atualizadas com sucesso.')
+        return redirect('home')
+
+    return render(request, 'usuario.html', {'user': request.user})

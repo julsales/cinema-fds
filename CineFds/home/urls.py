@@ -8,17 +8,16 @@ from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from .views import HomePageView
 
 urlpatterns = [
-    path("",views.home,name="home"),
+    path("", views.home, name="home"),
     path('rate_movie/<movie_uid>/', views.rate_movie, name='rate_movie'),
     path('cart/', views.cart, name='cart'),
-    path('remove_cart_item/<cart_item_uid>', remove_cart_item, name='remove_cart'),
-    path('add_cart/<movie_uid>', add_cart , name="add-cart"),
-    path('search/', search_movies, name='search_movies'),
-    path("login/",views.login_page,name="login"),
+    path('remove_cart_item/<cart_item_uid>', views.remove_cart_item, name='remove_cart'),
+    path('add_cart/<movie_uid>', views.add_cart, name="add-cart"),
+    path('search/', views.search_movies, name='search_movies'),
+    path("login/", views.login_page, name="login"),
     path('register/', views.register_page, name="register"),
     path("admin/", admin.site.urls),
     path('cadastro-filme/', views.add_movie, name='cadastro_filme'),
-    path('', HomePageView.as_view(), name='home'),
     path('logout/', views.logout_view, name='logout'),
     path('adicionar-genero/', views.adicionar_genero, name='adicionar_genero'),
     path('editar_filme/', views.editar_filme, name='editar_filme'),
@@ -30,7 +29,6 @@ urlpatterns = [
     path('escolha_acento/', views.escolha_acento, name='escolha_acento'),
     path('pag_fim/', views.pag_fim, name='pag_fim'),
     path('delete_movie_by_name/', views.delete_movie_by_name, name='delete_movie_by_name'),
-    path('editar_filme/', editar_filme, name='editar_filme'),
     path('usuario/', views.usuario, name='usuario'),
 ]
 if settings.DEBUG:
