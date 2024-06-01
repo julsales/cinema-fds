@@ -10,7 +10,7 @@ load_dotenv(BASE_DIR / find_dotenv())
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
-TARGET_ENV = os.getenv('TARGET_ENV', 'dev')  # Valor padrão 'dev' caso TARGET_ENV não esteja definido
+TARGET_ENV = os.getenv('TARGET_ENV')  # Valor padrão 'dev' caso TARGET_ENV não esteja definido
 NOT_PROD = not TARGET_ENV.lower().startswith('prod')
 
 if NOT_PROD:
@@ -75,9 +75,9 @@ MIDDLEWARE = [
 MESSAGE_TAGS = {
     messages.DEBUG: 'debug',
     messages.INFO: 'info',
-    messages.SUCCESS: ' ',
-    messages.WARNING: 'Cuidado',
-    messages.ERROR: 'Oh não!',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
 }
 
 ROOT_URLCONF = 'projeto.urls'
