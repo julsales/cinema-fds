@@ -23,9 +23,9 @@
             <a href="{% url 'home' %}" class="navbar-brand">
                 <strong style="font-size: 30px; color: rgb(255, 255, 255);">CineFDS</strong>
             </a>
-            <form id="search-form" action="{% url 'search_movies' %}" method="GET" onsubmit="return validateSearch()">
-                <input id="search-input" type="text" name="q" placeholder="Buscar filmes" style="background-color: rgb(63, 62, 62); color: rgb(215, 225, 214); border-radius: 14px; font-weight: bold;">
-                <button type="submit" style="background-color: #dc3546fc; border-radius: 12px; color: rgb(255, 255, 255); padding: 4px;">Pesquisar</button>
+            <form id="search-form" class="d-flex col-md-6 mx-3" action="{% url 'search_movies' %}" method="GET" onsubmit="return validateSearch()">
+                <input id="search-input" class="form-control me-2" type="search" name="q" placeholder="Buscar filmes" aria-label="Search" style="background-color: rgb(63, 62, 62); color: rgb(215, 225, 214); border-radius: 14px; font-weight: bold;">
+                <button class="btn btn-danger" type="submit" style="border-radius: 12px;">Pesquisar</button>
             </form>
 
             <script>
