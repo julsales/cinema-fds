@@ -135,7 +135,6 @@ def adicionar_genero(request):
 def remover_genero(request):
     return render(request, 'remover_genero.html')
 
-
 def remover_filme(request):
     movies = Movie.objects.all()
     selected_movie = None

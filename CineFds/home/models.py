@@ -21,8 +21,6 @@ class Movie(BaseModel):
     price = models.IntegerField(default=100)
     images = models.CharField(max_length=500)
     
-    
-     
 class Cart(BaseModel):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL, related_name="cart")
     is_paid = models.BooleanField(default=False)

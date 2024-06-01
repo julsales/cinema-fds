@@ -40,9 +40,9 @@ MIDDLEWARE = [
 MESSAGE_TAGS = {
     messages.DEBUG: 'debug',
     messages.INFO: 'info',
-    messages.SUCCESS: 'success',
-    messages.WARNING: 'warning',
-    messages.ERROR: 'danger',
+    messages.SUCCESS: ' ',
+    messages.WARNING: 'Cuidado',
+    messages.ERROR: 'Oh não!',
 }
 
 ROOT_URLCONF = 'projeto.urls'
