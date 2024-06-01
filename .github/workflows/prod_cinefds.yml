@@ -28,13 +28,41 @@ jobs:
           source venv/bin/activate
       
       - name: Install dependencies
-        run: pip install -r requirements.txt
-        
-      # Optional: Add step to run tests here (PyTest, Django test suites, etc.)
+        run: |
+          cd CineFds/
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          npm ci
+          cd ..
+
+      - name: Run local server
+        run: |
+          cd CineFds/
+          python manage.py migrate
+          python manage.py runserver &
+          sleep 5
+          npx cypress run
+
+      - name: Cleaning testing files
+        run: |
+          cd CineFds/
+          rm .env
+          rm db.sqlite3
+          rm cypress.config.js
+          rm package-lock.json
+          rm package.json
+          rm -rf cypress
+          rm -rf node_modules
+          cd ..
+
 
       - name: Zip artifact for deployment
-        run: zip release.zip ./* -r
-
+        run: |
+          cd CineFds/
+          zip release.zip ./* -r
+          cd ..
+          mv CineFds/release.zip .
+        
       - name: Upload artifact for deployment jobs
         uses: actions/upload-artifact@v3
         with:
@@ -65,9 +93,9 @@ jobs:
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_5C29B20EF4D34771ABAFE680A3EE7D60 }}
-          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_CCE4D395CA4C4420A7098295D4AF4389 }}
-          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_5573FB4B43904596B4689DC34F54B54D }}
+          client-id: ${{ secrets.AZUREAPPSERVICE_CLIENTID_889BD2EE1F774EF2A68C2E2ADC1628C8 }}
+          tenant-id: ${{ secrets.AZUREAPPSERVICE_TENANTID_F8EEA79ABADE4A968961BD12921E00C8 }}
+          subscription-id: ${{ secrets.AZUREAPPSERVICE_SUBSCRIPTIONID_3C22DC8E5B204F4D8CFAF66CAEF0CEA6 }}
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
