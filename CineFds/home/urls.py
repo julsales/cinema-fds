@@ -9,6 +9,7 @@ from .views import HomePageView
 
 urlpatterns = [
     path("",views.home,name="home"),
+    path('rate_movie/<movie_uid>/', views.rate_movie, name='rate_movie'),
     path('cart/', views.cart, name='cart'),
     path('remove_cart_item/<cart_item_uid>', remove_cart_item, name='remove_cart'),
     path('add_cart/<movie_uid>', add_cart , name="add-cart"),

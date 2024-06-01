@@ -29,3 +29,7 @@ class CartItems(BaseModel):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name="cart_items")
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
 
+class Rating(BaseModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='ratings')
+    score = models.IntegerField(choices=[(i, i) for i in range(6)], default=0)

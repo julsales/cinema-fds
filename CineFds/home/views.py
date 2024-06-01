@@ -5,8 +5,7 @@ from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
-from .models import Movie
-from .forms import MovieForm,CategoryForm
+from .forms import MovieForm,CategoryForm,RatingForm
 
 def home(request):
     movies = Movie.objects.all()
@@ -84,18 +83,29 @@ def add_movie(request):
         form = MovieForm()
     return render(request, 'cadastro_filme.html', {'form': form})
 
-from django.contrib import messages
+@login_required
+def rate_movie(request, movie_uid):
+    movie = get_object_or_404(Movie, uid=movie_uid)
+    if request.method == 'POST':
+        form = RatingForm(request.POST)
+        if form.is_valid():
+            rating = form.save(commit=False)
+            rating.user = request.user
+            rating.movie = movie
+            rating.save()
+            messages.success(request, 'Avaliação salva com sucesso!')
+            return redirect('home')
+    else:
+        form = RatingForm()
+    return render(request, 'rate_movie.html', {'form': form, 'movie': movie})
 
-
-from django.shortcuts import redirect, render, get_object_or_404
-from .models import Movie, MovieCategory
 
 def editar_filme(request):
     movies = Movie.objects.all()
     categories = MovieCategory.objects.all()  # Query para todas as categorias de filme
     
     if request.method == 'POST':
-        movie_id = request.POST.get('movie_id')
+        movie_id = request.POST.get('movie_uid')
         new_name = request.POST.get('new_name')
         new_price = request.POST.get('new_price')
         new_category_id = request.POST.get('new_category')  # Receba o ID da nova categoria

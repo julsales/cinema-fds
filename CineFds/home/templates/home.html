@@ -5,6 +5,28 @@
 {% block start %}
  
 <style>
+    .star-rating {
+        display: inline-block;
+    }
+    
+    .star-rating input[type="radio"] {
+        display: none;
+    }
+    
+    .star-rating label {
+        font-size: 30px;
+        cursor: pointer;
+    }
+    
+    .star-rating label:before {
+        content: '★';
+        color: white;
+    }
+    
+    .star-rating input[type="radio"]:checked ~ label:before {
+        color: gold;
+    }
+
     card {
         display: flex;
         flex-direction: column;
@@ -35,6 +57,7 @@
 
 </style>
 <link href="/static/home.css" rel="stylesheet"/>
+<script src="./static/rating.js" sync></script>
 <script src="./static/home.js" defer></script>
 <br>
 <div class="container-fluid py-5 text-center">
@@ -60,7 +83,19 @@
 <div class="container mt-5 pt-3" >
     <div class="row" >
     {% for movie in movies %}
+    
     <div class="col-md-3 pt-3" >
+        <form method="post">
+            {% csrf_token %}
+            <div class="star-rating" id="star-rating">
+                <input type="radio" id="star1" name="rating" value="1" /><label for="star1" title="1 estrela"></label>
+                <input type="radio" id="star2" name="rating" value="2" /><label for="star2" title="2 estrelas"></label>
+                <input type="radio" id="star3" name="rating" value="3" /><label for="star3" title="3 estrelas"></label> 
+                <input type="radio" id="star4" name="rating" value="4" /><label for="star4" title="4 estrelas"></label>
+                <input type="radio" id="star5" name="rating" value="5" /><label for="star5" title="5 estrelas"></label> 
+                
+            </div>
+        </form>
         <!-- COR DAS CAIXAS DE FILME-->
         <div class="card shadow-lg" style="width: 18rem; background-color:  rgb(33 38 45); border-radius: 32px;" >
             <img src="{{movie.images}}" style="height: 210px; border-radius: 32px;" alt="Filme">
@@ -76,4 +111,5 @@
     {% endfor %}
 </div>
 </div>
+
 {% endblock %}
