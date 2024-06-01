@@ -5,6 +5,7 @@
 {% block start %}
  
 <style>
+      
     .bold{
         margin-left: 57px;
         
@@ -15,9 +16,31 @@
     }
 
 </style>
+<link href="/static/home.css" rel="stylesheet"/>
+<script src="./static/home.js" defer></script>
+<br>
+<div class="container-fluid py-5 text-center">
+  <div class="container-slider">
+    <button id="prev-button"><img src="https://i.imgur.com/LgQ8BaB.png" alt="prev-button"></button>
+    <div class="container-images">
+      <img src="https://www.cinepolis.com.br/img/_ocasioes.jpg " width="300" 
+      height="320" alt="ocasioes" class="slider on">
+      <img src="https://www.cinepolis.com.br/img/_pipoca.jpg" width="300" 
+      height="320" alt="pipoca" class="slider">
+      <img src="https://www.cinepolis.com.br/img/_snack.jpg" width="300" 
+      height="320" alt="snack" class="slider">
+      <img src="https://www.cinepolis.com.br/img/_fome.jpg" width="300" 
+      height="320" alt="fome" class="slider">
+    </div>
+    <button id="next-button"><img src="https://i.imgur.com/LgQ8BaB.png" alt="next-button"></button>
+  </div>
+<br>
+<br>
+<br>
+
 <h1 class="text-center "> Filmes em cartaz </h1>  
 <div class="container mt-5 pt-3" >
-
+<br>
     <div class="row" >
     {% for movie in movies %}
     <div class="col-md-3 pt-3" >
