@@ -39,7 +39,7 @@
   width: 30px;
   height: 30px;
   border: none;
-  background-color: white;
+  background-color: transparent;
   cursor: pointer;
   margin-right: 50px;
 }
