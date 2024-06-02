@@ -1,10 +1,9 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página do Usuário</title>
+    <title>Remover Gênero</title>
     <style>
         body {
             background-color: rgb(4, 10, 29);
@@ -44,61 +43,53 @@
             text-align: center;
         }
 
-        form {
+        .generos-list {
             max-width: 400px;
             margin: 0 auto;
+            list-style-type: none;
+            padding: 0;
         }
 
-        input[type="text"], input[type="email"], input[type="password"], input[type="file"] {
-            width: 100%;
+        .generos-list li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0056b3;
             padding: 10px;
             margin-bottom: 10px;
-            border: 1px solid #fff;
-            background-color: #fff;
-            color: #000;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
         }
 
-        button[type="submit"] {
-            padding: 10px 20px;
-            background-color: #007bff;
+        .generos-list li form {
+            display: inline;
+        }
+
+        .generos-list li button {
+            background-color: #ff0000;
             color: #fff;
             border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-        }
-
-        button[type="submit"]:hover {
-            background-color: #0056b3;
-        }
-
-        .icon-container {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            margin-top: 20px;
+            padding: 5px 10px;
+            border-radius: 5px;
             cursor: pointer;
         }
 
-        .icon-container svg {
-            width: 100px;
-            height: 100px;
-            fill: black;
-        }
-
-        .tickets-container {
-            margin-top: 30px;
-            text-align: center;
+        .generos-list li button:hover {
+            background-color: #cc0000;
         }
     </style>
+    <script>
+        function confirmarExclusao(event) {
+            event.preventDefault();
+            if (confirm("Tem certeza que deseja excluir este gênero?")) {
+                event.target.closest("form").submit();
+            }
+        }
+    </script>
 </head>
-
 <body>
     <nav class="navbar navbar-dark justify-content-start">
         <div class="nav-content">
-            <a href="{% url 'home' %}" class="navbar-brand">
+            <a href="{% url 'pagina_adm' %}" class="navbar-brand">
                 <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
                     <path fill-rule="evenodd" d="M10.354 11.354a.5.5 0 0 0 0-.708L7.707 8l2.647-2.646a.5.5 0 0 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
                 </svg>
@@ -107,20 +98,18 @@
         </div>
     </nav>
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Confirmação de Exclusão</title>
-        <!-- Seu CSS -->
-    </head>
-    
-    <body>
-        <h1>Tem certeza que deseja excluir o gênero "{{ genero.nome }}"?</h1>
-        <form method="post">
-            {% csrf_token %}
-            <button type="submit">Sim, excluir</button>
-            <a href="{% url 'home' %}">Cancelar</a>
-        </form>
-    </body>
-    
-    </html>
+    <h1>Remover Gênero</h1>
+    <ul class="generos-list">
+        {% for genero in generos %}
+        <li>
+            {{ genero.category_name }}
+            <form method="post" action="{% url 'remover_genero' %}">
+                {% csrf_token %}
+                <input type="hidden" name="genero_uid" value="{{ genero.uid }}">
+                <button type="submit" onclick="confirmarExclusao(event)">Excluir</button>
+            </form>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

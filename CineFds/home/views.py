@@ -1,13 +1,11 @@
 from django.shortcuts import render,  get_object_or_404, redirect
-from django.http import HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
-from .forms import MovieForm,CategoryForm
-from .forms import ComidaForm
-
+from .forms import MovieForm,CategoryForm, ComidaForm
+from .models import MovieCategory
 def home(request):
     movies = Movie.objects.all()
     context = {'movies': movies}
@@ -117,18 +115,25 @@ def editar_filme(request):
     
     return render(request, 'editar_filme.html', {'movies': movies, 'categories': categories})
 
+
 def adicionar_genero(request):
     if request.method == 'POST':
         form2 = CategoryForm(request.POST)
         if form2.is_valid():
             form2.save()
-            return redirect('home')
+            return redirect('adicionar_genero')
     else:
         form2 = CategoryForm()
     return render(request, 'adicionar_genero.html', {'form2': form2})
 
 def remover_genero(request):
-    return render(request, 'remover_genero.html')
+    if request.method == 'POST':
+        genero_uid = request.POST.get('genero_uid')  
+        genero = get_object_or_404(MovieCategory, uid=genero_uid)  
+        genero.delete()
+        return redirect('remover_genero') 
+    generos = MovieCategory.objects.all()
+    return render(request, 'remover_genero.html', {'generos': generos})
 
 def remover_filme(request):
     movies = Movie.objects.all()
