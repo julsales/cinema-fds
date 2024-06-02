@@ -6,6 +6,7 @@ from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
 from .forms import MovieForm,CategoryForm
+from .forms import ComidaForm
 
 def home(request):
     movies = Movie.objects.all()
@@ -235,11 +236,10 @@ def payment_success(request):
     return render(request, 'payment_success.html')
 
 def escolha_acento(request):
-    return render(request, 'escolha_acento.html')
+        comidas = Comida.objects.all()
+        return render(request, 'escolha_acento.html', {'comidas': comidas})
 
 
-
-from django.db import IntegrityError
 
 def usuario(request):
     if request.method == 'POST':
@@ -262,10 +262,25 @@ def usuario(request):
 
     return render(request, 'usuario.html', {'user': request.user})
 
-
 def adicionar_comida(request):
-    return render(request, 'adicionar_comida.html')
+    if request.method == 'POST':
+        form = ComidaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('escolha_acento')
+    else:
+        form = ComidaForm()
+    
+    return render(request, 'adicionar_comida.html', {'form': form})
 
 def remover_comida(request):
-    return render(request, 'remover_comida.html')
-
+    if request.method == 'POST':
+        comida_id = request.POST.get('comida')
+        try:
+            comida = Comida.objects.get(id=comida_id)
+            comida.delete()
+            return redirect('/pagina_adm/') 
+        except Comida.DoesNotExist:
+            pass 
+    comidas = Comida.objects.all()
+    return render(request, 'remover_comida.html', {'comidas': comidas})

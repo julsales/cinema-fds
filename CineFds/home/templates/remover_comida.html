@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block start %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Remover Comida</title>
+    <style>
+        body {
+            background-color: #333; 
+            color: #fff; 
+            font-family: Arial, sans-serif; 
+        }
+        .container {
+            max-width: 400px; 
+            margin: 0 auto; 
+            color: #fff;
+            padding-top: 50px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #fff; 
+            background-color: #fff; 
+            color: #000; 
+            border-radius: 10px; 
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1); 
+        }
+        button[type="submit"] {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #dc3545; 
+            color: #fff; 
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        }
+        button[type="submit"]:hover {
+            background-color: #c82333; 
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 style="text-align: center;">Remover Comida</h1>
+        <form method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="comida">Selecione a comida a ser removida:</label>
+                <select name="comida" id="comida">
+                    {% for comida in comidas %}
+                        <option value="{{ comida.id }}">{{ comida.nome }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <button type="submit">Remover</button>
+        </form>
+    </div>
+</body>
+</html>
+{% endblock %}

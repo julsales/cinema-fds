@@ -12,35 +12,71 @@
         /* Estilos para os assentos */
         .seats-container {
             display: grid;
-            grid-template-columns: repeat(12, 1fr); /* 12 colunas */
-            gap: 5px; /* Espaçamento entre as colunas de assentos */
-            background-color: rgb(9, 27, 87); /* Fundo branco */
-            padding: 20px; /* Espaçamento interno */
-            border-radius: 10px; /* Borda arredondada */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+            grid-template-columns: repeat(12, 1fr);
+            gap: 5px;
+            background-color: rgb(9, 27, 87);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
         }
 
         .seat {
-            width: 50px; /* largura do assento */
-            height: 50px; /* altura do assento */
-            background-image: url('https://cdn-icons-png.flaticon.com/512/708/708905.png'); /* imagem inicial do assento */
-            background-size: cover; /* ajustar o tamanho da imagem */
-            cursor: pointer; /* cursor de mouse ao passar por cima do assento */
+            width: 50px;
+            height: 50px;
+            background-image: url('https://cdn-icons-png.flaticon.com/512/708/708905.png');
+            background-size: cover;
+            cursor: pointer;
         }
 
-        /* Estilos para o assento selecionado */
         .seat.selected {
             background-image: url('https://cdn-icons-png.flaticon.com/512/24/24627.png');
         }
 
-        /* Centralizar o título e o botão */
         .container {
             text-align: center;
-            margin-top: 50px; /* Espaço superior */
+            margin-top: 50px;
         }
 
         .payment-button {
-            margin-top: 20px; /* Espaço entre o título e o botão */
+            margin-top: 20px;
+        }
+
+        .comida-list {
+            margin-top: 20px;
+            color: white;
+            text-align: center; 
+            width: 50%; 
+            margin: 0 auto; 
+            }
+            
+        .comida-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgb(5, 101, 255);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+        }
+
+        .comida-item img {
+            max-width: 100px;
+            max-height: 100px;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+
+        .comida-item .info {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .comida-item .select-comida {
+            margin-left: auto;
+            background-color: #ffcc00;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -68,42 +104,37 @@
         <a href="{% url 'payment' %}" class="btn btn-warning payment-button">Pagar</a>
     </div>
 
+    <div class="comida-list">
+        <h2>Comidas Disponíveis</h2>
+        {% for comida in comidas %}
+            <div class="comida-item">
+                <img src="{{ comida.imagem.url }}" alt="{{ comida.nome }}">
+                <div class="info">
+                    <h3>{{ comida.nome }}</h3>
+                    <p>Preço: R$ {{ comida.preco }}</p>
+                </div>
+                <button class="select-comida" data-preco="{{ comida.preco }}">Selecionar</button>
+            </div>
+        {% endfor %}
+    </div>
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Contar o número de itens na tabela da página anterior
-            const maxSeats = document.querySelectorAll('.table tbody tr').length;
-            let selectedSeats = 0; // Contador de assentos selecionados
-
-            // Função para verificar se o limite máximo de assentos foi atingido
-            function checkMaxSeats() {
-                if (selectedSeats >= maxSeats) {
-                    // Desativar a seleção de mais assentos
-                    document.querySelectorAll('.seat').forEach(seat => {
-                        if (!seat.classList.contains('selected')) {
-                            seat.classList.add('disabled');
-                        }
-                    });
-                } else {
-                    // Ativar a seleção de assentos
-                    document.querySelectorAll('.seat').forEach(seat => {
-                        seat.classList.remove('disabled');
-                    });
-                }
-            }
-
-            // Event listener para cada assento
-            document.querySelectorAll('.seat').forEach(seat => {
-                seat.addEventListener('click', function() {
-                    if (!this.classList.contains('selected') && !this.classList.contains('disabled')) {
-                        this.classList.toggle('selected');
-                        selectedSeats += this.classList.contains('selected') ? 1 : -1;
-                        checkMaxSeats();
+        document.addEventListener('DOMContentLoaded', function() {
+            let totalPreco = 0;
+            document.querySelectorAll('.select-comida').forEach(button => {
+                button.addEventListener('click', function() {
+                    const preco = parseFloat(this.dataset.preco);
+                    if (!this.classList.contains('selected')) {
+                        this.classList.add('selected');
+                        this.textContent = 'Selecionado';
+                        totalPreco += preco;
+                    } else {
+                        this.classList.remove('selected');
+                        this.textContent = 'Selecionar';
+                        totalPreco -= preco;
                     }
+                    console.log(`Total Preço: R$ ${totalPreco.toFixed(2)}`);
                 });
             });
-
-            // Verificar o limite máximo de assentos ao carregar a página
-            checkMaxSeats();
         });
     </script>
 </body>

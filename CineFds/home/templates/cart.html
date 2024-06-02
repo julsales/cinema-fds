@@ -38,7 +38,7 @@
                 <td class="quantity-container">
                     <div class="input-group">
                         <button class="btn btn-outline-secondary decrease" type="button">-</button>
-                        <input type="text" class="form-control quantity" value="1" readonly maxlength="2">
+                        <input type="text" class="form-control quantity" value="1" readonly maxlength="2" data-unit-price="{{ cartItem.movie.price }}">
                         <button class="btn btn-outline-secondary increase" type="button">+</button>
                     </div>
                 </td>
@@ -70,9 +70,9 @@
                 let currentValue = parseInt(quantityInput.value);
                 if (currentValue > 1) {
                     quantityInput.value = currentValue - 1;
-                    let unitPrice = parseFloat(this.parentElement.nextElementSibling.querySelector('.price').textContent.replace('R$', '').trim());
+                    let unitPrice = parseFloat(quantityInput.dataset.unitPrice);
                     let totalPrice = calculateTotalPrice(currentValue - 1, unitPrice);
-                    this.parentElement.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
+                    this.parentElement.nextElementSibling.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
                 }
             });
         });
@@ -83,9 +83,9 @@
                 let currentValue = parseInt(quantityInput.value);
                 if (currentValue < 9) {
                     quantityInput.value = currentValue + 1;
-                    let unitPrice = parseFloat(this.parentElement.nextElementSibling.querySelector('.price').textContent.replace('R$', '').trim());
+                    let unitPrice = parseFloat(quantityInput.dataset.unitPrice);
                     let totalPrice = calculateTotalPrice(currentValue + 1, unitPrice);
-                    this.parentElement.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
+                    this.parentElement.nextElementSibling.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
                 }
             });
         });
