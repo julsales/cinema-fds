@@ -261,3 +261,11 @@ def usuario(request):
         return redirect('home')
 
     return render(request, 'usuario.html', {'user': request.user})
+
+
+def adicionar_comida(request):
+    return render(request, 'adicionar_comida.html')
+
+def remover_comida(request):
+    return render(request, 'remover_comida.html')
+

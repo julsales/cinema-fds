@@ -29,6 +29,8 @@ urlpatterns = [
     path('pag_fim/', views.pag_fim, name='pag_fim'),
     path('delete_movie_by_name/', views.delete_movie_by_name, name='delete_movie_by_name'),
     path('usuario/', views.usuario, name='usuario'),
+    path('adicionar_comida/', views.adicionar_comida, name='adicionar_comida'),
+    path('remover_comida/', views.remover_comida, name='remover_comida'),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root = settings.MEDIA_ROOT)
