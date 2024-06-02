@@ -149,6 +149,23 @@
         document.getElementById('btn_pagar').addEventListener('click', function() {
             document.getElementById('payment_form').submit();
         });
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const ticketData = JSON.parse(localStorage.getItem('ticketData')) || [];
+            const selectedComida = JSON.parse(localStorage.getItem('selectedComida')) || [];
+
+            let totalPrice = 0;
+
+            ticketData.forEach(item => {
+                totalPrice += item.quantity * item.price;
+            });
+
+            selectedComida.forEach(item => {
+                totalPrice += item.preco;
+            });
+
+            document.getElementById('total-price').textContent = `Total: R$ ${totalPrice.toFixed(2)}`;
+        });
     </script>
 </body>
 </html>

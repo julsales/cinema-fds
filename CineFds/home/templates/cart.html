@@ -1,7 +1,5 @@
 {% extends "base.html" %}
- 
 {% load static %}
- 
 {% block start %}
 <style>
 .quantity-container {
@@ -46,7 +44,7 @@
                 <td>
                     <h5 style="color: aliceblue;">{{ cartItem.movie.movie_name }}</h5>
                 </td>
-                <td><a href="{% url 'escolha_acento' %}" class="btn btn-warning">Finalizar a compra</a></td>
+                <td><a href="{% url 'escolha_acento' %}" class="btn btn-warning btn-finalize">Finalizar a compra</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -87,6 +85,19 @@
                     let totalPrice = calculateTotalPrice(currentValue + 1, unitPrice);
                     this.parentElement.nextElementSibling.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
                 }
+            });
+        });
+
+        document.querySelectorAll('.btn-finalize').forEach(button => {
+            button.addEventListener('click', function() {
+                const ticketData = [];
+                quantityInputs.forEach((input, index) => {
+                    const quantity = parseInt(input.value);
+                    const price = parseFloat(input.dataset.unitPrice);
+                    const movieName = document.querySelectorAll('h5')[index].textContent;
+                    ticketData.push({ movieName, quantity, price });
+                });
+                localStorage.setItem('ticketData', JSON.stringify(ticketData));
             });
         });
     });

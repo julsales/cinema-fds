@@ -3,38 +3,94 @@
 
 {% block start %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escolha de Assentos</title>
     <style>
-        /* Estilos para os assentos */
-        .seats-container {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr);
-            gap: 5px;
+        body {
             background-color: rgb(9, 27, 87);
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .seat {
-            width: 50px;
-            height: 50px;
-            background-image: url('https://cdn-icons-png.flaticon.com/512/708/708905.png');
-            background-size: cover;
-            cursor: pointer;
-        }
-
-        .seat.selected {
-            background-image: url('https://cdn-icons-png.flaticon.com/512/24/24627.png');
+            color: white;
+            font-family: Arial, sans-serif;
         }
 
         .container {
             text-align: center;
             margin-top: 50px;
+        }
+
+        .screen {
+            background-color: #fff;
+            height: 30px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .screen:before {
+            content: 'TELA';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            color: black;
+        }
+
+        .seats-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .seat {
+            width: 30px;
+            height: 30px;
+            background-color: #3b3e46;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .seat.selected {
+            background-color: #6feaf6;
+        }
+
+        .seat.occupied {
+            background-color: #444451;
+            cursor: not-allowed;
+        }
+
+        .seat:not(.occupied):hover {
+            background-color: #5a5e68;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .row:not(:last-child) {
+            margin-bottom: 5px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .legend div {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .legend div .seat {
+            margin: 0 5px;
         }
 
         .payment-button {
@@ -43,11 +99,10 @@
 
         .comida-list {
             margin-top: 20px;
-            color: white;
             text-align: center; 
             width: 50%; 
             margin: 0 auto; 
-            }
+        }
             
         .comida-item {
             margin-bottom: 10px;
@@ -83,22 +138,40 @@
 <body>
     <div class="container">
         <h1>Escolha de Assentos</h1>
-        <!-- Box branca para os assentos -->
+        <div class="screen"></div>
         <div class="seats-container">
-            <!-- Gerar 6x12 assentos -->
             <script>
-                // Gerar os assentos
-                for (let i = 1; i <= 6; i++) {
-                    for (let j = 1; j <= 12; j++) {
-                        let seat = document.createElement('div');
-                        seat.classList.add('seat');
-                        seat.dataset.seatId = `${i}-${j}`; // Usando o formato "linha-coluna" como ID do assento
-                        seat.addEventListener('click', function() {
+                const rows = [
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                ];
+
+                rows.forEach((row, rowIndex) => {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.classList.add('row');
+                    row.forEach((seat, seatIndex) => {
+                        const seatDiv = document.createElement('div');
+                        seatDiv.classList.add('seat');
+                        seatDiv.dataset.seatId = `${rowIndex + 1}-${seatIndex + 1}`;
+                        seatDiv.addEventListener('click', function() {
                             this.classList.toggle('selected');
                         });
-                        document.querySelector('.seats-container').appendChild(seat);
-                    }
-                }
+                        rowDiv.appendChild(seatDiv);
+                    });
+                    document.querySelector('.seats-container').appendChild(rowDiv);
+                });
             </script>
         </div>
         <a href="{% url 'payment' %}" class="btn btn-warning payment-button">Pagar</a>
@@ -113,26 +186,29 @@
                     <h3>{{ comida.nome }}</h3>
                     <p>Preço: R$ {{ comida.preco }}</p>
                 </div>
-                <button class="select-comida" data-preco="{{ comida.preco }}">Selecionar</button>
+                <button class="select-comida" data-preco="{{ comida.preco }}" data-nome="{{ comida.nome }}">Selecionar</button>
             </div>
         {% endfor %}
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            let totalPreco = 0;
+            let selectedComida = [];
+
             document.querySelectorAll('.select-comida').forEach(button => {
                 button.addEventListener('click', function() {
                     const preco = parseFloat(this.dataset.preco);
+                    const nome = this.dataset.nome;
+
                     if (!this.classList.contains('selected')) {
                         this.classList.add('selected');
                         this.textContent = 'Selecionado';
-                        totalPreco += preco;
+                        selectedComida.push({ nome, preco });
                     } else {
                         this.classList.remove('selected');
                         this.textContent = 'Selecionar';
-                        totalPreco -= preco;
+                        selectedComida = selectedComida.filter(item => item.nome !== nome);
                     }
-                    console.log(`Total Preço: R$ ${totalPreco.toFixed(2)}`);
+                    localStorage.setItem('selectedComida', JSON.stringify(selectedComida));
                 });
             });
         });
