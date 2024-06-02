@@ -1,74 +1,78 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Compra Concluída</title>
+    <title>Download Ticket</title>
     <style>
         body {
-            background-color: rgb(4, 10, 29);
-            color: #fff;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding-top: 55px;
-            text-align: center;
-        }
-
-        button {
-            padding: 10px 20px;
-            background-color: #007bff;
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            border-radius: 10px;
-            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
-            margin: 10px;
-        }
-
-        button:hover {
-            background-color: #0056b3;
-        }
-
-        h1 {
-            color: aliceblue;
-            text-align: center;
-        }
-
-        .container-fluid {
-            margin-top: 4rem;
             display: flex;
             justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: rgb(9, 27, 87);
+            color: white;
+            font-family: Arial, sans-serif;
         }
-
-        .col-md-6 {
-            width: 50%;
+        .download-button {
+            padding: 20px 40px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            text-align: center;
+        }
+        .download-button:hover {
+            background-color: #0056b3;
+        }
+        .navbar {
+            width: 100%;
+            padding: 0;
+            border-bottom: none; 
+            position: fixed;
+            top: 0;
+            background-color:rgb(5, 101, 255);
+            height: 55px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+        .navbar-brand {
+            padding: 0;
+            margin: 0;
+            text-decoration: none; 
+        }
+        .navbar-brand strong {
+            font-size: 30px;
+            color: rgb(255, 255, 255);
         }
     </style>
 </head>
-<body>
-    <div class="container-fluid mt-4">
-        <div class="col-md-6">
-            <h1>Parabéns pela compra!</h1>
-            <button id="voltarInicio">Voltar ao Início</button>
-            <button id="baixarTicket">Baixar Ticket</button>
-        </div>
-    </div>
+
+<body style="background-color: rgb(4, 10, 29); margin: 0;"> 
+    <nav class="navbar">
+        <a href="{% url 'home' %}" class="navbar-brand">
+            <strong> CineFDS </strong>
+        </a>
+    </nav>
+
+    <button class="download-button" onclick="downloadImage()">Baixar Ticket</button>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            document.getElementById('baixarTicket').addEventListener('click', function() {
-                var link = document.createElement('a');
-                link.href = '/media/pics/ticket.jpg';
-                link.download = 'ticket.jpg'; 
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            });
-
-            document.getElementById('voltarInicio').addEventListener('click', function() {
-                window.location.href = "{% url 'home' %}";
-            });
-        });
+        function downloadImage() {
+            const link = document.createElement('a');
+            link.href = "{% static 'CineFds/ticket.png' %}";
+            link.download = 'ticket.png';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
     </script>
 </body>
 </html>
