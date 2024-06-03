@@ -20,6 +20,18 @@
             margin-top: 50px;
         }
 
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #444451;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         .screen {
             background-color: #fff;
             height: 30px;
@@ -170,93 +182,143 @@
             border-radius: 10px;
         }
 
+        .back-button {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgba(9, 27, 87); /* Updated color */
+        color: white;
+        padding: 5px;
+        width: 200px; /* Adjusted width */
+        height: 45px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+        position: absolute;
+        top: 20px;
+        left: 10px; /* Adjusted left position */
+    }
+
+    .back-button svg {
+        width: 48px;
+        height: 48px;
+        fill: white;
+    }
+
+    .back-button span {
+        font-size: 24px;
+        color: white;
+        margin-left: 5px;
+    }      
     </style>
-    <link href="{% static 'home.css' %}" rel="stylesheet"/>
-    <script src="{% static 'home.js' %}" defer></script>
+ <link href="{% static 'home.css' %}" rel="stylesheet"/>
+ <script src="{% static 'home.js' %}" defer></script>
 </head>
 <body>
+    <button class="back-button" onclick="window.location.href='{% url 'cart' %}'">Voltar</button>
     <div class="container">
-        <h1>Escolha de Assentos</h1>
-        <div class="screen"></div>
-        <div class="seats-container">
-            <script>
-                const rows = [
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-                ];
+     <h1>Escolha de Assentos</h1>
+     <div class="screen"></div>
+     <div class="seats-container">
+         <script>
+             const rows = [
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                 [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+             ];
 
-                rows.forEach((row, rowIndex) => {
-                    const rowDiv = document.createElement('div');
-                    rowDiv.classList.add('row');
-                    row.forEach((seat, seatIndex) => {
-                        const seatDiv = document.createElement('div');
-                        seatDiv.classList.add('seat');
-                        seatDiv.dataset.seatId = `${rowIndex + 1}-${seatIndex + 1}`;
-                        seatDiv.addEventListener('click', function() {
-                            this.classList.toggle('selected');
-                        });
-                        rowDiv.appendChild(seatDiv);
-                    });
-                    document.querySelector('.seats-container').appendChild(rowDiv);
-                });
-            </script>
-        </div>
-        <a href="{% url 'payment' %}" class="btn btn-warning payment-button">Pagar</a>
-    </div>
+             rows.forEach((row, rowIndex) => {
+                 const rowDiv = document.createElement('div');
+                 rowDiv.classList.add('row');
+                 row.forEach((seat, seatIndex) => {
+                     const seatDiv = document.createElement('div');
+                     seatDiv.classList.add('seat');
+                     seatDiv.dataset.seatId = `${rowIndex + 1}-${seatIndex + 1}`;
+                     rowDiv.appendChild(seatDiv);
+                 });
+                 document.querySelector('.seats-container').appendChild(rowDiv);
+             });
 
-    <div class="comida-list">
-        <h2>Comidas Disponíveis</h2>
-        <div class="row">
-            {% for comida in comidas %}
-                <div class="col-md-3 pt-3">
-                    <div class="comida-item shadow-lg">
-                        <img src="{{ comida.imagem.url }}" alt="{{ comida.nome }}">
-                        <div class="card-body">
-                            <h5 class="card-title text-center text-uppercase"><strong>{{ comida.nome }}</strong></h5>
-                            <p class="bold"><b>Preço:</b> R$ {{ comida.preco }}</p>
-                            <button class="btn btn-warning select-comida" data-preco="{{ comida.preco }}" data-nome="{{ comida.nome }}">Selecionar</button>
-                        </div>
-                    </div>
-                </div>
-            {% endfor %}
-        </div>
-    </div>
+             document.addEventListener('DOMContentLoaded', function() {
+                 const totalTickets = parseFloat(localStorage.getItem('totalTickets'));
+                 let selectedSeatsCount = 0;
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            let selectedComida = [];
+                 document.querySelectorAll('.seat').forEach(seat => {
+                     seat.addEventListener('click', function() {
+                         if (this.classList.contains('occupied')) return;
 
-            document.querySelectorAll('.select-comida').forEach(button => {
-                button.addEventListener('click', function() {
-                    const preco = parseFloat(this.dataset.preco);
-                    const nome = this.dataset.nome;
+                         if (this.classList.contains('selected')) {
+                             this.classList.remove('selected');
+                             selectedSeatsCount--;
+                         } else {
+                             if (selectedSeatsCount < totalTickets) {
+                                 this.classList.add('selected');
+                                 selectedSeatsCount++;
+                             } else {
+                                 alert('Você só pode selecionar o número de assentos de acordo com a quantidade de ingressos comprados.');
+                             }
+                         }
+                     });
+                 });
+             });
+         </script>
+     </div>
+     <a href="{% url 'payment' %}" class="btn btn-warning payment-button">Pagar</a>
+ </div>
 
-                    if (!this.classList.contains('selected')) {
-                        this.classList.add('selected');
-                        this.textContent = 'Selecionado';
-                        selectedComida.push({ nome, preco });
-                    } else {
-                        this.classList.remove('selected');
-                        this.textContent = 'Selecionar';
-                        selectedComida = selectedComida.filter(item => item.nome !== nome);
-                    }
-                    localStorage.setItem('selectedComida', JSON.stringify(selectedComida));
-                });
-            });
-        });
-    </script>
+ <div class="comida-list">
+     <h2>Comidas Disponíveis</h2>
+     <div class="row">
+         {% for comida in comidas %}
+             <div class="col-md-3 pt-3">
+                 <div class="comida-item shadow-lg">
+                     <img src="{{ comida.imagem.url }}" alt="{{ comida.nome }}">
+                     <div class="card-body">
+                         <h5 class="card-title text-center text-uppercase"><strong>{{ comida.nome }}</strong></h5>
+                         <p class="bold"><b>Preço:</b> R$ {{ comida.preco }}</p>
+                         <button class="btn btn-warning select-comida" data-preco="{{ comida.preco }}" data-nome="{{ comida.nome }}">Selecionar</button>
+                     </div>
+                 </div>
+             </div>
+         {% endfor %}
+     </div>
+ </div>
+
+ <script>
+     document.addEventListener('DOMContentLoaded', function() {
+         let selectedComida = [];
+
+         document.querySelectorAll('.select-comida').forEach(button => {
+             button.addEventListener('click', function() {
+                 const preco = parseFloat(this.dataset.preco);
+                 const nome = this.dataset.nome;
+
+                 if (!this.classList.contains('selected')) {
+                     this.classList.add('selected');
+                     this.textContent = 'Selecionado';
+                     selectedComida.push({ nome, preco });
+                 } else {
+                     this.classList.remove('selected');
+                     this.textContent = 'Selecionar';
+                     selectedComida = selectedComida.filter(item => item.nome !== nome);
+                 }
+                 localStorage.setItem('selectedComida', JSON.stringify(selectedComida));
+             });
+         });
+     });
+ </script>
 </body>
 </html>
 {% endblock %}

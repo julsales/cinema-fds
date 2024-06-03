@@ -52,7 +52,7 @@
                 <td>
                     <h5 style="color: aliceblue;">{{ cartItem.movie.movie_name }}</h5>
                 </td>
-                <td><a href="{% url 'escolha_acento' %}" class="btn btn-warning btn-finalize">Finalizar a compra</a></td>
+                <td><a href="#" class="btn btn-warning btn-finalize">Finalizar a compra</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -85,15 +85,29 @@
         });
 
         document.querySelectorAll('.btn-finalize').forEach(button => {
-            button.addEventListener('click', function() {
+            button.addEventListener('click', function(event) {
                 const ticketData = [];
+                let totalTickets = 0;
+                let anySelected = false;
+
                 document.querySelectorAll('.btn-primary').forEach((btn, index) => {
                     const quantity = parseFloat(btn.dataset.quantity);
                     const price = parseFloat(btn.dataset.unitPrice);
                     const movieName = document.querySelectorAll('h5')[index].textContent;
+
+                    totalTickets += quantity;
                     ticketData.push({ movieName, quantity, price });
+                    anySelected = true;
                 });
-                localStorage.setItem('ticketData', JSON.stringify(ticketData));
+
+                if (!anySelected) {
+                    alert('Por favor, selecione pelo menos um ingresso "Inteira" ou "Meia".');
+                    event.preventDefault();
+                } else {
+                    localStorage.setItem('ticketData', JSON.stringify(ticketData));
+                    localStorage.setItem('totalTickets', totalTickets);
+                    window.location.href = "{% url 'escolha_acento' %}";
+                }
             });
         });
     });
