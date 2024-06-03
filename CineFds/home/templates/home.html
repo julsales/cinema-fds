@@ -1,12 +1,9 @@
 {% extends "base.html" %}
- 
 {% load static %}
- 
 {% block start %}
  
 <style>
-
-    card {
+    .card {
         display: flex;
         flex-direction: column;
         align-items: center;
@@ -20,18 +17,39 @@
         flex-direction: column;
         align-items: center;
     }
+
     .card-body p {
         text-align: center;
         width: 100%;
     }
 
-    .bold{
-        text-align: left;
-        
+    .bold {
+        text-align: left;     
     }
-    .middle{
+
+    .middle {
         margin: 0 auto;
-         
+    }
+
+    .star-rating {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .star {
+        font-size: 24px;
+        color: gray;
+        margin: 0 2px;
+    }
+
+    .star.filled {
+        color: gold;
+    }
+
+    .card img {
+        width: 100%;
+        border-radius: 32px 32px 0 0;
     }
 
 </style>
@@ -54,20 +72,30 @@
 <br>
 <br>
 <br>
-<h1 class="text-center "> Filmes em cartaz </h1>  
-<div class="container mt-5 pt-3" >
-    <div class="row" >
+<h1 class="text-center"> Filmes em cartaz </h1>  
+<div class="container mt-5 pt-3">
+    <div class="row">
     {% for movie in movies %}
-
-    <div class="col-md-3 pt-3" >
-        <!-- COR DAS CAIXAS DE FILME-->
-        <div class="card shadow-lg" style="width: 18rem; background-color:  rgb(33 38 45); border-radius: 32px;" >
-            <img src="{{movie.images}}" style="height: 210px; border-radius: 32px;" alt="Filme">
+    <div class="col-md-3 pt-3">
+        <div class="star-rating">
+            {% for i in range %} 
+                <span class="star {% if movie.rating >= i %}filled{% endif %}">&#9733;</span>
+            {% endfor %}
+        </div>
+        <!-- COR DAS CAIXAS DE FILME -->
+        <div class="card shadow-lg" style="width: 18rem; background-color: rgb(33 38 45); border-radius: 32px;">
+            <img src="{{movie.images}}" style="height: 300px; border-radius: 30px;" alt="Filme">
             <div class="card-body">
-                <h5 class="card-title text-center text-uppercase">  <strong style="font-size: 20px; color:rgb(152 170 236)">{{movie.movie_name}}</strong></h5>
-                <p class="bold" style="color: aliceblue;"> <b>Preço</b> R$ {{movie.price}} <br> <strong>Gênero</strong> - {{movie.category.category_name}} <br> <Strong>Duração</Strong> --:-- </p>
-                 <a href="{%  url 'add-cart' movie.uid %}" class="btn btn-warning middle" style="border-radius: 10px;">Comprar agora </a>
-                   </div>
+                <h5 class="card-title text-center text-uppercase">
+                    <strong style="font-size: 20px; color:rgb(152 170 236)">{{movie.movie_name}}</strong>
+                </h5>
+                <p class="bold" style="color: aliceblue;"> 
+                    <b>Preço:</b> R$ {{movie.price}} <br> 
+                    <b>Gênero:</b> {{movie.category.category_name}} <br> 
+                    <b>Duração:</b> --:-- <br> 
+                </p>
+                <a href="{%  url 'add-cart' movie.uid %}" class="btn btn-warning middle" style="border-radius: 10px;">Comprar agora</a>
+            </div>
         </div>
         <br>
     </div>

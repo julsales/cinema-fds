@@ -3,107 +3,258 @@
 
 {% block start %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Escolha de Assentos</title>
     <style>
-        /* Estilos para os assentos */
+        body {
+            background-color: rgb(9, 27, 87);
+            color: white;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .screen {
+            background-color: #fff;
+            height: 30px;
+            margin: 20px 0;
+            position: relative;
+            box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .screen:before {
+            content: 'TELA';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            color: black;
+        }
+
         .seats-container {
-            display: grid;
-            grid-template-columns: repeat(12, 1fr); /* 12 colunas */
-            gap: 5px; /* Espaçamento entre as colunas de assentos */
-            background-color: rgb(9, 27, 87); /* Fundo branco */
-            padding: 20px; /* Espaçamento interno */
-            border-radius: 10px; /* Borda arredondada */
-            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Sombra */
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .seat {
-            width: 50px; /* largura do assento */
-            height: 50px; /* altura do assento */
-            background-image: url('https://cdn-icons-png.flaticon.com/512/708/708905.png'); /* imagem inicial do assento */
-            background-size: cover; /* ajustar o tamanho da imagem */
-            cursor: pointer; /* cursor de mouse ao passar por cima do assento */
+            width: 30px;
+            height: 30px;
+            background-color: #3b3e46;
+            margin: 5px;
+            border-radius: 5px;
+            cursor: pointer;
         }
 
-        /* Estilos para o assento selecionado */
         .seat.selected {
-            background-image: url('https://cdn-icons-png.flaticon.com/512/24/24627.png');
+            background-color: #6feaf6;
         }
 
-        /* Centralizar o título e o botão */
-        .container {
-            text-align: center;
-            margin-top: 50px; /* Espaço superior */
+        .seat.occupied {
+            background-color: #444451;
+            cursor: not-allowed;
+        }
+
+        .seat:not(.occupied):hover {
+            background-color: #5a5e68;
+        }
+
+        .row {
+            display: flex;
+            justify-content: center;
+        }
+
+        .row:not(:last-child) {
+            margin-bottom: 5px;
+        }
+
+        .legend {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .legend div {
+            display: flex;
+            align-items: center;
+            margin: 0 10px;
+        }
+
+        .legend div .seat {
+            margin: 0 5px;
         }
 
         .payment-button {
-            margin-top: 20px; /* Espaço entre o título e o botão */
+            margin-top: 20px;
         }
+
+        .container-images img {
+            width: 100%;
+            height: auto;
+            border-radius: 32px;
+        }
+
+        .container-slider {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .container-slider button {
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .slider {
+            display: none;
+        }
+
+        .slider.on {
+            display: block;
+        }
+
+        .comida-list {
+            margin-top: 20px;
+            text-align: center; 
+            width: 100%;
+            margin: 0 auto; 
+        }
+
+        .comida-item {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: rgb(33, 38, 45);
+            border-radius: 32px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 18rem;
+            margin: 0 auto;
+        }
+
+        .comida-item img {
+            height: 210px;
+            border-radius: 32px;
+            width: 100%;
+            object-fit: cover;
+        }
+
+        .comida-item .card-body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .comida-item .card-body h5 {
+            font-size: 20px;
+            color: rgb(152, 170, 236);
+        }
+
+        .comida-item .card-body p {
+            text-align: center;
+            color: aliceblue;
+        }
+
+        .comida-item .btn {
+            border-radius: 10px;
+        }
+
     </style>
+    <link href="{% static 'home.css' %}" rel="stylesheet"/>
+    <script src="{% static 'home.js' %}" defer></script>
 </head>
 <body>
     <div class="container">
         <h1>Escolha de Assentos</h1>
-        <!-- Box branca para os assentos -->
+        <div class="screen"></div>
         <div class="seats-container">
-            <!-- Gerar 6x12 assentos -->
             <script>
-                // Gerar os assentos
-                for (let i = 1; i <= 6; i++) {
-                    for (let j = 1; j <= 12; j++) {
-                        let seat = document.createElement('div');
-                        seat.classList.add('seat');
-                        seat.dataset.seatId = `${i}-${j}`; // Usando o formato "linha-coluna" como ID do assento
-                        seat.addEventListener('click', function() {
+                const rows = [
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                ];
+
+                rows.forEach((row, rowIndex) => {
+                    const rowDiv = document.createElement('div');
+                    rowDiv.classList.add('row');
+                    row.forEach((seat, seatIndex) => {
+                        const seatDiv = document.createElement('div');
+                        seatDiv.classList.add('seat');
+                        seatDiv.dataset.seatId = `${rowIndex + 1}-${seatIndex + 1}`;
+                        seatDiv.addEventListener('click', function() {
                             this.classList.toggle('selected');
                         });
-                        document.querySelector('.seats-container').appendChild(seat);
-                    }
-                }
+                        rowDiv.appendChild(seatDiv);
+                    });
+                    document.querySelector('.seats-container').appendChild(rowDiv);
+                });
             </script>
         </div>
         <a href="{% url 'payment' %}" class="btn btn-warning payment-button">Pagar</a>
     </div>
 
+    <div class="comida-list">
+        <h2>Comidas Disponíveis</h2>
+        <div class="row">
+            {% for comida in comidas %}
+                <div class="col-md-3 pt-3">
+                    <div class="comida-item shadow-lg">
+                        <img src="{{ comida.imagem.url }}" alt="{{ comida.nome }}">
+                        <div class="card-body">
+                            <h5 class="card-title text-center text-uppercase"><strong>{{ comida.nome }}</strong></h5>
+                            <p class="bold"><b>Preço:</b> R$ {{ comida.preco }}</p>
+                            <button class="btn btn-warning select-comida" data-preco="{{ comida.preco }}" data-nome="{{ comida.nome }}">Selecionar</button>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            // Contar o número de itens na tabela da página anterior
-            const maxSeats = document.querySelectorAll('.table tbody tr').length;
-            let selectedSeats = 0; // Contador de assentos selecionados
+        document.addEventListener('DOMContentLoaded', function() {
+            let selectedComida = [];
 
-            // Função para verificar se o limite máximo de assentos foi atingido
-            function checkMaxSeats() {
-                if (selectedSeats >= maxSeats) {
-                    // Desativar a seleção de mais assentos
-                    document.querySelectorAll('.seat').forEach(seat => {
-                        if (!seat.classList.contains('selected')) {
-                            seat.classList.add('disabled');
-                        }
-                    });
-                } else {
-                    // Ativar a seleção de assentos
-                    document.querySelectorAll('.seat').forEach(seat => {
-                        seat.classList.remove('disabled');
-                    });
-                }
-            }
+            document.querySelectorAll('.select-comida').forEach(button => {
+                button.addEventListener('click', function() {
+                    const preco = parseFloat(this.dataset.preco);
+                    const nome = this.dataset.nome;
 
-            // Event listener para cada assento
-            document.querySelectorAll('.seat').forEach(seat => {
-                seat.addEventListener('click', function() {
-                    if (!this.classList.contains('selected') && !this.classList.contains('disabled')) {
-                        this.classList.toggle('selected');
-                        selectedSeats += this.classList.contains('selected') ? 1 : -1;
-                        checkMaxSeats();
+                    if (!this.classList.contains('selected')) {
+                        this.classList.add('selected');
+                        this.textContent = 'Selecionado';
+                        selectedComida.push({ nome, preco });
+                    } else {
+                        this.classList.remove('selected');
+                        this.textContent = 'Selecionar';
+                        selectedComida = selectedComida.filter(item => item.nome !== nome);
                     }
+                    localStorage.setItem('selectedComida', JSON.stringify(selectedComida));
                 });
             });
-
-            // Verificar o limite máximo de assentos ao carregar a página
-            checkMaxSeats();
         });
     </script>
 </body>

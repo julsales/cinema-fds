@@ -1,15 +1,14 @@
 from django.shortcuts import render,  get_object_or_404, redirect
-from django.http import HttpResponseRedirect
 from .models import *
 from django.contrib import messages
 from django.contrib.auth import login, authenticate
 from django.contrib.auth.decorators import login_required
 from django.views.generic import TemplateView
-from .forms import MovieForm,CategoryForm
-
+from .forms import MovieForm,CategoryForm, ComidaForm
+from .models import MovieCategory
 def home(request):
     movies = Movie.objects.all()
-    context = {'movies': movies}
+    context = {'movies': movies, 'range': range(1, 6)}
     return render(request, "home.html", context)
 
 class HomePageView(TemplateView):
@@ -71,8 +70,8 @@ def register_page(request):
             return redirect('/register/')
      
     return render(request, "register.html")
-@login_required(login_url="/login/")
 
+@login_required(login_url="/login/")
 def add_movie(request):
     if request.method == 'POST':
         form = MovieForm(request.POST)
@@ -84,51 +83,59 @@ def add_movie(request):
     return render(request, 'cadastro_filme.html', {'form': form})
 
 
-def editar_filme(request):
+@login_required(login_url='/login/')
+def editar_filme(request, movie_uid=None):
     movies = Movie.objects.all()
-    categories = MovieCategory.objects.all()  # Query para todas as categorias de filme
+    selected_movie = None
+    categories = MovieCategory.objects.all()
+    
+    if movie_uid:
+        selected_movie = get_object_or_404(Movie, uid=movie_uid)
     
     if request.method == 'POST':
-        movie_id = request.POST.get('movie_uid')
-        new_name = request.POST.get('new_name')
-        new_price = request.POST.get('new_price')
-        new_category_id = request.POST.get('new_category')  # Receba o ID da nova categoria
-        
-        # Verificar se o ID do filme foi fornecido
-        if movie_id:
-            # Obter o objeto do filme ou retornar 404 se não encontrado
-            movie = get_object_or_404(Movie, id=movie_id)
-            
-            # Atualizar os campos do filme com os novos valores
-            if new_name:
-                movie.movie_name = new_name
-            if new_price:
-                movie.price = new_price
-            if new_category_id:
-                new_category = get_object_or_404(MovieCategory, id=new_category_id)
-                movie.category = new_category
-            
-            # Salvar as alterações no banco de dados
-            movie.save()
-            
-            # Redirecionar para a página inicial após salvar
-            return redirect('home')
+        if selected_movie:
+            form = MovieForm(request.POST, instance=selected_movie)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Filme atualizado com sucesso.")
+                return redirect('editar_filme')
+            else:
+                messages.error(request, "Erro ao atualizar filme.")
+        else:
+            messages.error(request, "Erro ao atualizar filme")
+            return redirect('editar_filme')
+    else:
+        if selected_movie:
+            form = MovieForm(instance=selected_movie)
+        else:
+            form= MovieForm(instance=None)
+            messages.info(request, "Selecione um filme")
     
-    return render(request, 'editar_filme.html', {'movies': movies, 'categories': categories})
+    return render(request, 'editar_filme.html', {'movies': movies, 'form': form, 'categories': categories, 'selected_movie': selected_movie})
 
+
+@login_required(login_url='/login/')
 def adicionar_genero(request):
     if request.method == 'POST':
         form2 = CategoryForm(request.POST)
         if form2.is_valid():
             form2.save()
-            return redirect('home')
+            return redirect('adicionar_genero')
     else:
         form2 = CategoryForm()
     return render(request, 'adicionar_genero.html', {'form2': form2})
 
+@login_required(login_url='/login/')
 def remover_genero(request):
-    return render(request, 'remover_genero.html')
+    if request.method == 'POST':
+        genero_uid = request.POST.get('genero_uid')  
+        genero = get_object_or_404(MovieCategory, uid=genero_uid)  
+        genero.delete()
+        return redirect('remover_genero') 
+    generos = MovieCategory.objects.all()
+    return render(request, 'remover_genero.html', {'generos': generos})
 
+@login_required(login_url='/login/')
 def remover_filme(request):
     movies = Movie.objects.all()
     selected_movie = None
@@ -167,11 +174,12 @@ def pag_fim(request):
     return render(request, 'pag_fim.html')
 
 @login_required(login_url='/login/')
+
 def add_cart(request, movie_uid):
     try:
         user = request.user
         movie_obj = get_object_or_404(Movie, uid=movie_uid)
-        max_seats = request.GET.get('max_seats')  # Certifique-se de que max_seats está sendo usado conforme necessário
+        max_seats = request.GET.get('max_seats') 
         cart, created = Cart.objects.get_or_create(user=user, is_paid=False)
         CartItems.objects.create(cart=cart, movie=movie_obj)
         messages.success(request, "Filme adicionado ao carrinho com sucesso!")
@@ -184,6 +192,8 @@ def add_cart(request, movie_uid):
         return redirect('/')
 @login_required(login_url='/login/')
 
+
+
 def cart(request):
     try:
         cart = Cart.objects.get(is_paid=False, user=request.user)
@@ -194,6 +204,9 @@ def cart(request):
     except Exception as e:
         messages.error(request, "Algo deu errado ao acessar o carrinho.")
         return redirect('/')
+
+
+
 @login_required(login_url='/login/')
 
 def remove_cart_item(request, cart_item_uid):
@@ -235,11 +248,10 @@ def payment_success(request):
     return render(request, 'payment_success.html')
 
 def escolha_acento(request):
-    return render(request, 'escolha_acento.html')
+        comidas = Comida.objects.all()
+        return render(request, 'escolha_acento.html', {'comidas': comidas})
 
 
-
-from django.db import IntegrityError
 
 def usuario(request):
     if request.method == 'POST':
@@ -261,3 +273,26 @@ def usuario(request):
         return redirect('home')
 
     return render(request, 'usuario.html', {'user': request.user})
+
+def adicionar_comida(request):
+    if request.method == 'POST':
+        form = ComidaForm(request.POST, request.FILES)
+        if form.is_valid():
+            form.save()
+            return redirect('escolha_acento')
+    else:
+        form = ComidaForm()
+    
+    return render(request, 'adicionar_comida.html', {'form': form})
+
+def remover_comida(request):
+    if request.method == 'POST':
+        comida_id = request.POST.get('comida')
+        try:
+            comida = Comida.objects.get(id=comida_id)
+            comida.delete()
+            return redirect('/pagina_adm/') 
+        except Comida.DoesNotExist:
+            pass 
+    comidas = Comida.objects.all()
+    return render(request, 'remover_comida.html', {'comidas': comidas})

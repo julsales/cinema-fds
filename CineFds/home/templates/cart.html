@@ -1,7 +1,5 @@
 {% extends "base.html" %}
- 
 {% load static %}
- 
 {% block start %}
 <style>
 .quantity-container {
@@ -38,7 +36,7 @@
                 <td class="quantity-container">
                     <div class="input-group">
                         <button class="btn btn-outline-secondary decrease" type="button">-</button>
-                        <input type="text" class="form-control quantity" value="1" readonly maxlength="2">
+                        <input type="text" class="form-control quantity" value="1" readonly maxlength="2" data-unit-price="{{ cartItem.movie.price }}">
                         <button class="btn btn-outline-secondary increase" type="button">+</button>
                     </div>
                 </td>
@@ -46,7 +44,7 @@
                 <td>
                     <h5 style="color: aliceblue;">{{ cartItem.movie.movie_name }}</h5>
                 </td>
-                <td><a href="{% url 'escolha_acento' %}" class="btn btn-warning">Finalizar a compra</a></td>
+                <td><a href="{% url 'escolha_acento' %}" class="btn btn-warning btn-finalize">Finalizar a compra</a></td>
             </tr>
             {% endfor %}
         </tbody>
@@ -70,9 +68,9 @@
                 let currentValue = parseInt(quantityInput.value);
                 if (currentValue > 1) {
                     quantityInput.value = currentValue - 1;
-                    let unitPrice = parseFloat(this.parentElement.nextElementSibling.querySelector('.price').textContent.replace('R$', '').trim());
+                    let unitPrice = parseFloat(quantityInput.dataset.unitPrice);
                     let totalPrice = calculateTotalPrice(currentValue - 1, unitPrice);
-                    this.parentElement.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
+                    this.parentElement.nextElementSibling.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
                 }
             });
         });
@@ -83,10 +81,23 @@
                 let currentValue = parseInt(quantityInput.value);
                 if (currentValue < 9) {
                     quantityInput.value = currentValue + 1;
-                    let unitPrice = parseFloat(this.parentElement.nextElementSibling.querySelector('.price').textContent.replace('R$', '').trim());
+                    let unitPrice = parseFloat(quantityInput.dataset.unitPrice);
                     let totalPrice = calculateTotalPrice(currentValue + 1, unitPrice);
-                    this.parentElement.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
+                    this.parentElement.nextElementSibling.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
                 }
+            });
+        });
+
+        document.querySelectorAll('.btn-finalize').forEach(button => {
+            button.addEventListener('click', function() {
+                const ticketData = [];
+                quantityInputs.forEach((input, index) => {
+                    const quantity = parseInt(input.value);
+                    const price = parseFloat(input.dataset.unitPrice);
+                    const movieName = document.querySelectorAll('h5')[index].textContent;
+                    ticketData.push({ movieName, quantity, price });
+                });
+                localStorage.setItem('ticketData', JSON.stringify(ticketData));
             });
         });
     });
