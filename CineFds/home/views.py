@@ -192,6 +192,8 @@ def add_cart(request, movie_uid):
         return redirect('/')
 @login_required(login_url='/login/')
 
+
+
 def cart(request):
     try:
         cart = Cart.objects.get(is_paid=False, user=request.user)
@@ -202,6 +204,9 @@ def cart(request):
     except Exception as e:
         messages.error(request, "Algo deu errado ao acessar o carrinho.")
         return redirect('/')
+
+
+
 @login_required(login_url='/login/')
 
 def remove_cart_item(request, cart_item_uid):
