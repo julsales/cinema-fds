@@ -53,36 +53,33 @@
     </div>
   </nav>
 <div class="container">
-  <form action="{% url 'editar_filme' %}" method="post">
-      {% csrf_token %}
-      <h1>Editar Filme</h1>
-      <label for="movie_name">Nome do Filme:</label><br>
-      <input type="text" id="movie_name" name="movie_name"><br><br>
-      <label for="new_name">Novo Nome:</label><br>
-      <input type="text" id="new_name" name="new_name"><br><br>
-      <label for="new_price">Novo Preço:</label><br>
-      <input type="number" id="new_price" name="new_price"><br><br>
-      <label for="new_category">Nova Categoria:</label><br>
-      <input type="text" id="new_category" name="new_category"><br><br>
-      <input type="submit" value="Salvar Alterações">
-  </form>
+<h2>Lista de filmes para editar</h2>
+    {% if movies %}
+    <div class="filme-list-container">
+    <ul>
+        {% for movie in movies %}
+        <li>
+            {{ movie.movie_name }}
+            <a href="{% url 'editar_filme' movie.uid %}">Editar</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+      <p>Não há filmes disponíveis.</p>
+  {% endif %}
+</div>
+
+    <h2>{% if selected_movie %}Editar Filme{% endif %}</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">{% if selected_movie %}Salvar Alterações{% endif %}</button>
+    </form>
   {% if messages %}
       <ul class="messages">
           {% for message in messages %}
               <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
           {% endfor %}
       </ul>
-  {% endif %}
-  {% if movies %}
-      <div class="filme-list-container">
-          <h2>Lista de Filmes:</h2>
-          <ul>
-              {% for movie in movies %}
-                  <li>{{ movie.movie_name }}</li>
-              {% endfor %}
-          </ul>
-      </div>
-  {% else %}
-      <p>Não há filmes disponíveis.</p>
   {% endif %}
 </div>

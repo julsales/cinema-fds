@@ -70,8 +70,8 @@ def register_page(request):
             return redirect('/register/')
      
     return render(request, "register.html")
-@login_required(login_url="/login/")
 
+@login_required(login_url="/login/")
 def add_movie(request):
     if request.method == 'POST':
         form = MovieForm(request.POST)
@@ -83,39 +83,38 @@ def add_movie(request):
     return render(request, 'cadastro_filme.html', {'form': form})
 
 
-def editar_filme(request):
+@login_required(login_url='/login/')
+def editar_filme(request, movie_uid=None):
     movies = Movie.objects.all()
-    categories = MovieCategory.objects.all()  # Query para todas as categorias de filme
+    selected_movie = None
+    categories = MovieCategory.objects.all()
+    
+    if movie_uid:
+        selected_movie = get_object_or_404(Movie, uid=movie_uid)
     
     if request.method == 'POST':
-        movie_id = request.POST.get('movie_uid')
-        new_name = request.POST.get('new_name')
-        new_price = request.POST.get('new_price')
-        new_category_id = request.POST.get('new_category')  # Receba o ID da nova categoria
-        
-        # Verificar se o ID do filme foi fornecido
-        if movie_id:
-            # Obter o objeto do filme ou retornar 404 se não encontrado
-            movie = get_object_or_404(Movie, id=movie_id)
-            
-            # Atualizar os campos do filme com os novos valores
-            if new_name:
-                movie.movie_name = new_name
-            if new_price:
-                movie.price = new_price
-            if new_category_id:
-                new_category = get_object_or_404(MovieCategory, id=new_category_id)
-                movie.category = new_category
-            
-            # Salvar as alterações no banco de dados
-            movie.save()
-            
-            # Redirecionar para a página inicial após salvar
-            return redirect('home')
+        if selected_movie:
+            form = MovieForm(request.POST, instance=selected_movie)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Filme atualizado com sucesso.")
+                return redirect('editar_filme')
+            else:
+                messages.error(request, "Erro ao atualizar filme.")
+        else:
+            messages.error(request, "Erro ao atualizar filme")
+            return redirect('editar_filme')
+    else:
+        if selected_movie:
+            form = MovieForm(instance=selected_movie)
+        else:
+            form= MovieForm(instance=None)
+            messages.info(request, "Selecione um filme")
     
-    return render(request, 'editar_filme.html', {'movies': movies, 'categories': categories})
+    return render(request, 'editar_filme.html', {'movies': movies, 'form': form, 'categories': categories, 'selected_movie': selected_movie})
 
 
+@login_required(login_url='/login/')
 def adicionar_genero(request):
     if request.method == 'POST':
         form2 = CategoryForm(request.POST)
@@ -126,6 +125,7 @@ def adicionar_genero(request):
         form2 = CategoryForm()
     return render(request, 'adicionar_genero.html', {'form2': form2})
 
+@login_required(login_url='/login/')
 def remover_genero(request):
     if request.method == 'POST':
         genero_uid = request.POST.get('genero_uid')  
@@ -135,6 +135,7 @@ def remover_genero(request):
     generos = MovieCategory.objects.all()
     return render(request, 'remover_genero.html', {'generos': generos})
 
+@login_required(login_url='/login/')
 def remover_filme(request):
     movies = Movie.objects.all()
     selected_movie = None
