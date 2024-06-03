@@ -296,3 +296,8 @@ def remover_comida(request):
             pass 
     comidas = Comida.objects.all()
     return render(request, 'remover_comida.html', {'comidas': comidas})
+
+def lista_filmes(request):
+    movies = Movie.objects.all()
+    context = {'movies': movies}
+    return render(request, 'lista_filmes.html', context)
