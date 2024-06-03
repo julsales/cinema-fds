@@ -174,11 +174,12 @@ def pag_fim(request):
     return render(request, 'pag_fim.html')
 
 @login_required(login_url='/login/')
+
 def add_cart(request, movie_uid):
     try:
         user = request.user
         movie_obj = get_object_or_404(Movie, uid=movie_uid)
-        max_seats = request.GET.get('max_seats')  # Certifique-se de que max_seats está sendo usado conforme necessário
+        max_seats = request.GET.get('max_seats') 
         cart, created = Cart.objects.get_or_create(user=user, is_paid=False)
         CartItems.objects.create(cart=cart, movie=movie_obj)
         messages.success(request, "Filme adicionado ao carrinho com sucesso!")

@@ -43,14 +43,14 @@
             text-align: center;
         }
 
-        .generos-list {
+        .list-container {
             max-width: 400px;
             margin: 0 auto;
             list-style-type: none;
             padding: 0;
         }
 
-        .generos-list li {
+        .list-container li {
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -60,11 +60,11 @@
             border-radius: 5px;
         }
 
-        .generos-list li form {
+        .list-container li form {
             display: inline;
         }
 
-        .generos-list li button {
+        .list-container li button {
             background-color: #ff0000;
             color: #fff;
             border: none;
@@ -73,7 +73,7 @@
             cursor: pointer;
         }
 
-        .generos-list li button:hover {
+        .list-container li button:hover {
             background-color: #cc0000;
         }
     </style>
@@ -99,7 +99,7 @@
     </nav>
 
     <h1>Remover Gênero</h1>
-    <ul class="generos-list">
+    <ul class="list-container">
         {% for genero in generos %}
         <li>
             {{ genero.category_name }}
