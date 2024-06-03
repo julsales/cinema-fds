@@ -73,7 +73,7 @@
                         </div>
                     {% endif %}
                     <a class="navbar-brand" href="{% url 'cart' %}" style="background-color: #dc3546fc; border-radius: 12px; display: inline-block; padding: 10px;">
-                        <button type="button" style="background-color: transparent; border: none; color: aliceblue; cursor: pointer;"><i class=""fa fa-shopping-cart""></i> Carrinho<strong>{{ request.user.get_cart_count }}</strong></button>
+                        <button type="button" style="background-color: transparent; border: none; color: aliceblue; cursor: pointer;"><i class="fa fa-shopping-cart"></i> Carrinho<strong>{{ request.user.get_cart_count }}</strong></button>
                     </a>
                     <a href="{% url 'logout' %}" class="navbar-brand" style="border: 2px solid white; border-radius: 10px; padding: 5px 10px; background-color: black;">Logout</a>
                 {% else %}
