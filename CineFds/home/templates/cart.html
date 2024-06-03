@@ -7,13 +7,22 @@
     align-items: center;
 }
 
-.quantity-container .input-group {
-    width: 90px; 
-}
-
 .quantity-container .btn {
     font-size: 1.3rem; 
     padding: 0.2rem 0.4rem;
+}
+
+.quantity-container .btn-group {
+    display: flex;
+}
+
+.quantity-container .btn-group .btn {
+    margin-right: 0.5rem;
+    flex: 1;
+}
+
+.quantity-container .btn-group .btn:last-child {
+    margin-right: 0;
 }
 </style>
 <div class="container card shadow-lg mt-5" style="background-color: rgb(33 38 45);">
@@ -34,10 +43,9 @@
                 <th scope="row">{{ forloop.counter }}</th>
                 <td><a href="{% url 'remove_cart' cartItem.uid %}" class="btn btn-danger">Remover</a></td>
                 <td class="quantity-container">
-                    <div class="input-group">
-                        <button class="btn btn-outline-secondary decrease" type="button">-</button>
-                        <input type="text" class="form-control quantity" value="1" readonly maxlength="2" data-unit-price="{{ cartItem.movie.price }}">
-                        <button class="btn btn-outline-secondary increase" type="button">+</button>
+                    <div class="btn-group" role="group">
+                        <button type="button" class="btn btn-outline-secondary quantity-btn" data-quantity="1" data-unit-price="{{ cartItem.movie.price }}">Inteira</button>
+                        <button type="button" class="btn btn-outline-secondary quantity-btn" data-quantity="0.5" data-unit-price="{{ cartItem.movie.price }}">Meia</button>
                     </div>
                 </td>
                 <td style="color: aliceblue;"><p class="price">R$ {{ cartItem.movie.price }}</p></td>
@@ -57,43 +65,31 @@
     }
 
     document.addEventListener('DOMContentLoaded', function () {
-        const decreaseButtons = document.querySelectorAll('.decrease');
-        const increaseButtons = document.querySelectorAll('.increase');
-        const quantityInputs = document.querySelectorAll('.quantity');
+        const quantityButtons = document.querySelectorAll('.quantity-btn');
         const priceElements = document.querySelectorAll('.price');
 
-        decreaseButtons.forEach(button => {
+        quantityButtons.forEach(button => {
             button.addEventListener('click', function () {
-                let quantityInput = this.parentElement.querySelector('.quantity');
-                let currentValue = parseInt(quantityInput.value);
-                if (currentValue > 1) {
-                    quantityInput.value = currentValue - 1;
-                    let unitPrice = parseFloat(quantityInput.dataset.unitPrice);
-                    let totalPrice = calculateTotalPrice(currentValue - 1, unitPrice);
-                    this.parentElement.nextElementSibling.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
-                }
-            });
-        });
+                let quantity = parseFloat(this.dataset.quantity);
+                let unitPrice = parseFloat(this.dataset.unitPrice);
+                let totalPrice = calculateTotalPrice(quantity, unitPrice);
+                this.closest('tr').querySelector('.price').textContent = `R$ ${totalPrice}`;
 
-        increaseButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                let quantityInput = this.parentElement.querySelector('.quantity');
-                let currentValue = parseInt(quantityInput.value);
-                if (currentValue < 9) {
-                    quantityInput.value = currentValue + 1;
-                    let unitPrice = parseFloat(quantityInput.dataset.unitPrice);
-                    let totalPrice = calculateTotalPrice(currentValue + 1, unitPrice);
-                    this.parentElement.nextElementSibling.nextElementSibling.querySelector('.price').textContent = `R$ ${totalPrice}`;
-                }
+                this.closest('.btn-group').querySelectorAll('.quantity-btn').forEach(btn => {
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('btn-outline-secondary');
+                });
+                this.classList.remove('btn-outline-secondary');
+                this.classList.add('btn-primary');
             });
         });
 
         document.querySelectorAll('.btn-finalize').forEach(button => {
             button.addEventListener('click', function() {
                 const ticketData = [];
-                quantityInputs.forEach((input, index) => {
-                    const quantity = parseInt(input.value);
-                    const price = parseFloat(input.dataset.unitPrice);
+                document.querySelectorAll('.btn-primary').forEach((btn, index) => {
+                    const quantity = parseFloat(btn.dataset.quantity);
+                    const price = parseFloat(btn.dataset.unitPrice);
                     const movieName = document.querySelectorAll('h5')[index].textContent;
                     ticketData.push({ movieName, quantity, price });
                 });
