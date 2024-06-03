@@ -8,7 +8,7 @@ from .forms import MovieForm,CategoryForm, ComidaForm
 from .models import MovieCategory
 def home(request):
     movies = Movie.objects.all()
-    context = {'movies': movies}
+    context = {'movies': movies, 'range': range(1, 6)}
     return render(request, "home.html", context)
 
 class HomePageView(TemplateView):
