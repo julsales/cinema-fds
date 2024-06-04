@@ -14,12 +14,21 @@
             color: white;
             font-family: Arial, sans-serif;
         }
-
         .container {
             text-align: center;
             margin-top: 50px;
         }
-
+        .back-button {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background-color: #444451;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
         .screen {
             background-color: #fff;
             height: 30px;
@@ -27,7 +36,6 @@
             position: relative;
             box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
         }
-
         .screen:before {
             content: 'TELA';
             position: absolute;
@@ -37,7 +45,6 @@
             font-weight: bold;
             color: black;
         }
-
         .seats-container {
             display: flex;
             justify-content: center;
@@ -45,7 +52,6 @@
             max-width: 800px;
             margin: 0 auto;
         }
-
         .seat {
             width: 30px;
             height: 30px;
@@ -54,83 +60,67 @@
             border-radius: 5px;
             cursor: pointer;
         }
-
         .seat.selected {
             background-color: #6feaf6;
         }
-
         .seat.occupied {
             background-color: #444451;
             cursor: not-allowed;
         }
-
         .seat:not(.occupied):hover {
             background-color: #5a5e68;
         }
-
         .row {
             display: flex;
             justify-content: center;
         }
-
         .row:not(:last-child) {
             margin-bottom: 5px;
         }
-
         .legend {
             display: flex;
             justify-content: center;
             margin-top: 20px;
         }
-
         .legend div {
             display: flex;
             align-items: center;
             margin: 0 10px;
         }
-
         .legend div .seat {
             margin: 0 5px;
         }
-
         .payment-button {
             margin-top: 20px;
         }
-
         .container-images img {
             width: 100%;
             height: auto;
             border-radius: 32px;
         }
-
         .container-slider {
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
         }
-
         .container-slider button {
             background: none;
             border: none;
             cursor: pointer;
         }
-
         .slider {
             display: none;
         }
-
         .slider.on {
             display: block;
         }
-
         .comida-list {
             margin-top: 20px;
-            text-align: center; 
+            text-align: center;
             width: 100%;
-            margin: 0 auto; 
+            margin: 0 auto;
         }
-
         .comida-item {
             margin-bottom: 10px;
             padding: 10px;
@@ -142,74 +132,116 @@
             width: 18rem;
             margin: 0 auto;
         }
-
         .comida-item img {
             height: 210px;
             border-radius: 32px;
             width: 100%;
             object-fit: cover;
         }
-
         .comida-item .card-body {
             display: flex;
             flex-direction: column;
             align-items: center;
         }
-
         .comida-item .card-body h5 {
             font-size: 20px;
             color: rgb(152, 170, 236);
         }
-
         .comida-item .card-body p {
             text-align: center;
             color: aliceblue;
         }
-
         .comida-item .btn {
             border-radius: 10px;
         }
-
+        .back-button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(9, 27, 87);
+            color: white;
+            padding: 5px;
+            width: 200px;
+            height: 45px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            left: 10px;
+        }
+        .back-button svg {
+            width: 48px;
+            height: 48px;
+            fill: white;
+        }
+        .back-button span {
+            font-size: 24px;
+            color: white;
+            margin-left: 5px;
+        }
     </style>
-    <link href="{% static 'home.css' %}" rel="stylesheet"/>
-    <script src="{% static 'home.js' %}" defer></script>
 </head>
 <body>
+    <button class="back-button" onclick="window.location.href='{% url 'cart' %}'">Voltar</button>
     <div class="container">
         <h1>Escolha de Assentos</h1>
         <div class="screen"></div>
         <div class="seats-container">
             <script>
-                const rows = [
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-                ];
+                document.addEventListener('DOMContentLoaded', function() {
+                    const rows = [
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                    ];
 
-                rows.forEach((row, rowIndex) => {
-                    const rowDiv = document.createElement('div');
-                    rowDiv.classList.add('row');
-                    row.forEach((seat, seatIndex) => {
-                        const seatDiv = document.createElement('div');
-                        seatDiv.classList.add('seat');
-                        seatDiv.dataset.seatId = `${rowIndex + 1}-${seatIndex + 1}`;
-                        seatDiv.addEventListener('click', function() {
-                            this.classList.toggle('selected');
+                    const seatsContainer = document.querySelector('.seats-container');
+
+                    rows.forEach((row, rowIndex) => {
+                        const rowDiv = document.createElement('div');
+                        rowDiv.classList.add('row');
+                        row.forEach((seat, seatIndex) => {
+                            const seatDiv = document.createElement('div');
+                            seatDiv.classList.add('seat');
+                            seatDiv.dataset.seatId = `${rowIndex + 1}-${seatIndex + 1}`;
+                            rowDiv.appendChild(seatDiv);
                         });
-                        rowDiv.appendChild(seatDiv);
+                        seatsContainer.appendChild(rowDiv);
                     });
-                    document.querySelector('.seats-container').appendChild(rowDiv);
+
+                    const totalTickets = parseInt(localStorage.getItem('totalTickets'), 10);
+                    let selectedSeatsCount = 0;
+
+                    document.querySelectorAll('.seat').forEach(seat => {
+                        seat.addEventListener('click', function() {
+                            if (this.classList.contains('occupied')) return;
+
+                            if (this.classList.contains('selected')) {
+                                this.classList.remove('selected');
+                                selectedSeatsCount--;
+                            } else {
+                                if (selectedSeatsCount < totalTickets) {
+                                    this.classList.add('selected');
+                                    selectedSeatsCount++;
+                                } else {
+                                    alert('Você só pode selecionar o número de assentos de acordo com a quantidade de ingressos comprados.');
+                                }
+                            }
+                        });
+                    });
                 });
             </script>
         </div>

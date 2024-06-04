@@ -1,4 +1,4 @@
-describe('Editar Filme', () => {
+describe('Comprar ingresso', () => {
     it('Adicionando categoria e filme', () => {
         cy.visit('');
         cy.get('[href="/login/?next=/"]').click()
@@ -19,27 +19,30 @@ describe('Editar Filme', () => {
         cy.get('#id_price').clear()
         cy.get('#id_price').type('20')
         cy.get('#id_images').type('https://institutofortunato.com.br/wp-content/uploads/2021/05/teste.jpg')
-        cy.get('#id_rating').type('2')
+        cy.get('#id_rating').clear()
+        cy.get('#id_rating').type(2)
         cy.get('button').click()
     
         })
-    it('Editando o filme', () => {
+    it('Comprando ingressos', () => {
         cy.visit('');
         cy.get('[href="/login/?next=/"]').click()
-        cy.get(':nth-child(3) > .form-control').type('adm123')
-        cy.get(':nth-child(4) > .form-control').type('admin123')
+        cy.get(':nth-child(3) > .form-control').type('123')
+        cy.get(':nth-child(4) > .form-control').type('123')
         cy.get(':nth-child(5) > .btn').click()
-        cy.get('[href="/pagina_adm/"] > button').should('be.visible')
-        cy.get('[href="/pagina_adm/"] > button').click()
-        cy.get('[href="/editar_filme/"] > button').click()
-        cy.get('li > form > button').click()
-        cy.get('#id_category').select(1)
-        cy.get('#id_movie_name').clear()
-        cy.get('#id_movie_name').type('teste1')
-        cy.get('#id_rating').clear()
-        cy.get('#id_rating').type('2')
-        cy.get('[method="POST"] > button').click()
-        cy.get('.success').invoke('text').should('have.string', "Filme atualizado com sucesso.")
+        cy.get(':nth-child(1) > .card > .card-body > .btn').click()
+        cy.get('.swal2-confirm').click()
+        cy.get(':nth-child(1) > .card > .card-body > .btn').click()
+        cy.get('.swal2-confirm').click()
+        cy.get('[href="/cart/"] > button').click()
+        cy.get('[data-quantity="1"]').click({ multiple: true })
+        cy.get(':nth-child(2) > :nth-child(6) > .btn').contains('Finalizar a compra').click()
+        cy.get('[data-seat-id="1-3"]').click()
+        cy.get('[data-seat-id="1-2"]').click()
+        cy.get('.container > .btn').click()
+        cy.get('#nome').type('teste')
+        cy.contains('Total: R$ 40.00')
+        cy.get('#btn_pagar').click()
             })
 
         it('Apagando o filme para não dar conflito nos outros testes', () => {
@@ -52,8 +55,6 @@ describe('Editar Filme', () => {
         cy.get('[href="/pagina_adm/"] > button').click()
         cy.get('[href="/remover_filme/"] > button').click()
         cy.get('#movie_name').type('teste')
-        cy.get('[type="submit"]').click()
-        cy.get('#movie_name').type('teste1')
         cy.get('[type="submit"]').click()
         cy.get('.success').invoke('text').should('have.string', "Filme removido com sucesso!")
             }) 

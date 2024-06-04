@@ -239,7 +239,6 @@ def payment(request):
         cpf = request.POST.get('cpf')
         numero_cartao = request.POST.get('numero_cartao')
         endereco = request.POST.get('endereco')
-        return render(request, 'payment_success.html')  
 
     return render(request, 'payment.html')
 
@@ -296,3 +295,8 @@ def remover_comida(request):
             pass 
     comidas = Comida.objects.all()
     return render(request, 'remover_comida.html', {'comidas': comidas})
+
+def lista_filmes(request):
+    movies = Movie.objects.all()
+    context = {'movies': movies}
+    return render(request, 'lista_filmes.html', context)
