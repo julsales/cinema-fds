@@ -144,7 +144,7 @@ Lembrando que cada login contem funções diferentes
 [Docs do relato](https://docs.google.com/document/d/19zGnUU6alP4K4-cIQ1aMZvmV7GqcnomqHvNyMZZcX0Q/edit?usp=sharing)
 
 = Diagrama da 4° entrega = 
-![ImagemDiagrama](Imagens/Diagrama_final.jpg)
+![ImagemDiagrama](Imagens/Diagrama3.jpg)
 
 = Resumo da Quarta Entrega =
 
