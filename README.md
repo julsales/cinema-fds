@@ -122,6 +122,7 @@ Atualização do prototipo Lo-FI deixando o mais proximo a dinamica que foi feit
 
 = Screencasts =
 [Deployment na azure](https://cinefds.azurewebsites.net) 
+
 = Para Logar =
 <br>
 `Login: adm123`
