@@ -122,10 +122,17 @@ Atualização do prototipo Lo-FI deixando o mais proximo a dinamica que foi feit
 
 [Screencasts Site](https://youtu.be/7zUDd9M8pe8)
 <br>
-
-
+[Screencast Quarta entrega -> Testes do Sistema E CI\CD com Build e Deployment automatizado](https://youtu.be/UoYZ18QsB14) 
+<br>
 = Azure =<br>
 [Deployment na azure](https://cinefds.azurewebsites.net) 
+
+= Página no Jira =<br>
+![WhatsApp Image 2024-06-03 at 23 39 45](https://github.com/julsales/cinema-fds/assets/142419446/bfcc42e4-6e4e-4824-b5e1-6596ab5aa5e8)
+
+= Bug Tracker =<br>
+![WhatsApp Image 2024-06-03 at 23 40 27](https://github.com/julsales/cinema-fds/assets/142419446/5fa89b17-7a07-40d4-9f38-042f687d1100)
+![WhatsApp Image 2024-06-03 at 23 40 54](https://github.com/julsales/cinema-fds/assets/142419446/ac62bd9d-64b7-4669-bca5-e87b8444622e)
 
 = Para Logar =
 <br>
