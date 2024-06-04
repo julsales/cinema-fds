@@ -239,7 +239,6 @@ def payment(request):
         cpf = request.POST.get('cpf')
         numero_cartao = request.POST.get('numero_cartao')
         endereco = request.POST.get('endereco')
-        return render(request, 'payment_success.html')  
 
     return render(request, 'payment.html')
 

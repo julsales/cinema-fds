@@ -1,4 +1,4 @@
-describe('Teste adicionar filme', () => {
+describe('Lista de filmes', () => {
     it('Adicionando categoria e dois filmes', () => {
     cy.visit('');
     cy.get('[href="/login/?next=/"]').click()
@@ -22,20 +22,21 @@ describe('Teste adicionar filme', () => {
     cy.get('#id_rating').clear()
     cy.get('#id_rating').type(2)
     cy.get('button').click()
-    cy.get('[href="/pagina_adm/"] > button').should('be.visible')
-    cy.get('[href="/pagina_adm/"] > button').click()
-    cy.get('[href="/cadastro-filme/"] > button').should('be.visible')
-    cy.get('[href="/cadastro-filme/"] > button').click()
-    cy.get('#id_category').select(1)
-    cy.get('#id_movie_name').type('teste1')
-    cy.get('#id_price').clear()
-    cy.get('#id_price').type('20')
-    cy.get('#id_images').type('https://institutofortunato.com.br/wp-content/uploads/2021/05/teste.jpg')
-    cy.get('#id_rating').clear()
-    cy.get('#id_rating').type(2)
-    cy.get('button').click()
 
     })
+
+    it('Lista de filmes', () => {
+        cy.visit('');
+        cy.get('[href="/login/?next=/"]').click()
+        cy.get(':nth-child(3) > .form-control').type('adm123')
+        cy.get(':nth-child(4) > .form-control').type('admin123')
+        cy.get(':nth-child(5) > .btn').click()
+        cy.get('[href="/pagina_adm/"] > button').should('be.visible')
+        cy.get('[href="/pagina_adm/"] > button').click()
+        cy.get('[href="/lista_filmes/"] > button').click()
+        cy.get('li').invoke('text').should('have.string', "teste")
+    })
+
     it('Apagando os filmes', () => {
         cy.visit('');
         cy.get('[href="/login/?next=/"]').click()

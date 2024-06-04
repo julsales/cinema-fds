@@ -182,8 +182,6 @@
             margin-left: 5px;
         }
     </style>
-    <link href="{% static 'home.css' %}" rel="stylesheet"/>
-    <script src="{% static 'home.js' %}" defer></script>
 </head>
 <body>
     <button class="back-button" onclick="window.location.href='{% url 'cart' %}'">Voltar</button>
@@ -192,36 +190,38 @@
         <div class="screen"></div>
         <div class="seats-container">
             <script>
-                const rows = [
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-                    [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
-                ];
-
-                rows.forEach((row, rowIndex) => {
-                    const rowDiv = document.createElement('div');
-                    rowDiv.classList.add('row');
-                    row.forEach((seat, seatIndex) => {
-                        const seatDiv = document.createElement('div');
-                        seatDiv.classList.add('seat');
-                        seatDiv.dataset.seatId = `${rowIndex + 1}-${seatIndex + 1}`;
-                        rowDiv.appendChild(seatDiv);
-                    });
-                    document.querySelector('.seats-container').appendChild(rowDiv);
-                });
-
                 document.addEventListener('DOMContentLoaded', function() {
+                    const rows = [
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
+                        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1]
+                    ];
+
+                    const seatsContainer = document.querySelector('.seats-container');
+
+                    rows.forEach((row, rowIndex) => {
+                        const rowDiv = document.createElement('div');
+                        rowDiv.classList.add('row');
+                        row.forEach((seat, seatIndex) => {
+                            const seatDiv = document.createElement('div');
+                            seatDiv.classList.add('seat');
+                            seatDiv.dataset.seatId = `${rowIndex + 1}-${seatIndex + 1}`;
+                            rowDiv.appendChild(seatDiv);
+                        });
+                        seatsContainer.appendChild(rowDiv);
+                    });
+
                     const totalTickets = parseInt(localStorage.getItem('totalTickets'), 10);
                     let selectedSeatsCount = 0;
 
