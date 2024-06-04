@@ -136,9 +136,8 @@ Atualização do prototipo Lo-FI deixando o mais proximo a dinamica que foi feit
 `Senha: 123`
 <br>
 <br>
-Lembrando que cada login contem funções diferentes
-
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Lembrando que cada login contem funções diferentes<br>
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 = Programação em Par =
  - 2° / 3° / 4° - entraga
