@@ -114,13 +114,11 @@ O Lo-fi já tinhas essas histórias implementadas nele anteriormente, é póssiv
 QUARTA ENTREGA
 ===========================================================
 
-= Lo-FI =
-
-Atualização do prototipo Lo-FI deixando o mais proximo a dinamica que foi feita do site.:
-
+= Lo-FI =<br>
+Atualização do prototipo Lo-FI deixando o mais proximo a dinamica que foi feita do site:<br>
 [Protótipo Lo-Fi](https://www.figma.com/file/Ms5aUXSnImGqW7S97h7m92/Wireframe-Template-(Community)?type=design&node-id=0%3A1&mode=design&t=v2NZ8sR463NZwdIk-1)
 
-= Screencasts =
+= Screencasts =<br>
 [Deployment na azure](https://cinefds.azurewebsites.net) 
 
 = Para Logar =
@@ -137,7 +135,7 @@ Atualização do prototipo Lo-FI deixando o mais proximo a dinamica que foi feit
 <br>
 <br>
 Lembrando que cada login contem funções diferentes<br>
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 = Programação em Par =
  - 2° / 3° / 4° - entraga
