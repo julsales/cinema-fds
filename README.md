@@ -113,6 +113,8 @@ O Lo-fi já tinhas essas histórias implementadas nele anteriormente, é póssiv
 
 QUARTA ENTREGA
 ===========================================================
+= Slides da apresentação =<br>
+[Slides Apresentação Final](https://www.canva.com/design/DAGGxFwmEOE/5HSkTcgglxai1-aF04BkgQ/edit?utm_content=DAGGxFwmEOE&utm_campaign=designshare&utm_medium=link2&utm_source=sharebutton)
 
 = Lo-FI =<br>
 Atualização do prototipo Lo-FI deixando o mais proximo a dinamica que foi feita do site:<br>
