@@ -103,8 +103,36 @@ O Lo-fi já tinhas essas histórias implementadas nele anteriormente, é póssiv
 
 <br>
 
--Programação em par:
+= Programação em par = 
+ - 2° / 3° / 4° - entraga
 
 [Docs do relato](https://docs.google.com/document/d/19zGnUU6alP4K4-cIQ1aMZvmV7GqcnomqHvNyMZZcX0Q/edit?usp=sharing)
 
 <br>
+
+
+QUARTA ENTREGA
+===========================================================
+
+= Lo-FI =
+
+Atualização do prototipo Lo-FI deixando o mais proximo a dinamica que foi feita do site.:
+
+[Protótipo Lo-Fi](https://www.figma.com/file/Ms5aUXSnImGqW7S97h7m92/Wireframe-Template-(Community)?type=design&node-id=0%3A1&mode=design&t=v2NZ8sR463NZwdIk-1)
+
+= Screencasts =
+
+
+
+= Programação em Par =
+ - 2° / 3° / 4° - entraga
+
+[Docs do relato](https://docs.google.com/document/d/19zGnUU6alP4K4-cIQ1aMZvmV7GqcnomqHvNyMZZcX0Q/edit?usp=sharing)
+
+= Diagrama da 4° entrega = 
+![ImagemDiagrama](Imagens/Diagrama_final.jpg)
+
+= Resumo da Quarta Entrega =
+
+° Todas as historias foram atualizadas e corrigidas em detalhes minimos, sendo em erros ou apenas o visual.
+° Historias implementadas para usuarios e administrador
