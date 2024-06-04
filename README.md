@@ -121,8 +121,22 @@ Atualização do prototipo Lo-FI deixando o mais proximo a dinamica que foi feit
 [Protótipo Lo-Fi](https://www.figma.com/file/Ms5aUXSnImGqW7S97h7m92/Wireframe-Template-(Community)?type=design&node-id=0%3A1&mode=design&t=v2NZ8sR463NZwdIk-1)
 
 = Screencasts =
-
-
+[Deployment na azure](https://cinefds.azurewebsites.net) 
+= Para Logar =
+<br>
+`Login: adm123`
+<br>
+`Senha: admin123`
+<br>
+= Para Logar Usuario =
+<br>
+`Login: 123`
+<br>
+`Senha: 123`
+<br>
+<br>
+Lembrando que cada login contem funções diferentes
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 = Programação em Par =
  - 2° / 3° / 4° - entraga
