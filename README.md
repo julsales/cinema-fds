@@ -147,5 +147,5 @@ Lembrando que cada login contem funções diferentes<br>
 
 = Resumo da Quarta Entrega =
 
-° Todas as historias foram atualizadas e corrigidas em detalhes minimos, sendo em erros ou apenas o visual.
+° Todas as historias foram atualizadas e corrigidas em detalhes minimos, sendo em erros ou apenas o visual.<br>
 ° Historias implementadas para usuarios e administrador
