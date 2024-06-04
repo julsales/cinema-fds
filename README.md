@@ -137,6 +137,7 @@ Atualização do prototipo Lo-FI deixando o mais proximo a dinamica que foi feit
 <br>
 <br>
 Lembrando que cada login contem funções diferentes
+
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 = Programação em Par =
