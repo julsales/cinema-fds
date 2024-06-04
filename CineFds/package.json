@@ -21,5 +21,8 @@
   "homepage": "https://github.com/ZiicoB/cinema-fds#readme",
   "dependencies": {
     "cypress": "^13.8.1"
+  },
+  "devDependencies": {
+    "cypress-file-upload": "^5.0.8"
   }
 }
