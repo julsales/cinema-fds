@@ -300,3 +300,16 @@ def lista_filmes(request):
     movies = Movie.objects.all()
     context = {'movies': movies}
     return render(request, 'lista_filmes.html', context)
+from django.db.models import Avg
+
+def avaliacao_usuario(request):
+    movies = Movie.objects.all()
+    movie_ratings = {movie.uid: MovieRatingUS.objects.filter(movie=movie).aggregate(Avg('nota'))['nota__avg'] for movie in movies}
+    context = {'movies': movies, 'movie_ratings': movie_ratings}
+    return render(request, 'avaliacao_usuario.html', context)
+
+def dar_nota(request, movie_uid):
+    nota = request.POST.get('nota')
+    movie = Movie.objects.get(uid=movie_uid)
+    MovieRatingUS.objects.create(movie=movie, nota=nota, user=request.user)
+    return redirect('avaliacao_usuario')

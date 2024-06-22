@@ -1,7 +1,6 @@
 {% extends "base.html" %}
 {% load static %}
 {% block start %}
- 
 <style>
     .card {
         display: flex;
@@ -9,7 +8,7 @@
         align-items: center;
         border-radius: 32px;
         width: 18rem;
-        margin-bottom: 20px; 
+        margin-bottom: 20px;
     }
 
     .card-body {
@@ -24,7 +23,7 @@
     }
 
     .bold {
-        text-align: left;     
+        text-align: left;
     }
 
     .middle {
@@ -41,6 +40,7 @@
         font-size: 24px;
         color: gray;
         margin: 0 2px;
+        cursor: pointer;
     }
 
     .star.filled {
@@ -52,56 +52,128 @@
         border-radius: 32px 32px 0 0;
     }
 
+    .modal-dialog-centered {
+        display: flex;
+        align-items: center;
+        min-height: calc(100% - 1rem);
+    }
+
+    .modal-dialog-centered::before {
+        display: block;
+        height: calc(100vh - 1rem);
+        content: "";
+    }
+
+    .modal-content {
+        margin: auto;
+        background-color: rgb(0, 47, 122);
+    }
+
+    .modal-title, .modal-body h5, .modal-body p {
+        color: white;
+    }
 </style>
-<link href="{% static 'home.css' %}" rel="stylesheet"/>
+
+<link href="{% static 'home.css' %}" rel="stylesheet" />
 <script src="{% static 'home.js' %}" defer></script>
 
 <br>
 <div class="container-fluid py-5 text-center">
-  <div class="container-slider">
-    <button id="prev-button"><img src="https://i.imgur.com/877lMJA.png" alt="prev-button"></button>
-    <div class="container-images">
-      <img src="https://www.cinepolis.com.br/img/_ocasioes.jpg" alt="ocasioes" class="slider on">
-      <img src="https://www.cinepolis.com.br/img/_pipoca.jpg" alt="pipoca" class="slider">
-      <img src="https://www.cinepolis.com.br/img/_snack.jpg" alt="snack" class="slider">
-      <img src="https://www.cinepolis.com.br/img/_fome.jpg" alt="fome" class="slider">
-    </div>
-    <button id="next-button"><img src="https://i.imgur.com/877lMJA.png" alt="next-button"></button>
-  </div>
-<br>
-<br>
-<br>
-<br>
-<h1 class="text-center"> Filmes em cartaz </h1>  
-<div class="container mt-5 pt-3">
-    <div class="row">
-    {% for movie in movies %}
-    <div class="col-md-3 pt-3">
-        <div class="star-rating">
-            {% for i in range %} 
-                <span class="star {% if movie.rating >= i %}filled{% endif %}">&#9733;</span>
-            {% endfor %}
+    <div class="container-slider">
+        <button id="prev-button"><img src="https://i.imgur.com/877lMJA.png" alt="prev-button"></button>
+        <div class="container-images">
+            <img src="https://www.cinepolis.com.br/img/_ocasioes.jpg" alt="ocasioes" class="slider on">
+            <img src="https://www.cinepolis.com.br/img/_pipoca.jpg" alt="pipoca" class="slider">
+            <img src="https://www.cinepolis.com.br/img/_snack.jpg" alt="snack" class="slider">
+            <img src="https://www.cinepolis.com.br/img/_fome.jpg" alt="fome" class="slider">
         </div>
-        <!-- COR DAS CAIXAS DE FILME -->
-        <div class="card shadow-lg" style="width: 18rem; background-color: rgb(33 38 45); border-radius: 32px;">
-            <img src="{{movie.images}}" style="height: 300px; border-radius: 30px;" alt="Filme">
-            <div class="card-body">
-                <h5 class="card-title text-center text-uppercase">
-                    <strong style="font-size: 20px; color:rgb(152 170 236)">{{movie.movie_name}}</strong>
-                </h5>
-                <p class="bold" style="color: aliceblue;"> 
-                    <b>Preço:</b> R$ {{movie.price}} <br> 
-                    <b>Gênero:</b> {{movie.category.category_name}} <br> 
-                    <b>Duração:</b> --:-- <br> 
-                </p>
-                <a href="{%  url 'add-cart' movie.uid %}" class="btn btn-warning middle" style="border-radius: 10px;">Comprar agora</a>
-            </div>
-        </div>
-        <br>
+        <button id="next-button"><img src="https://i.imgur.com/877lMJA.png" alt="next-button"></button>
     </div>
     <br>
-    {% endfor %}
+    <br>
+    <br>
+    <br>
+    <h1 class="text-center">Filmes em cartaz</h1>
+    <div class="container mt-5 pt-3">
+        <div class="row">
+            {% for movie in movies %}
+            <div class="col-md-3 pt-3">
+                <div class="star-rating">
+                    {% for i in range %} 
+                        <span class="star {% if movie.rating >= i %}filled{% endif %}">&#9733;</span>
+                    {% endfor %}
+                </div>
+                <div class="card shadow-lg" style="width: 18rem; background-color: rgb(33 38 45); border-radius: 32px;">
+                    <img src="{{ movie.images }}" style="height: 300px; border-radius: 30px;" alt="Filme" class="movie-image" 
+                         data-bs-toggle="modal" data-bs-target="#movieModal" 
+                         data-title="{{ movie.movie_name }}" 
+                         data-description="{{ movie.description }}"
+                         data-synopsis="{{ movie.sinopse }}">
+                    <div class="card-body">
+                        <h5 class="card-title text-center text-uppercase">
+                            <strong style="font-size: 20px; color:rgb(152 170 236)">{{ movie.movie_name }}</strong>
+                        </h5>
+                        <p class="bold" style="color: aliceblue;">
+                            <b>Preço:</b> R$ {{ movie.price }} <br>
+                            <b>Gênero:</b> {{ movie.category.category_name }} <br>
+                            <b>Duração:</b> --:-- <br>
+                        </p>
+                        <a href="{% url 'add-cart' movie.uid %}" class="btn btn-warning middle" style="border-radius: 10px;">Comprar agora</a>
+                    </div>
+                </div>
+                <br>
+            </div>
+            <br>
+            {% endfor %}
+        </div>
+    </div>
 </div>
+
+<div class="modal fade" id="movieModal" tabindex="-1" aria-labelledby="movieModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="movieModalLabel" style="flex: 1; text-align: center;">Filme</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body d-flex">
+                <div style="flex: 1; max-width: 300px;">
+                    <img id="modal-movie-image" src="" style="width: 100%; border-radius: 30px;" alt="Filme">
+                </div>
+                <div style="flex: 2; padding: 0 20px;">
+                    <h5 id="modal-movie-title" class="text-center text-uppercase"></h5>
+                    <div style="text-align: left;">
+                        <h5 style="color: aliceblue;">Sinopse:</h5>
+                        <p id="modal-movie-synopsis" class="bold" style="color: rgb(255, 255, 255);"></p>
+                        <p id="modal-movie-rating" class="bold" style="color: yellow;"></p>
+                        <p class="bold" style="color: rgb(8, 75, 133);" id="modal-movie-price"></p>
+                        <p class="bold" style="color: rgb(8, 75, 133);" id="modal-movie-category"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const movieImages = document.querySelectorAll('.movie-image');
+    const modalTitle = document.getElementById('movieModalLabel');
+    const modalImage = document.getElementById('modal-movie-image');
+    const modalSynopsis = document.getElementById('modal-movie-synopsis');
+    const modalRating = document.getElementById('modal-movie-rating');
+
+    movieImages.forEach(image => {
+        image.addEventListener('click', function () {
+            modalTitle.innerText = this.getAttribute('data-title');
+            modalImage.src = this.src;
+            modalSynopsis.innerText = this.getAttribute('data-synopsis');
+            const rating = this.getAttribute('data-rating');
+            modalRating.innerText = rating ? `Rating: ${rating}/5` : 'Rating: Not available';
+        });
+    });
+});
+</script>
 
 {% endblock %}

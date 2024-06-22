@@ -74,6 +74,22 @@
             background-color: #0056b3;
         }
 
+            .btn-avaliar {
+        padding: 10px 20px;
+        background-color: #007bff;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+        box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+        text-decoration: none; 
+        display: inline-block; 
+    }
+
+    .btn-avaliar:hover {
+        background-color: #0056b3;
+    }
+
         .icon-container {
             display: flex;
             justify-content: center;
@@ -138,9 +154,9 @@
             </form>
 
             <div class="tickets-container">
-                <h2>Ingressos Comprados</h2>
-                <!-- Listagem de ingressos comprados pode ser colocada aqui -->
+                <a href="{% url 'avaliacao_usuario' %}" class="btn-avaliar">Avaliar Filmes</a>
             </div>
+            
         </div>
     </div>
 </body>
