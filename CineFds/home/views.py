@@ -300,7 +300,37 @@ def lista_filmes(request):
     movies = Movie.objects.all()
     context = {'movies': movies}
     return render(request, 'lista_filmes.html', context)
+
+
+
+
+
+from .models import UserRating
+from django.urls import reverse
+from django.views.decorators.http import require_POST
 from django.db.models import Avg
 
+
 def avaliacao_usuario(request):
-    return render(request, 'avaliacao_usuario.html',)
+    movies = Movie.objects.all()
+    for movie in movies:
+        user_ratings = UserRating.objects.filter(movie=movie)
+        if user_ratings.exists():
+            movie.user_rating = user_ratings.aggregate(Avg('nota'))['nota__avg']
+        else:
+            movie.user_rating = 0
+    return render(request, 'avaliacao_usuario.html', {'movies': movies})
+
+@require_POST
+def avaliar_filme(request):
+    movie_uid = request.POST.get('filme_uid')
+    nota = request.POST.get('nota')
+    movie = get_object_or_404(Movie, uid=movie_uid)
+    
+    rating, created = UserRating.objects.update_or_create(movie=movie, user=request.user, defaults={'nota': nota})
+    
+    user_ratings = UserRating.objects.filter(movie=movie)
+    movie.user_rating = user_ratings.aggregate(Avg('nota'))['nota__avg']
+    movie.save()
+    
+    return redirect(reverse('avaliacao_usuario'))

@@ -23,7 +23,8 @@ class Movie(BaseModel):
     price = models.IntegerField(default=100)
     images = models.CharField(max_length=500)
     rating = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
-    sinopse = models.TextField(max_length=1000, blank=True) 
+    sinopse = models.TextField(max_length=1000, blank=True)
+    user_rating = models.FloatField(default=0)
     
     
 class Cart(BaseModel):
@@ -38,6 +39,17 @@ class Rating(BaseModel):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name='ratings')
     score = models.IntegerField(choices=[(i, i) for i in range(6)], default=0)
+
+class UserRating(models.Model):
+    movie = models.ForeignKey(Movie, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    nota = models.IntegerField()
+    
+    class Meta:
+        unique_together = ('movie', 'user')
+
+
+        
 
 class Comida(models.Model):
     nome = models.CharField(max_length=100)

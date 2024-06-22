@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliação de Usuário</title>
+    <style>
+        body {
+            background-color: rgb(4, 10, 29);
+            color: #fff;
+            font-family: Arial, sans-serif;
+            margin: 0;
+        }
+
+        .navbar {
+            background-color: rgb(5, 101, 255);
+            padding: 0;
+        }
+
+        .navbar .nav-content {
+            padding-left: 10px;
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar .navbar-brand {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            background-color: rgb(0, 48, 126);
+            border-radius: 5px;
+            padding: 5px;
+            width: 140px;
+            height: 45px;
+        }
+
+        .navbar .navbar-brand svg {
+            margin-right: 5px;
+        }
+
+        h1 {
+            color: aliceblue;
+            text-align: center;
+        }
+
+        .list-container {
+            max-width: 600px;
+            margin: 0 auto;
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .list-container li {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #0056b3;
+            padding: 10px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+        }
+
+        .list-container li .rate-button {
+            background-color: #ff9900;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-left: 5px;
+        }
+
+        .list-container li .rate-button:hover {
+            background-color: #cc7a00;
+        }
+
+        .rating-form {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #003366;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+
+        .rating-form select {
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-dark justify-content-start">
+        <div class="nav-content">
+            <a href="{% url 'usuario' %}" class="navbar-brand">
+                <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" fill="white" class="bi bi-arrow-left" viewBox="0 0 16 16">
+                    <path fill-rule="evenodd" d="M10.354 11.354a.5.5 0 0 0 0-.708L7.707 8l2.647-2.646a.5.5 0 0 0-.708-.708l-3 3a.5.5 0 0 0 0 .708l3 3a.5.5 0 0 0 .708 0z"/>
+                </svg>
+                <span style="font-size: 24px; color: white;">Voltar</span>
+            </a>
+        </div>
+    </nav>
+
+    <h1>Avaliação de Usuário</h1>
+    <ul class="list-container">
+        {% for movie in movies %}
+        <li>
+            {{ movie.movie_name }}
+            <div>
+                <button class="rate-button" onclick="document.getElementById('rating-form-{{ movie.uid }}').style.display='flex';">Avaliar</button>
+            </div>
+            <div id="rating-form-{{ movie.uid }}" class="rating-form" style="display: none;">
+                <form method="post" action="{% url 'avaliar_filme' %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="filme_uid" value="{{ movie.uid }}">
+                    <label for="nota">Nota:</label>
+                    <select name="nota" id="nota">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                    <button type="submit">Salvar</button>
+                </form>
+            </div>
+        </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

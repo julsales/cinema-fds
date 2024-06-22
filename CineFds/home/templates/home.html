@@ -108,7 +108,8 @@
                          data-bs-toggle="modal" data-bs-target="#movieModal" 
                          data-title="{{ movie.movie_name }}" 
                          data-description="{{ movie.description }}"
-                         data-synopsis="{{ movie.sinopse }}">
+                         data-synopsis="{{ movie.sinopse }}"
+                         data-rating="{{ movie.user_rating }}">
                     <div class="card-body">
                         <h5 class="card-title text-center text-uppercase">
                             <strong style="font-size: 20px; color:rgb(152 170 236)">{{ movie.movie_name }}</strong>
@@ -145,6 +146,7 @@
                     <div style="text-align: left;">
                         <h5 style="color: aliceblue;">Sinopse:</h5>
                         <p id="modal-movie-synopsis" class="bold" style="color: rgb(255, 255, 255);"></p>
+                        <h5 style="color: aliceblue;">Avaliação:</h5>
                         <p id="modal-movie-rating" class="bold" style="color: yellow;"></p>
                         <p class="bold" style="color: rgb(8, 75, 133);" id="modal-movie-price"></p>
                         <p class="bold" style="color: rgb(8, 75, 133);" id="modal-movie-category"></p>
@@ -155,20 +157,20 @@
     </div>
 </div>
 
-
 <script>
 document.addEventListener('DOMContentLoaded', (event) => {
     const movieImages = document.querySelectorAll('.movie-image');
     const modalTitle = document.getElementById('movieModalLabel');
     const modalImage = document.getElementById('modal-movie-image');
     const modalSynopsis = document.getElementById('modal-movie-synopsis');
+    const modalRating = document.getElementById('modal-movie-rating');
 
     movieImages.forEach(image => {
         image.addEventListener('click', function () {
             modalTitle.innerText = this.getAttribute('data-title');
             modalImage.src = this.src;
             modalSynopsis.innerText = this.getAttribute('data-synopsis');
-
+            modalRating.innerText = this.getAttribute('data-rating') + '/5';
         });
     });
 });
