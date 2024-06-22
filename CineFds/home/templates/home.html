@@ -162,15 +162,13 @@ document.addEventListener('DOMContentLoaded', (event) => {
     const modalTitle = document.getElementById('movieModalLabel');
     const modalImage = document.getElementById('modal-movie-image');
     const modalSynopsis = document.getElementById('modal-movie-synopsis');
-    const modalRating = document.getElementById('modal-movie-rating');
 
     movieImages.forEach(image => {
         image.addEventListener('click', function () {
             modalTitle.innerText = this.getAttribute('data-title');
             modalImage.src = this.src;
             modalSynopsis.innerText = this.getAttribute('data-synopsis');
-            const rating = this.getAttribute('data-rating');
-            modalRating.innerText = rating ? `Rating: ${rating}/5` : 'Rating: Not available';
+
         });
     });
 });
