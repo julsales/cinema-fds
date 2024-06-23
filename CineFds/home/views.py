@@ -305,32 +305,44 @@ def lista_filmes(request):
 
 
 
-from .models import UserRating
-from django.urls import reverse
-from django.views.decorators.http import require_POST
-from django.db.models import Avg
-
-
+@login_required
 def avaliacao_usuario(request):
     movies = Movie.objects.all()
-    for movie in movies:
-        user_ratings = UserRating.objects.filter(movie=movie)
-        if user_ratings.exists():
-            movie.user_rating = user_ratings.aggregate(Avg('nota'))['nota__avg']
-        else:
-            movie.user_rating = 0
-    return render(request, 'avaliacao_usuario.html', {'movies': movies})
+    user_ratings = UserRating.objects.filter(user=request.user)
+    rated_movies = [rating.movie for rating in user_ratings]
+    context = {
+        'movies': movies,
+        'rated_movies': rated_movies
+    }
+    return render(request, 'avaliacao_usuario.html', context)
 
-@require_POST
+@login_required
 def avaliar_filme(request):
-    movie_uid = request.POST.get('filme_uid')
-    nota = request.POST.get('nota')
-    movie = get_object_or_404(Movie, uid=movie_uid)
-    
-    rating, created = UserRating.objects.update_or_create(movie=movie, user=request.user, defaults={'nota': nota})
-    
-    user_ratings = UserRating.objects.filter(movie=movie)
-    movie.user_rating = user_ratings.aggregate(Avg('nota'))['nota__avg']
-    movie.save()
-    
-    return redirect(reverse('avaliacao_usuario'))
+    if request.method == 'POST':
+        filme_uid = request.POST.get('filme_uid')
+        nota = float(request.POST.get('nota'))
+        movie = Movie.objects.get(uid=filme_uid)
+        
+        # Verifica se o usuário já avaliou este filme
+        user_rating, created = UserRating.objects.get_or_create(
+            user=request.user,
+            movie=movie,
+            defaults={'nota': nota}
+        )
+        if not created:
+            # Se a avaliação já existe, atualiza a nota
+            user_rating.nota = nota
+            user_rating.save()
+
+        # Atualiza a média e o número de avaliações do filme
+        ratings = UserRating.objects.filter(movie=movie)
+        average_rating = ratings.aggregate(Avg('nota'))['nota__avg']
+        num_ratings = ratings.count()
+
+        movie.user_rating = average_rating
+        movie.num_ratings = num_ratings
+        movie.save()
+
+        return redirect('avaliacao_usuario')
+    else:
+        return redirect('avaliacao_usuario')
