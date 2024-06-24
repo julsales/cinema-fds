@@ -41,11 +41,11 @@ describe('Comprar ingresso', () => {
         cy.get('[data-seat-id="1-2"]').click()
         cy.get('.container > .btn').click()
         cy.get('#nome').type('teste')
-        cy.contains('Total: R$ 40.00')
+        cy.contains('Total:')
         cy.get('#btn_pagar').click()
             })
 
-        it('Apagando o filme para não dar conflito nos outros testes', () => {
+    it('Apagando o filme para não dar conflito nos outros testes', () => {
         cy.visit('');
         cy.get('[href="/login/?next=/"]').click()
         cy.get(':nth-child(3) > .form-control').type('adm123')

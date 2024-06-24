@@ -21,6 +21,14 @@ def logout_view(request):
     logout(request)
     return redirect('home') 
 
+def movie_detail(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    context = {
+        'movie': movie,
+        'formatted_duration': movie.get_duration_display(),
+    }
+    return render(request, 'movie_detail.html', context)
+
 def login_page(request):
     if request.method == "POST":
         try:
