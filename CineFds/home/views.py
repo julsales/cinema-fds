@@ -21,6 +21,14 @@ def logout_view(request):
     logout(request)
     return redirect('home') 
 
+def movie_detail(request, movie_id):
+    movie = get_object_or_404(Movie, id=movie_id)
+    context = {
+        'movie': movie,
+        'formatted_duration': movie.get_duration_display(),
+    }
+    return render(request, 'movie_detail.html', context)
+
 def login_page(request):
     if request.method == "POST":
         try:
@@ -300,49 +308,3 @@ def lista_filmes(request):
     movies = Movie.objects.all()
     context = {'movies': movies}
     return render(request, 'lista_filmes.html', context)
-
-
-
-
-
-@login_required
-def avaliacao_usuario(request):
-    movies = Movie.objects.all()
-    user_ratings = UserRating.objects.filter(user=request.user)
-    rated_movies = [rating.movie for rating in user_ratings]
-    context = {
-        'movies': movies,
-        'rated_movies': rated_movies
-    }
-    return render(request, 'avaliacao_usuario.html', context)
-
-@login_required
-def avaliar_filme(request):
-    if request.method == 'POST':
-        filme_uid = request.POST.get('filme_uid')
-        nota = float(request.POST.get('nota'))
-        movie = Movie.objects.get(uid=filme_uid)
-        
-        # Verifica se o usuário já avaliou este filme
-        user_rating, created = UserRating.objects.get_or_create(
-            user=request.user,
-            movie=movie,
-            defaults={'nota': nota}
-        )
-        if not created:
-            # Se a avaliação já existe, atualiza a nota
-            user_rating.nota = nota
-            user_rating.save()
-
-        # Atualiza a média e o número de avaliações do filme
-        ratings = UserRating.objects.filter(movie=movie)
-        average_rating = ratings.aggregate(Avg('nota'))['nota__avg']
-        num_ratings = ratings.count()
-
-        movie.user_rating = average_rating
-        movie.num_ratings = num_ratings
-        movie.save()
-
-        return redirect('avaliacao_usuario')
-    else:
-        return redirect('avaliacao_usuario')

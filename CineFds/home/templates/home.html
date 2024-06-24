@@ -72,6 +72,11 @@
     .modal-title, .modal-body h5, .modal-body p {
         color: white;
     }
+
+    /* Adiciona esta classe para alinhar a avaliação por estrelas à esquerda */
+    .modal-body .star-rating {
+        justify-content: flex-start;
+    }
 </style>
 
 <link href="{% static 'home.css' %}" rel="stylesheet" />
@@ -98,18 +103,15 @@
         <div class="row">
             {% for movie in movies %}
             <div class="col-md-3 pt-3">
-                <div class="star-rating">
-                    {% for i in range %} 
-                        <span class="star {% if movie.rating >= i %}filled{% endif %}">&#9733;</span>
-                    {% endfor %}
-                </div>
+
                 <div class="card shadow-lg" style="width: 18rem; background-color: rgb(33 38 45); border-radius: 32px;">
                     <img src="{{ movie.images }}" style="height: 300px; border-radius: 30px;" alt="Filme" class="movie-image" 
                          data-bs-toggle="modal" data-bs-target="#movieModal" 
                          data-title="{{ movie.movie_name }}" 
                          data-description="{{ movie.description }}"
                          data-synopsis="{{ movie.sinopse }}"
-                         data-rating="{{ movie.user_rating }}">
+                         data-rating="{{ movie.rating }}"
+                         data-duration="{{ movie.get_duration_display }}">
                     <div class="card-body">
                         <h5 class="card-title text-center text-uppercase">
                             <strong style="font-size: 20px; color:rgb(152 170 236)">{{ movie.movie_name }}</strong>
@@ -117,7 +119,6 @@
                         <p class="bold" style="color: aliceblue;">
                             <b>Preço:</b> R$ {{ movie.price }} <br>
                             <b>Gênero:</b> {{ movie.category.category_name }} <br>
-                            <b>Duração:</b> --:-- <br>
                         </p>
                         <a href="{% url 'add-cart' movie.uid %}" class="btn btn-warning middle" style="border-radius: 10px;">Comprar agora</a>
                     </div>
@@ -147,33 +148,48 @@
                         <h5 style="color: aliceblue;">Sinopse:</h5>
                         <p id="modal-movie-synopsis" class="bold" style="color: rgb(255, 255, 255);"></p>
                         <h5 style="color: aliceblue;">Avaliação:</h5>
-                        <p id="modal-movie-rating" class="bold" style="color: yellow;"></p>
-                        <p class="bold" style="color: rgb(8, 75, 133);" id="modal-movie-price"></p>
-                        <p class="bold" style="color: rgb(8, 75, 133);" id="modal-movie-category"></p>
+                        <div id="modal-movie-rating" class="star-rating"></div>
+                        <p class="bold" style="color: white;" id="modal-movie-duration"></p>
+                        <h5 style="color: aliceblue;">Horarios:</h5>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 <script>
-document.addEventListener('DOMContentLoaded', (event) => {
-    const movieImages = document.querySelectorAll('.movie-image');
-    const modalTitle = document.getElementById('movieModalLabel');
-    const modalImage = document.getElementById('modal-movie-image');
-    const modalSynopsis = document.getElementById('modal-movie-synopsis');
-    const modalRating = document.getElementById('modal-movie-rating');
-
-    movieImages.forEach(image => {
-        image.addEventListener('click', function () {
-            modalTitle.innerText = this.getAttribute('data-title');
-            modalImage.src = this.src;
-            modalSynopsis.innerText = this.getAttribute('data-synopsis');
-            modalRating.innerText = this.getAttribute('data-rating') + '/5';
+    document.addEventListener('DOMContentLoaded', (event) => {
+        const movieImages = document.querySelectorAll('.movie-image');
+        const modalTitle = document.getElementById('movieModalLabel');
+        const modalImage = document.getElementById('modal-movie-image');
+        const modalSynopsis = document.getElementById('modal-movie-synopsis');
+        const modalRating = document.getElementById('modal-movie-rating');
+        const modalDuration = document.getElementById('modal-movie-duration');
+    
+        movieImages.forEach(image => {
+            image.addEventListener('click', function () {
+                const rating = parseInt(this.getAttribute('data-rating')); 
+                const maxRating = 5;
+    
+                modalTitle.innerText = this.getAttribute('data-title');
+                modalImage.src = this.src;
+                modalSynopsis.innerText = this.getAttribute('data-synopsis');
+    
+                // Generate star rating dynamically
+                modalRating.innerHTML = '';
+                for (let i = 1; i <= maxRating; i++) {
+                    const starSpan = document.createElement('span');
+                    starSpan.classList.add('star');
+                    if (i <= rating) {
+                        starSpan.classList.add('filled');
+                    }
+                    starSpan.innerHTML = '&#9733;';
+                    modalRating.appendChild(starSpan);
+                }
+    
+                modalDuration.innerText = 'Duração: ' + this.getAttribute('data-duration');
+            });
         });
     });
-});
 </script>
-
 {% endblock %}
