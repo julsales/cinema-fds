@@ -26,6 +26,11 @@ class Movie(BaseModel):
     rating = models.IntegerField(default=0, validators=[MinValueValidator(0), MaxValueValidator(5)])
     sinopse = models.TextField(max_length=1000, blank=True)
     duration_minutes = models.IntegerField(default=0, validators=[MinValueValidator(0)])
+    horario1 = models.TimeField(null=True, blank=True)
+    horario2 = models.TimeField(null=True, blank=True)
+    horario3 = models.TimeField(null=True, blank=True)
+    horario4 = models.TimeField(null=True, blank=True)
+
 
     @property
     def get_duration_display(self):
@@ -35,17 +40,6 @@ class Movie(BaseModel):
     
     def __str__(self):
         return self.movie_name
-    
-class MovieShowtimes(models.Model):
-    movie = models.ForeignKey(Movie, on_delete=models.CASCADE, related_name="showtimes")
-    showtime1 = models.TimeField(default=timezone.now)
-    showtime2 = models.TimeField(default=timezone.now, blank=True, null=True)
-    showtime3 = models.TimeField(default=timezone.now, blank=True, null=True)
-    showtime4 = models.TimeField(default=timezone.now, blank=True, null=True)
-
-    def __str__(self):
-        return f"Showtimes for {self.movie.movie_name}"    
-    
 
 
 class Cart(BaseModel):

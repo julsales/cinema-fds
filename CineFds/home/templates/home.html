@@ -73,9 +73,27 @@
         color: white;
     }
 
-    /* Adiciona esta classe para alinhar a avaliação por estrelas à esquerda */
     .modal-body .star-rating {
         justify-content: flex-start;
+    }
+
+    .horario-box {
+        background-color: rgb(8, 25, 52);
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        min-width: 60px;
+        margin: 5px;
+    }
+    .d-flex {
+        display: flex;
+    }
+    .flex-wrap {
+        flex-wrap: wrap;
+    }
+    .gap-2 {
+        gap: 10px;
     }
 </style>
 
@@ -106,12 +124,17 @@
 
                 <div class="card shadow-lg" style="width: 18rem; background-color: rgb(33 38 45); border-radius: 32px;">
                     <img src="{{ movie.images }}" style="height: 300px; border-radius: 30px;" alt="Filme" class="movie-image" 
-                         data-bs-toggle="modal" data-bs-target="#movieModal" 
-                         data-title="{{ movie.movie_name }}" 
-                         data-description="{{ movie.description }}"
-                         data-synopsis="{{ movie.sinopse }}"
-                         data-rating="{{ movie.rating }}"
-                         data-duration="{{ movie.get_duration_display }}">
+                    data-bs-toggle="modal" data-bs-target="#movieModal" 
+                    data-title="{{ movie.movie_name }}" 
+                    data-description="{{ movie.description }}"
+                    data-synopsis="{{ movie.sinopse }}"
+                    data-rating="{{ movie.rating }}"
+                    data-duration="{{ movie.get_duration_display }}"
+                    data-horario1="{{ movie.horario1 }}"
+                    data-horario2="{{ movie.horario2 }}"
+                    data-horario3="{{ movie.horario3 }}"
+                    data-horario4="{{ movie.horario4 }}">
+               
                     <div class="card-body">
                         <h5 class="card-title text-center text-uppercase">
                             <strong style="font-size: 20px; color:rgb(152 170 236)">{{ movie.movie_name }}</strong>
@@ -150,46 +173,69 @@
                         <h5 style="color: aliceblue;">Avaliação:</h5>
                         <div id="modal-movie-rating" class="star-rating"></div>
                         <p class="bold" style="color: white;" id="modal-movie-duration"></p>
-                        <h5 style="color: aliceblue;">Horarios:</h5>
+                        <h5 style="color: aliceblue;">Horários:</h5>
+                        <div id="modal-movie-horarios" class="d-flex flex-wrap gap-2">
+                            <div id="modal-horario1" class="horario-box"></div>
+                            <div id="modal-horario2" class="horario-box"></div>
+                            <div id="modal-horario3" class="horario-box"></div>
+                            <div id="modal-horario4" class="horario-box"></div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+
 <script>
-    document.addEventListener('DOMContentLoaded', (event) => {
-        const movieImages = document.querySelectorAll('.movie-image');
-        const modalTitle = document.getElementById('movieModalLabel');
-        const modalImage = document.getElementById('modal-movie-image');
-        const modalSynopsis = document.getElementById('modal-movie-synopsis');
-        const modalRating = document.getElementById('modal-movie-rating');
-        const modalDuration = document.getElementById('modal-movie-duration');
-    
-        movieImages.forEach(image => {
-            image.addEventListener('click', function () {
-                const rating = parseInt(this.getAttribute('data-rating')); 
-                const maxRating = 5;
-    
-                modalTitle.innerText = this.getAttribute('data-title');
-                modalImage.src = this.src;
-                modalSynopsis.innerText = this.getAttribute('data-synopsis');
-    
-                // Generate star rating dynamically
-                modalRating.innerHTML = '';
-                for (let i = 1; i <= maxRating; i++) {
-                    const starSpan = document.createElement('span');
-                    starSpan.classList.add('star');
-                    if (i <= rating) {
-                        starSpan.classList.add('filled');
-                    }
-                    starSpan.innerHTML = '&#9733;';
-                    modalRating.appendChild(starSpan);
+document.addEventListener('DOMContentLoaded', (event) => {
+    const movieImages = document.querySelectorAll('.movie-image');
+    const modalTitle = document.getElementById('movieModalLabel');
+    const modalImage = document.getElementById('modal-movie-image');
+    const modalSynopsis = document.getElementById('modal-movie-synopsis');
+    const modalRating = document.getElementById('modal-movie-rating');
+    const modalDuration = document.getElementById('modal-movie-duration');
+    const modalHorarios = [
+        document.getElementById('modal-horario1'),
+        document.getElementById('modal-horario2'),
+        document.getElementById('modal-horario3'),
+        document.getElementById('modal-horario4')
+    ];
+
+    movieImages.forEach(image => {
+        image.addEventListener('click', function () {
+            const rating = parseInt(this.getAttribute('data-rating')); 
+            const maxRating = 5;
+
+            modalTitle.innerText = this.getAttribute('data-title');
+            modalImage.src = this.src;
+            modalSynopsis.innerText = this.getAttribute('data-synopsis');
+
+            // Generate star rating dynamically
+            modalRating.innerHTML = '';
+            for (let i = 1; i <= maxRating; i++) {
+                const starSpan = document.createElement('span');
+                starSpan.classList.add('star');
+                if (i <= rating) {
+                    starSpan.classList.add('filled');
                 }
-    
-                modalDuration.innerText = 'Duração: ' + this.getAttribute('data-duration');
-            });
+                starSpan.innerHTML = '&#9733;';
+                modalRating.appendChild(starSpan);
+            }
+
+            modalDuration.innerText = 'Duração: ' + this.getAttribute('data-duration');
+
+            // Set movie horarios
+            for (let i = 0; i < modalHorarios.length; i++) {
+                const horario = this.getAttribute('data-horario' + (i + 1));
+                modalHorarios[i].innerText = horario ? horario : '';
+                modalHorarios[i].style.display = horario ? 'block' : 'none';
+            }
         });
     });
+});
 </script>
+
+
 {% endblock %}
