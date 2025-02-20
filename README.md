@@ -100,18 +100,18 @@ Página no GitHub dedicada ao projeto de Fundamentos de Desenvolvimento de Softw
 <table>
   <tr>
     <td align="center">
-      <a href="https://github.com/">
-        <img src="" width="100px;" alt=""/><br>
+      <a href="https://github.com/CRAUDI0">
+        <img src="https://avatars.githubusercontent.com/u/150556081?v=4" width="100px;" alt="Claudio"/><br>
         <sub>
-          <b></b>
+          <b>Claudio</b>
         </sub>
       </a>
     </td>
     <td align="center">
-      <a href="https://github.com/">
-        <img src="" width="100px;" alt=""/><br>
+      <a href="https://github.com/ChrisDrakon" >
+        <img src="https://avatars.githubusercontent.com/u/161368150?v=4" width="100px;" alt="Chris"/><br>
         <sub>
-          <b></b>
+          <b>Christian</b>
         </sub>
       </a>
     </td>
@@ -120,14 +120,6 @@ Página no GitHub dedicada ao projeto de Fundamentos de Desenvolvimento de Softw
         <img src="https://avatars.githubusercontent.com/u/142419446?v=4" width="100px;" alt="Júlia Sales"/><br>
         <sub>
           <b>Júlia Sales</b>
-        </sub>
-      </a>
-    </td>
-    <td align="center">
-      <a href="https://github.com/" >
-        <img src="" width="100px;" alt=""/><br>
-        <sub>
-          <b></b>
         </sub>
       </a>
     </td>
