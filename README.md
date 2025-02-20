@@ -1,13 +1,14 @@
 # CineFDS
+<div align="center">
+
 ![GitHub repo size](https://img.shields.io/github/repo-size/julsales/cinema-fds?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/julsales/cinema-fds?style=for-the-badge)
 ![GitHub forks](https://img.shields.io/github/forks/julsales/cinema-fds?style=for-the-badge)
 ![Bitbucket open issues](https://img.shields.io/bitbucket/issues/julsales/cinema-fds?style=for-the-badge)
 ![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/julsales/cinema-fds?style=for-the-badge)
+  <img src="https://github.com/user-attachments/assets/8cdb8268-42e4-499c-91d3-8c44dfad734c" height="320">
+</div>
 
-Página no GitHub dedicada ao projeto de Fundamentos de Desenvolvimento de Software.
-
----
 
 ## Entregas
 
